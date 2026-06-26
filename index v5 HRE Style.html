@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bryce Waddell</title>
+<meta name="description" content="Bryce Waddell — philosopher and Workday Financial Consultant. Professional work, genealogy, reading, PC building, and the trail.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* PRIMARY schema — Military / War Banner (white & red) */
+    --parchment:#f5eede;
+    --parchment-2:#efe6d2;
+    --panel:#fbf6ea;
+    --war-red:#8f1d1d;
+    --war-red-bright:#b22222;
+    --ink:#221c14;
+    --ink-soft:#5c4f3d;
+    /* SECONDARY schema — Imperial Banner (black & gold) */
+    --imperial-black:#161310;
+    --gold:#b8923a;
+    --gold-dim:#9c7a2c;
+    --rule:rgba(143,29,29,.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'EB Garamond',Georgia,serif;
+    background:
+      radial-gradient(1100px 520px at 50% -8%, rgba(143,29,29,.07), transparent 60%),
+      linear-gradient(180deg, var(--parchment) 0%, var(--parchment-2) 100%);
+    color:var(--ink);line-height:1.65;font-size:18px;-webkit-font-smoothing:antialiased;min-height:100vh;
+  }
+  a{color:var(--war-red);text-decoration:none;transition:color .2s}
+  a:hover{color:var(--imperial-black)}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+  .top-band{height:6px;background:linear-gradient(90deg,var(--war-red),var(--war-red-bright),var(--war-red))}
+
+  /* ---- Nav ---- */
+  nav{position:sticky;top:0;z-index:20;background:rgba(245,238,222,.92);backdrop-filter:blur(6px);
+      border-bottom:1px solid var(--rule)}
+  nav .inner{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px;padding:11px 28px}
+  nav .brand{font-family:'UnifrakturMaguntia',serif;font-size:24px;color:var(--war-red);margin-right:auto}
+  nav a{font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
+        padding:4px 2px;border-bottom:2px solid transparent}
+  nav a:hover{color:var(--war-red);border-bottom-color:var(--gold)}
+
+  /* ---- Hero ---- */
+  header.hero{text-align:center;padding:40px 28px 14px}
+  .wordmark{font-family:'UnifrakturMaguntia',serif;font-size:clamp(48px,9vw,92px);line-height:1;color:var(--war-red);
+            text-shadow:0 1px 0 rgba(0,0,0,.12)}
+  .interests{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.26em;
+             font-size:clamp(11px,2vw,15px);color:var(--ink);margin-top:20px}
+  .interests span{color:var(--gold-dim)}
+  .motto{font-style:italic;color:var(--ink-soft);margin:18px auto 0;max-width:680px;font-size:19px}
+  .crest-divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:28px auto 0;max-width:460px}
+  .crest-divider .line{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--war-red))}
+  .crest-divider .line.r{background:linear-gradient(90deg,var(--war-red),transparent)}
+  .crest-divider .pip{color:var(--gold);font-size:18px}
+
+  /* ---- Sections ---- */
+  section{padding:48px 0;scroll-margin-top:64px}
+  .section-head{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+  .section-head h2{font-family:'Cinzel',serif;font-weight:700;text-transform:uppercase;letter-spacing:.16em;
+                   font-size:clamp(20px,3vw,28px);color:var(--war-red);white-space:nowrap}
+  /* secondary (imperial) marker: black-over-gold banner */
+  .section-head .banner{width:24px;height:32px;flex:none;border-radius:2px;
+    background:linear-gradient(180deg,var(--imperial-black) 0 50%,var(--gold) 50% 100%);
+    box-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .section-head .rule{height:2px;flex:1;background:linear-gradient(90deg,var(--rule),transparent)}
+  .section-intro{color:var(--ink-soft);max-width:780px;margin-bottom:22px;font-size:18px}
+
+  /* ---- Cards ---- */
+  .card{background:var(--panel);border:1px solid var(--rule);border-left:3px solid var(--war-red);border-radius:4px;
+        padding:22px 26px;margin-bottom:20px;box-shadow:0 4px 16px rgba(60,30,20,.06)}
+  .card .role-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px}
+  .card h3{font-family:'Cinzel',serif;font-size:20px;color:var(--war-red);font-weight:600}
+  .card .org-when{font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.07em;color:var(--ink-soft);text-transform:uppercase}
+  .card .subrole{color:var(--gold-dim);font-style:italic;margin:2px 0 12px;font-size:16.5px}
+  .card ul{list-style:none;margin:0}
+  .card li{position:relative;padding-left:20px;margin-bottom:8px}
+  .card li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--war-red);transform:rotate(45deg)}
+
+  /* buttons */
+  .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:.06em;
+       text-transform:uppercase;color:var(--parchment);background:var(--war-red);padding:11px 20px;border-radius:3px;
+       border:1px solid var(--war-red);transition:all .2s}
+  .btn:hover{background:var(--imperial-black);border-color:var(--gold);color:var(--gold)}
+  .btn.ghost{background:transparent;color:var(--war-red)}
+  .btn.ghost:hover{background:var(--war-red);color:var(--parchment);border-color:var(--war-red)}
+  .btn svg{width:16px;height:16px;fill:currentColor}
+
+  /* pills */
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .pill{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);
+        border:1px solid var(--gold);border-radius:999px;padding:6px 14px;background:rgba(184,146,58,.08)}
+
+  /* clients grid */
+  .clients{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px}
+  .client{border:1px solid var(--rule);border-top:2px solid var(--war-red);border-radius:3px;padding:13px 15px;background:var(--panel)}
+  .client .name{font-family:'Cinzel',serif;color:var(--war-red);font-size:14.5px;font-weight:600}
+  .client .meta{font-size:14px;color:var(--ink-soft);margin-top:4px}
+  .client .meta b{color:var(--ink);font-weight:600}
+
+  /* reading */
+  .reading{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:start}
+  .now-reading{background:var(--imperial-black);color:var(--parchment);border-radius:4px;padding:24px 26px;border-left:3px solid var(--gold)}
+  .now-reading .tag{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .now-reading .bk{font-family:'Cinzel',serif;font-size:23px;margin-top:8px;line-height:1.25}
+  .now-reading .au{font-style:italic;color:var(--parchment);opacity:.82;margin-top:6px}
+  .shelf h4{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+  .shelf ul{list-style:none}
+  .shelf li{padding:7px 0;border-bottom:1px dashed var(--rule)}
+  .shelf li .t{font-weight:600;color:var(--ink)}
+  .shelf li .a{color:var(--ink-soft);font-style:italic}
+
+  /* fan chart */
+  .fanwrap{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:14px;box-shadow:0 4px 16px rgba(60,30,20,.06)}
+  .fanchart{display:block;width:100%;height:auto;max-width:720px;margin:0 auto}
+  .fan-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-top:14px}
+  .fan-legend .lg{display:inline-flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:.04em;color:var(--ink)}
+  .fan-legend .lg i{width:15px;height:15px;border-radius:3px;display:inline-block;border:1px solid rgba(36,31,24,.45)}
+  .fan-legend .lg em{font-style:normal;color:var(--ink-soft);font-size:12px}
+  .fan-cap{text-align:center;color:var(--ink-soft);font-style:italic;font-size:15px;margin-top:10px}
+
+  /* rig table */
+  .rig{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+  .rig td{padding:11px 16px;border-bottom:1px solid var(--rule);vertical-align:top}
+  .rig tr:last-child td{border-bottom:none}
+  .rig .cat{font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--war-red);width:150px;white-space:nowrap}
+  .rig .mk{font-weight:600;color:var(--ink);width:130px}
+  .rig .md{color:var(--ink-soft)}
+  .rig tr:hover td{background:rgba(184,146,58,.06)}
+
+  /* ironman splits */
+  .splits{width:100%;border-collapse:collapse;margin-top:14px}
+  .splits td{padding:9px 4px;border-bottom:1px solid var(--rule);vertical-align:baseline}
+  .splits .leg{font-family:'Cinzel',serif;font-size:14px;color:var(--ink)}
+  .splits .leg span{display:block;font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:var(--ink-soft);letter-spacing:0}
+  .splits .dist{color:var(--ink-soft);font-size:14.5px;text-align:right;white-space:nowrap;padding-right:18px}
+  .splits .time{font-family:'Cinzel',serif;font-size:15px;color:var(--war-red);text-align:right;white-space:nowrap}
+  .splits tr:last-child td{border-bottom:none}
+  .splits .total .leg{text-transform:uppercase;letter-spacing:.08em;color:var(--war-red)}
+  .splits .total .time{font-weight:700;font-size:17px}
+  .splits .total td{border-top:2px solid var(--war-red);padding-top:12px}
+
+  /* two-col generic */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+
+  /* footer / connect */
+  footer{text-align:center;padding:54px 28px 64px;border-top:1px solid var(--rule);margin-top:24px}
+  footer .wm{font-family:'UnifrakturMaguntia',serif;color:var(--war-red);font-size:34px}
+  .social{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:20px}
+  .social a{display:inline-flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.08em;
+            text-transform:uppercase;color:var(--ink);border:1px solid var(--rule);padding:10px 16px;border-radius:3px}
+  .social a:hover{color:var(--war-red);border-color:var(--gold)}
+  .social svg{width:16px;height:16px;fill:currentColor}
+  footer .small{color:var(--ink-soft);font-size:14px;margin-top:24px;font-style:italic}
+
+  @media(max-width:760px){
+    .reading,.two{grid-template-columns:1fr}
+    .section-head .banner{display:none}
+    nav .brand{font-size:20px}
+  }
+</style>
+</head>
+<body>
+<div class="top-band"></div>
+
+<nav><div class="inner">
+  <span class="brand">Bryce Waddell</span>
+  <a href="#work">Work</a>
+  <a href="#scholarship">Scholarship</a>
+  <a href="#lineage">Lineage</a>
+  <a href="#arsenal">Arsenal</a>
+  <a href="#athletics">Athletics</a>
+  <a href="#connect">Connect</a>
+</div></nav>
+
+<header class="hero">
+  <div class="crest-divider"><span class="line"></span><span class="pip">&#10022;</span><span class="line r"></span></div>
+</header>
+
+<main class="wrap">
+
+  <!-- PROFESSIONAL WORK -->
+  <section id="work">
+    <div class="section-head"><span class="banner"></span><h2>Professional Work</h2><span class="rule"></span></div>
+    <p class="section-intro">Workday Financials consultant — <b>~25 full-lifecycle implementations</b> across the Foundation Data Model, Procurement, Accounts, Banking &amp; Settlement, Assets, and Expenses. I convert and reconcile the general ledger to the penny and lead solution design for global, multi-currency, intercompany accounting.</p>
+    <div class="pill-row" style="margin-bottom:22px">
+      <span class="pill">Workday &middot; Record to Report</span>
+      <span class="pill">Workday &middot; Human Capital Management</span>
+      <span class="pill">Workday &middot; Compensation</span>
+    </div>
+
+    <div class="card">
+      <div class="role-row"><h3>Kainos Group plc</h3><span class="org-when">Chicago, IL &middot; 2025 &ndash; Present</span></div>
+      <div class="subrole">Workday Financial Consultant &mdash; Implementation &amp; Data Conversion</div>
+      <ul>
+        <li>Architected and deployed ~10 full-suite Workday Financials implementations spanning the FDM, Procurement, Supplier &amp; Customer Accounts, Banking &amp; Settlement, Assets, and Expenses &mdash; including public-sector clients such as a statewide pension fund and Phase X Financials deployments.</li>
+        <li>Converted and reconciled payables, receivables, cash, and assets &mdash; plus the full general ledger with complete worktag detail &mdash; balanced to the penny.</li>
+        <li>Led solution-design decisions for global intercompany multi-currency accounting, ran discovery sessions, and facilitated stakeholder design workshops.</li>
+        <li>Partnered with technical, reporting, integration, and change-management teams to deliver custom reconciliation and payment-integration reports, and helped craft a change-management strategy for period close &amp; consolidation.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="role-row"><h3>Huron Consulting Group, Inc.</h3><span class="org-when">Chicago, IL &middot; 2023 &ndash; 2024</span></div>
+      <div class="subrole">Workday Financial Consultant &mdash; Implementation &amp; Data Conversion</div>
+      <ul>
+        <li>Restructured Workday Grants Management for an R1 research university &mdash; rebuilt the financial-aid and sponsored-funding FDM around grant, scholarship, and loan hierarchies.</li>
+        <li>Remediated post-production financials: built unearned-revenue recognition allocations and a calculated-field validation enforcing account posting rules on manual uploads.</li>
+        <li>Designed the full FDM and configured endowments &amp; fund accounting for a non-profit, producing conservative and aggressive statements via composite and matrix reporting.</li>
+        <li>Built executive financial scorecards and dashboards, and created a dynamic scoping tool and Workday module ontology used as a build checklist across Launch implementations.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="role-row"><h3>TopBloc, LLC</h3><span class="org-when">Chicago, IL &middot; 2022 &ndash; 2023</span></div>
+      <div class="subrole">Workday Financial Consultant &mdash; Implementation &amp; Data Conversion</div>
+      <ul>
+        <li>Delivered ~7 full-lifecycle Workday Financials and HCM implementations from design through go-live.</li>
+        <li>Deconstructed legacy ledger accounts into FDM dimensions, reconciled opening balances, loaded data via EIBs, and built audit reports validating over <b>$1B</b> in accounting activity.</li>
+        <li>Configured core financial business processes &mdash; Accounting Journal, Reversals &amp; Adjustments, Allocations, and Period Close &mdash; with approval routing aligned to client controls.</li>
+        <li>Led the solution design of a merger integrating two large healthcare enterprises' financial and HCM data models.</li>
+      </ul>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn" href="https://www.linkedin.com/in/bryce-waddell/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 9.5H5.67V18h2.67V9.5zM7 5.88a1.55 1.55 0 1 0 0 3.1 1.55 1.55 0 0 0 0-3.1zM18.34 18v-4.67c0-2.5-1.34-3.67-3.13-3.67a2.7 2.7 0 0 0-2.45 1.35V9.5h-2.67V18h2.67v-4.5c0-1.18.22-2.32 1.68-2.32 1.44 0 1.46 1.35 1.46 2.4V18h2.67z"/></svg>
+        Connect on LinkedIn
+      </a>
+    </div>
+
+    <div style="margin-top:30px">
+      <div class="section-head" style="margin-bottom:18px"><h2 style="font-size:18px">Selected Client Engagements</h2><span class="rule"></span></div>
+      <div class="clients">
+        <div class="client"><div class="name">R1 University</div><div class="meta"><b>Financials</b> &middot; USA<br>Grants Management &amp; financial-aid FDM, unearned-revenue recognition</div></div>
+        <div class="client"><div class="name">Non-Profit (NGO)</div><div class="meta"><b>Financials</b> &middot; USA<br>FDM &amp; fund accounting, endowments, financial statements</div></div>
+        <div class="client"><div class="name">Statewide Pension Fund</div><div class="meta"><b>Financials</b> &middot; USA<br>Full-system financial conversion &amp; reconciliation</div></div>
+        <div class="client"><div class="name">Healthcare</div><div class="meta"><b>HCM &amp; Financials</b> &middot; USA<br>Led the merger of two healthcare enterprises</div></div>
+        <div class="client"><div class="name">Hospitality &mdash; SaaS</div><div class="meta"><b>FDM / Accounting / Budgeting &mdash; Lead</b><br>USA, Italy, Spain, Brazil, Ireland, Canada</div></div>
+        <div class="client"><div class="name">Entertainment &mdash; Hollywood</div><div class="meta"><b>Financials</b> &middot; USA<br>Full-system conversion &amp; reconciliation</div></div>
+        <div class="client"><div class="name">Insurance &mdash; Software</div><div class="meta"><b>Financials</b> &middot; USA<br>Full-system conversion &amp; reconciliation</div></div>
+        <div class="client"><div class="name">Trucking &amp; Logistics</div><div class="meta"><b>Financials</b> &middot; USA<br>Full-system conversion &amp; reconciliation</div></div>
+        <div class="client"><div class="name">Retirement &amp; Investment Firm</div><div class="meta"><b>Financials</b> &middot; USA<br>Full-system conversion, incl. workers</div></div>
+        <div class="client"><div class="name">Immigration Law Firm</div><div class="meta"><b>Financials</b> &middot; USA<br>Full-system conversion, incl. workers</div></div>
+        <div class="client"><div class="name">Biotechnology</div><div class="meta"><b>Financials</b> &middot; USA<br>Full-system conversion, incl. workers</div></div>
+        <div class="client"><div class="name">Global Financial Group</div><div class="meta"><b>Financials</b> &middot; USA<br>Full-system conversion, incl. workers</div></div>
+        <div class="client"><div class="name">AAA Video Game Developer</div><div class="meta"><b>HCM &amp; FINS &mdash; Analysis</b> &middot; USA<br>System analysis &amp; reorganization compendium</div></div>
+        <div class="client"><div class="name">ML Advertisement Software</div><div class="meta"><b>HCM Lead &mdash; Core &amp; Comp</b><br>USA, South Korea, Singapore, China</div></div>
+        <div class="client"><div class="name">Telemedicine</div><div class="meta"><b>HCM &mdash; Core &amp; Comp</b><br>USA &amp; India</div></div>
+        <div class="client"><div class="name">Bio-Pharmaceutical</div><div class="meta"><b>HCM &mdash; Core &amp; Comp</b><br>USA, Mexico, Switzerland</div></div>
+        <div class="client"><div class="name">Fintech &mdash; Cryptocurrency</div><div class="meta"><b>HCM &mdash; Core &amp; Comp</b><br>USA, UK, Singapore</div></div>
+        <div class="client"><div class="name">Insurance Provider</div><div class="meta"><b>HCM &mdash; Core &amp; Comp</b><br>USA, UK, Singapore</div></div>
+        <div class="client"><div class="name">Mining &amp; Metals</div><div class="meta"><b>HCM</b> &middot; USA<br>Time tracking, payroll, workers</div></div>
+        <div class="client"><div class="name">Mining &amp; Metals &mdash; Software</div><div class="meta"><b>HCM Conversion</b> &middot; USA<br>Time tracking, payroll, workers</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHOLARSHIP & READING -->
+  <section id="scholarship">
+    <div class="section-head"><span class="banner"></span><h2>Scholarship &amp; Reading</h2><span class="rule"></span></div>
+
+    <div class="card">
+      <div class="role-row"><h3>Indiana University</h3><span class="org-when">Bloomington, IN &middot; May 2021</span></div>
+      <div class="subrole">Bachelor of Arts, Economics &mdash; College of Arts &amp; Sciences / Kelley School of Business</div>
+      <ul>
+        <li>Honors Certificate &mdash; Liberal Arts and Management Program (LAMP)</li>
+        <li>GPA: 3.567 / 4.000</li>
+        <li>Diploma CeDiD Key: <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">21YX-78WV-B0L7</span></li>
+      </ul>
+    </div>
+
+    <div class="reading">
+      <div class="now-reading">
+        <div class="tag">Currently Reading</div>
+        <div class="bk">The Decline of the West</div>
+        <div class="au">Oswald Spengler</div>
+      </div>
+      <div class="shelf">
+        <h4>Also on the shelf</h4>
+        <ul>
+          <li><span class="t">Incerto</span> &mdash; <span class="a">Nassim Taleb</span></li>
+          <li><span class="t">The Selfish Gene</span> &mdash; <span class="a">Richard Dawkins</span></li>
+          <li><span class="t">The Road to Serfdom</span> &mdash; <span class="a">Friedrich Hayek</span></li>
+          <li><span class="t">Governing the Commons</span> &mdash; <span class="a">Elinor Ostrom</span></li>
+          <li><span class="t">Fanged Noumena</span> &mdash; <span class="a">Nick Land</span></li>
+          <li><span class="t">Selected Writings</span> &mdash; <span class="a">Friedrich Nietzsche</span></li>
+          <li><span class="t">12 Rules for Life</span> &mdash; <span class="a">Jordan Peterson</span></li>
+          <li><span class="t">The Storm of Steel</span> &mdash; <span class="a">Ernst J&uuml;nger</span></li>
+          <li><span class="t">Guns, Germs, &amp; Steel</span> &mdash; <span class="a">Jared Diamond</span></li>
+          <li><span class="t">A Farewell to Alms</span> &mdash; <span class="a">Gregory Clark</span></li>
+          <li><span class="t">The Gene</span> &mdash; <span class="a">Siddhartha Mukherjee</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- LINEAGE -->
+  <section id="lineage">
+    <div class="section-head"><span class="banner"></span><h2>Lineage</h2><span class="rule"></span></div>
+    <p class="section-intro">A lifelong genealogy project. Below is my direct line &mdash; six generations of ancestors, rendered as a fan chart from my Ancestry tree. Each of the four quarters is colored by the surname lineage it descends from.</p>
+    <div class="fanwrap">
+      <svg viewBox="-340 -340 680 680" xmlns="http://www.w3.org/2000/svg" class="fanchart" role="img" aria-label="Fan chart of the direct-line ancestors of Bryce Cole Waddell, six generations">
+<defs>
+<path id="fp1" d="M3.66,-83.92 A84.00,84.00 0 0 1 3.66,83.92" fill="none"/>
+<path id="fp2" d="M-3.66,83.92 A84.00,84.00 0 0 1 -3.66,-83.92" fill="none"/>
+<path id="fp3" d="M4.75,-135.92 A136.00,136.00 0 0 1 135.92,-4.75" fill="none"/>
+<path id="fp4" d="M4.75,135.92 A136.00,136.00 0 0 0 135.92,4.75" fill="none"/>
+<path id="fp5" d="M-135.92,4.75 A136.00,136.00 0 0 0 -4.75,135.92" fill="none"/>
+<path id="fp6" d="M-135.92,-4.75 A136.00,136.00 0 0 1 -4.75,-135.92" fill="none"/>
+<path id="fp7" d="M5.25,-187.93 A188.00,188.00 0 0 1 129.17,-136.60" fill="none"/>
+<path id="fp8" d="M136.60,-129.17 A188.00,188.00 0 0 1 187.93,-5.25" fill="none"/>
+<path id="fp9" d="M136.60,129.17 A188.00,188.00 0 0 0 187.93,5.25" fill="none"/>
+<path id="fp10" d="M5.25,187.93 A188.00,188.00 0 0 0 129.17,136.60" fill="none"/>
+<path id="fp11" d="M-129.17,136.60 A188.00,188.00 0 0 0 -5.25,187.93" fill="none"/>
+<path id="fp12" d="M-187.93,5.25 A188.00,188.00 0 0 0 -136.60,129.17" fill="none"/>
+<path id="fp13" d="M-187.93,-5.25 A188.00,188.00 0 0 1 -136.60,-129.17" fill="none"/>
+<path id="fp14" d="M-129.17,-136.60 A188.00,188.00 0 0 1 -5.25,-187.93" fill="none"/>
+<path id="fp15" d="M5.44,-239.94 A240.00,240.00 0 0 1 86.79,-223.76" fill="none"/>
+<path id="fp16" d="M96.85,-219.59 A240.00,240.00 0 0 1 165.81,-173.51" fill="none"/>
+<path id="fp17" d="M173.51,-165.81 A240.00,240.00 0 0 1 219.59,-96.85" fill="none"/>
+<path id="fp18" d="M223.76,-86.79 A240.00,240.00 0 0 1 239.94,-5.44" fill="none"/>
+<path id="fp19" d="M223.76,86.79 A240.00,240.00 0 0 0 239.94,5.44" fill="none"/>
+<path id="fp20" d="M173.51,165.81 A240.00,240.00 0 0 0 219.59,96.85" fill="none"/>
+<path id="fp21" d="M96.85,219.59 A240.00,240.00 0 0 0 165.81,173.51" fill="none"/>
+<path id="fp22" d="M5.44,239.94 A240.00,240.00 0 0 0 86.79,223.76" fill="none"/>
+<path id="fp23" d="M-86.79,223.76 A240.00,240.00 0 0 0 -5.44,239.94" fill="none"/>
+<path id="fp24" d="M-165.81,173.51 A240.00,240.00 0 0 0 -96.85,219.59" fill="none"/>
+<path id="fp25" d="M-219.59,96.85 A240.00,240.00 0 0 0 -173.51,165.81" fill="none"/>
+<path id="fp26" d="M-239.94,5.44 A240.00,240.00 0 0 0 -223.76,86.79" fill="none"/>
+<path id="fp27" d="M-239.94,-5.44 A240.00,240.00 0 0 1 -223.76,-86.79" fill="none"/>
+<path id="fp28" d="M-219.59,-96.85 A240.00,240.00 0 0 1 -173.51,-165.81" fill="none"/>
+<path id="fp29" d="M-165.81,-173.51 A240.00,240.00 0 0 1 -96.85,-219.59" fill="none"/>
+<path id="fp30" d="M-86.79,-223.76 A240.00,240.00 0 0 1 -5.44,-239.94" fill="none"/>
+<path id="fp31" d="M5.39,-293.95 A294.00,294.00 0 0 1 52.06,-289.35" fill="none"/>
+<path id="fp32" d="M65.14,-298.74 A305.76,305.76 0 0 1 111.81,-284.58" fill="none"/>
+<path id="fp33" d="M60.13,-275.76 A282.24,282.24 0 0 1 103.21,-262.69" fill="none"/>
+<path id="fp34" d="M117.47,-269.51 A294.00,294.00 0 0 1 158.83,-247.40" fill="none"/>
+<path id="fp35" d="M167.79,-241.42 A294.00,294.00 0 0 1 204.04,-211.66" fill="none"/>
+<path id="fp36" d="M220.13,-212.21 A305.76,305.76 0 0 1 251.07,-174.50" fill="none"/>
+<path id="fp37" d="M203.20,-195.88 A282.24,282.24 0 0 1 231.76,-161.08" fill="none"/>
+<path id="fp38" d="M257.30,-165.18 A305.76,305.76 0 0 1 280.29,-122.17" fill="none"/>
+<path id="fp39" d="M237.51,-152.48 A282.24,282.24 0 0 1 258.73,-112.77" fill="none"/>
+<path id="fp40" d="M273.64,-107.51 A294.00,294.00 0 0 1 287.25,-62.63" fill="none"/>
+<path id="fp41" d="M300.93,-54.15 A305.76,305.76 0 0 1 305.71,-5.60" fill="none"/>
+<path id="fp42" d="M277.78,-49.98 A282.24,282.24 0 0 1 282.19,-5.17" fill="none"/>
+<path id="fp43" d="M300.93,54.15 A305.76,305.76 0 0 0 305.71,5.60" fill="none"/>
+<path id="fp44" d="M277.78,49.98 A282.24,282.24 0 0 0 282.19,5.17" fill="none"/>
+<path id="fp45" d="M284.58,111.81 A305.76,305.76 0 0 0 298.74,65.14" fill="none"/>
+<path id="fp46" d="M262.69,103.21 A282.24,282.24 0 0 0 275.76,60.13" fill="none"/>
+<path id="fp47" d="M257.30,165.18 A305.76,305.76 0 0 0 280.29,122.17" fill="none"/>
+<path id="fp48" d="M237.51,152.48 A282.24,282.24 0 0 0 258.73,112.77" fill="none"/>
+<path id="fp49" d="M211.66,204.04 A294.00,294.00 0 0 0 241.42,167.79" fill="none"/>
+<path id="fp50" d="M174.50,251.07 A305.76,305.76 0 0 0 212.21,220.13" fill="none"/>
+<path id="fp51" d="M161.08,231.76 A282.24,282.24 0 0 0 195.88,203.20" fill="none"/>
+<path id="fp52" d="M122.17,280.29 A305.76,305.76 0 0 0 165.18,257.30" fill="none"/>
+<path id="fp53" d="M112.77,258.73 A282.24,282.24 0 0 0 152.48,237.51" fill="none"/>
+<path id="fp54" d="M65.14,298.74 A305.76,305.76 0 0 0 111.81,284.58" fill="none"/>
+<path id="fp55" d="M60.13,275.76 A282.24,282.24 0 0 0 103.21,262.69" fill="none"/>
+<path id="fp56" d="M5.39,293.95 A294.00,294.00 0 0 0 52.06,289.35" fill="none"/>
+<path id="fp57" d="M-54.15,300.93 A305.76,305.76 0 0 0 -5.60,305.71" fill="none"/>
+<path id="fp58" d="M-49.98,277.78 A282.24,282.24 0 0 0 -5.17,282.19" fill="none"/>
+<path id="fp59" d="M-107.51,273.64 A294.00,294.00 0 0 0 -62.63,287.25" fill="none"/>
+<path id="fp60" d="M-165.18,257.30 A305.76,305.76 0 0 0 -122.17,280.29" fill="none"/>
+<path id="fp61" d="M-152.48,237.51 A282.24,282.24 0 0 0 -112.77,258.73" fill="none"/>
+<path id="fp62" d="M-204.04,211.66 A294.00,294.00 0 0 0 -167.79,241.42" fill="none"/>
+<path id="fp63" d="M-251.07,174.50 A305.76,305.76 0 0 0 -220.13,212.21" fill="none"/>
+<path id="fp64" d="M-231.76,161.08 A282.24,282.24 0 0 0 -203.20,195.88" fill="none"/>
+<path id="fp65" d="M-280.29,122.17 A305.76,305.76 0 0 0 -257.30,165.18" fill="none"/>
+<path id="fp66" d="M-258.73,112.77 A282.24,282.24 0 0 0 -237.51,152.48" fill="none"/>
+<path id="fp67" d="M-287.25,62.63 A294.00,294.00 0 0 0 -273.64,107.51" fill="none"/>
+<path id="fp68" d="M-293.95,5.39 A294.00,294.00 0 0 0 -289.35,52.06" fill="none"/>
+<path id="fp69" d="M-293.95,-5.39 A294.00,294.00 0 0 1 -289.35,-52.06" fill="none"/>
+<path id="fp70" d="M-287.25,-62.63 A294.00,294.00 0 0 1 -273.64,-107.51" fill="none"/>
+<path id="fp71" d="M-280.29,-122.17 A305.76,305.76 0 0 1 -257.30,-165.18" fill="none"/>
+<path id="fp72" d="M-258.73,-112.77 A282.24,282.24 0 0 1 -237.51,-152.48" fill="none"/>
+<path id="fp73" d="M-251.07,-174.50 A305.76,305.76 0 0 1 -220.13,-212.21" fill="none"/>
+<path id="fp74" d="M-231.76,-161.08 A282.24,282.24 0 0 1 -203.20,-195.88" fill="none"/>
+<path id="fp75" d="M-212.21,-220.13 A305.76,305.76 0 0 1 -174.50,-251.07" fill="none"/>
+<path id="fp76" d="M-195.88,-203.20 A282.24,282.24 0 0 1 -161.08,-231.76" fill="none"/>
+<path id="fp77" d="M-165.18,-257.30 A305.76,305.76 0 0 1 -122.17,-280.29" fill="none"/>
+<path id="fp78" d="M-152.48,-237.51 A282.24,282.24 0 0 1 -112.77,-258.73" fill="none"/>
+<path id="fp79" d="M-111.81,-284.58 A305.76,305.76 0 0 1 -65.14,-298.74" fill="none"/>
+<path id="fp80" d="M-103.21,-262.69 A282.24,282.24 0 0 1 -60.13,-275.76" fill="none"/>
+<path id="fp81" d="M-54.15,-300.93 A305.76,305.76 0 0 1 -5.60,-305.71" fill="none"/>
+<path id="fp82" d="M-49.98,-277.78 A282.24,282.24 0 0 1 -5.17,-282.19" fill="none"/>
+</defs>
+<circle cx="0" cy="0" r="58" fill="#8f1d1d" stroke="#000000" stroke-width="2"/>
+<path d="M0.00,-58.00 L0.00,-110.00 A110.00,110.00 0 0 1 0.00,110.00 L0.00,58.00 A58.00,58.00 0 0 0 0.00,-58.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,58.00 L0.00,110.00 A110.00,110.00 0 0 1 -0.00,-110.00 L-0.00,-58.00 A58.00,58.00 0 0 0 0.00,58.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,-110.00 L0.00,-162.00 A162.00,162.00 0 0 1 162.00,0.00 L110.00,0.00 A110.00,110.00 0 0 0 0.00,-110.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M110.00,0.00 L162.00,0.00 A162.00,162.00 0 0 1 0.00,162.00 L0.00,110.00 A110.00,110.00 0 0 0 110.00,0.00 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,110.00 L0.00,162.00 A162.00,162.00 0 0 1 -162.00,0.00 L-110.00,0.00 A110.00,110.00 0 0 0 0.00,110.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-110.00,0.00 L-162.00,0.00 A162.00,162.00 0 0 1 -0.00,-162.00 L-0.00,-110.00 A110.00,110.00 0 0 0 -110.00,0.00 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,-162.00 L0.00,-214.00 A214.00,214.00 0 0 1 151.32,-151.32 L114.55,-114.55 A162.00,162.00 0 0 0 0.00,-162.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M114.55,-114.55 L151.32,-151.32 A214.00,214.00 0 0 1 214.00,0.00 L162.00,0.00 A162.00,162.00 0 0 0 114.55,-114.55 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M162.00,0.00 L214.00,0.00 A214.00,214.00 0 0 1 151.32,151.32 L114.55,114.55 A162.00,162.00 0 0 0 162.00,0.00 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M114.55,114.55 L151.32,151.32 A214.00,214.00 0 0 1 0.00,214.00 L0.00,162.00 A162.00,162.00 0 0 0 114.55,114.55 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,162.00 L0.00,214.00 A214.00,214.00 0 0 1 -151.32,151.32 L-114.55,114.55 A162.00,162.00 0 0 0 0.00,162.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-114.55,114.55 L-151.32,151.32 A214.00,214.00 0 0 1 -214.00,0.00 L-162.00,0.00 A162.00,162.00 0 0 0 -114.55,114.55 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-162.00,0.00 L-214.00,0.00 A214.00,214.00 0 0 1 -151.32,-151.32 L-114.55,-114.55 A162.00,162.00 0 0 0 -162.00,0.00 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-114.55,-114.55 L-151.32,-151.32 A214.00,214.00 0 0 1 -0.00,-214.00 L-0.00,-162.00 A162.00,162.00 0 0 0 -114.55,-114.55 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,-214.00 L0.00,-266.00 A266.00,266.00 0 0 1 101.79,-245.75 L81.89,-197.71 A214.00,214.00 0 0 0 0.00,-214.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M81.89,-197.71 L101.79,-245.75 A266.00,266.00 0 0 1 188.09,-188.09 L151.32,-151.32 A214.00,214.00 0 0 0 81.89,-197.71 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M151.32,-151.32 L188.09,-188.09 A266.00,266.00 0 0 1 245.75,-101.79 L197.71,-81.89 A214.00,214.00 0 0 0 151.32,-151.32 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M197.71,-81.89 L245.75,-101.79 A266.00,266.00 0 0 1 266.00,0.00 L214.00,0.00 A214.00,214.00 0 0 0 197.71,-81.89 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M214.00,0.00 L266.00,0.00 A266.00,266.00 0 0 1 245.75,101.79 L197.71,81.89 A214.00,214.00 0 0 0 214.00,0.00 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M197.71,81.89 L245.75,101.79 A266.00,266.00 0 0 1 188.09,188.09 L151.32,151.32 A214.00,214.00 0 0 0 197.71,81.89 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M151.32,151.32 L188.09,188.09 A266.00,266.00 0 0 1 101.79,245.75 L81.89,197.71 A214.00,214.00 0 0 0 151.32,151.32 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M81.89,197.71 L101.79,245.75 A266.00,266.00 0 0 1 0.00,266.00 L0.00,214.00 A214.00,214.00 0 0 0 81.89,197.71 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,214.00 L0.00,266.00 A266.00,266.00 0 0 1 -101.79,245.75 L-81.89,197.71 A214.00,214.00 0 0 0 0.00,214.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-81.89,197.71 L-101.79,245.75 A266.00,266.00 0 0 1 -188.09,188.09 L-151.32,151.32 A214.00,214.00 0 0 0 -81.89,197.71 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-151.32,151.32 L-188.09,188.09 A266.00,266.00 0 0 1 -245.75,101.79 L-197.71,81.89 A214.00,214.00 0 0 0 -151.32,151.32 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-197.71,81.89 L-245.75,101.79 A266.00,266.00 0 0 1 -266.00,0.00 L-214.00,0.00 A214.00,214.00 0 0 0 -197.71,81.89 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-214.00,0.00 L-266.00,0.00 A266.00,266.00 0 0 1 -245.75,-101.79 L-197.71,-81.89 A214.00,214.00 0 0 0 -214.00,0.00 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-197.71,-81.89 L-245.75,-101.79 A266.00,266.00 0 0 1 -188.09,-188.09 L-151.32,-151.32 A214.00,214.00 0 0 0 -197.71,-81.89 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-151.32,-151.32 L-188.09,-188.09 A266.00,266.00 0 0 1 -101.79,-245.75 L-81.89,-197.71 A214.00,214.00 0 0 0 -151.32,-151.32 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-81.89,-197.71 L-101.79,-245.75 A266.00,266.00 0 0 1 -0.00,-266.00 L-0.00,-214.00 A214.00,214.00 0 0 0 -81.89,-197.71 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,-266.00 L0.00,-322.00 A322.00,322.00 0 0 1 62.82,-315.81 L51.89,-260.89 A266.00,266.00 0 0 0 0.00,-266.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M51.89,-260.89 L62.82,-315.81 A322.00,322.00 0 0 1 123.22,-297.49 L101.79,-245.75 A266.00,266.00 0 0 0 51.89,-260.89 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M101.79,-245.75 L123.22,-297.49 A322.00,322.00 0 0 1 178.89,-267.73 L147.78,-221.17 A266.00,266.00 0 0 0 101.79,-245.75 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M147.78,-221.17 L178.89,-267.73 A322.00,322.00 0 0 1 227.69,-227.69 L188.09,-188.09 A266.00,266.00 0 0 0 147.78,-221.17 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M188.09,-188.09 L227.69,-227.69 A322.00,322.00 0 0 1 267.73,-178.89 L221.17,-147.78 A266.00,266.00 0 0 0 188.09,-188.09 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M221.17,-147.78 L267.73,-178.89 A322.00,322.00 0 0 1 297.49,-123.22 L245.75,-101.79 A266.00,266.00 0 0 0 221.17,-147.78 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M245.75,-101.79 L297.49,-123.22 A322.00,322.00 0 0 1 315.81,-62.82 L260.89,-51.89 A266.00,266.00 0 0 0 245.75,-101.79 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M260.89,-51.89 L315.81,-62.82 A322.00,322.00 0 0 1 322.00,0.00 L266.00,0.00 A266.00,266.00 0 0 0 260.89,-51.89 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15"/>
+<path d="M266.00,0.00 L322.00,0.00 A322.00,322.00 0 0 1 315.81,62.82 L260.89,51.89 A266.00,266.00 0 0 0 266.00,0.00 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M260.89,51.89 L315.81,62.82 A322.00,322.00 0 0 1 297.49,123.22 L245.75,101.79 A266.00,266.00 0 0 0 260.89,51.89 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M245.75,101.79 L297.49,123.22 A322.00,322.00 0 0 1 267.73,178.89 L221.17,147.78 A266.00,266.00 0 0 0 245.75,101.79 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M221.17,147.78 L267.73,178.89 A322.00,322.00 0 0 1 227.69,227.69 L188.09,188.09 A266.00,266.00 0 0 0 221.17,147.78 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M188.09,188.09 L227.69,227.69 A322.00,322.00 0 0 1 178.89,267.73 L147.78,221.17 A266.00,266.00 0 0 0 188.09,188.09 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M147.78,221.17 L178.89,267.73 A322.00,322.00 0 0 1 123.22,297.49 L101.79,245.75 A266.00,266.00 0 0 0 147.78,221.17 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M101.79,245.75 L123.22,297.49 A322.00,322.00 0 0 1 62.82,315.81 L51.89,260.89 A266.00,266.00 0 0 0 101.79,245.75 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M51.89,260.89 L62.82,315.81 A322.00,322.00 0 0 1 0.00,322.00 L0.00,266.00 A266.00,266.00 0 0 0 51.89,260.89 Z" fill="#161310" stroke="#000000" stroke-width="1.15"/>
+<path d="M0.00,266.00 L0.00,322.00 A322.00,322.00 0 0 1 -62.82,315.81 L-51.89,260.89 A266.00,266.00 0 0 0 0.00,266.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-51.89,260.89 L-62.82,315.81 A322.00,322.00 0 0 1 -123.22,297.49 L-101.79,245.75 A266.00,266.00 0 0 0 -51.89,260.89 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-101.79,245.75 L-123.22,297.49 A322.00,322.00 0 0 1 -178.89,267.73 L-147.78,221.17 A266.00,266.00 0 0 0 -101.79,245.75 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-147.78,221.17 L-178.89,267.73 A322.00,322.00 0 0 1 -227.69,227.69 L-188.09,188.09 A266.00,266.00 0 0 0 -147.78,221.17 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-188.09,188.09 L-227.69,227.69 A322.00,322.00 0 0 1 -267.73,178.89 L-221.17,147.78 A266.00,266.00 0 0 0 -188.09,188.09 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-221.17,147.78 L-267.73,178.89 A322.00,322.00 0 0 1 -297.49,123.22 L-245.75,101.79 A266.00,266.00 0 0 0 -221.17,147.78 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-245.75,101.79 L-297.49,123.22 A322.00,322.00 0 0 1 -315.81,62.82 L-260.89,51.89 A266.00,266.00 0 0 0 -245.75,101.79 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-260.89,51.89 L-315.81,62.82 A322.00,322.00 0 0 1 -322.00,0.00 L-266.00,0.00 A266.00,266.00 0 0 0 -260.89,51.89 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15"/>
+<path d="M-266.00,0.00 L-322.00,0.00 A322.00,322.00 0 0 1 -315.81,-62.82 L-260.89,-51.89 A266.00,266.00 0 0 0 -266.00,0.00 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-260.89,-51.89 L-315.81,-62.82 A322.00,322.00 0 0 1 -297.49,-123.22 L-245.75,-101.79 A266.00,266.00 0 0 0 -260.89,-51.89 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-245.75,-101.79 L-297.49,-123.22 A322.00,322.00 0 0 1 -267.73,-178.89 L-221.17,-147.78 A266.00,266.00 0 0 0 -245.75,-101.79 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-221.17,-147.78 L-267.73,-178.89 A322.00,322.00 0 0 1 -227.69,-227.69 L-188.09,-188.09 A266.00,266.00 0 0 0 -221.17,-147.78 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-188.09,-188.09 L-227.69,-227.69 A322.00,322.00 0 0 1 -178.89,-267.73 L-147.78,-221.17 A266.00,266.00 0 0 0 -188.09,-188.09 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-147.78,-221.17 L-178.89,-267.73 A322.00,322.00 0 0 1 -123.22,-297.49 L-101.79,-245.75 A266.00,266.00 0 0 0 -147.78,-221.17 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-101.79,-245.75 L-123.22,-297.49 A322.00,322.00 0 0 1 -62.82,-315.81 L-51.89,-260.89 A266.00,266.00 0 0 0 -101.79,-245.75 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<path d="M-51.89,-260.89 L-62.82,-315.81 A322.00,322.00 0 0 1 -0.00,-322.00 L-0.00,-266.00 A266.00,266.00 0 0 0 -51.89,-260.89 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15"/>
+<text x="0" y="-4" text-anchor="middle" font-size="17" font-weight="700" fill="#f6efdc" font-family="Cinzel,serif">Bryce</text>
+<text x="0" y="16" text-anchor="middle" font-size="13.5" fill="#f6efdc" font-family="Cinzel,serif" letter-spacing="1">WADDELL</text>
+<text font-size="14.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp1" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Tracy Waddell</textPath></text>
+<text font-size="14.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp2" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Sarah Griffin</textPath></text>
+<text font-size="13.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp3" startOffset="50%" text-anchor="middle" dominant-baseline="middle">David Waddell</textPath></text>
+<text font-size="13.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp4" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Martha Caldwell</textPath></text>
+<text font-size="13.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp5" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Donald Griffin</textPath></text>
+<text font-size="13.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp6" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Rebecca Scobee</textPath></text>
+<text font-size="11.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp7" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Clarence Waddell</textPath></text>
+<text font-size="11.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp8" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Cleda Opel</textPath></text>
+<text font-size="11.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp9" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Charles Caldwell</textPath></text>
+<text font-size="11.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp10" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Emogene Marquette</textPath></text>
+<text font-size="11.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp11" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Hiram Griffin</textPath></text>
+<text font-size="11.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp12" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Sarah Gosnell</textPath></text>
+<text font-size="11.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp13" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Thomas Scobee</textPath></text>
+<text font-size="11.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp14" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Vivian Martin</textPath></text>
+<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp15" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Claude Waddle</textPath></text>
+<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp16" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Delila Grant</textPath></text>
+<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp17" startOffset="50%" text-anchor="middle" dominant-baseline="middle">George Opel</textPath></text>
+<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp18" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Barbara Seitz</textPath></text>
+<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp19" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Ray Caldwell</textPath></text>
+<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp20" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Chloe Tharp</textPath></text>
+<text font-size="9.3" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp21" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Grover Marquette</textPath></text>
+<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp22" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Minnie Heintz</textPath></text>
+<text font-size="9.9" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp23" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Gilbert Griffin</textPath></text>
+<text font-size="8.8" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp24" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Dollie Harrington</textPath></text>
+<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp25" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Alva Gosnell</textPath></text>
+<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp26" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Lucy Helt</textPath></text>
+<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp27" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Daniel Scobee</textPath></text>
+<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp28" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Katie Howlett</textPath></text>
+<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp29" startOffset="50%" text-anchor="middle" dominant-baseline="middle">John Martin</textPath></text>
+<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp30" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Georgia Magill</textPath></text>
+<text font-size="7.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp31" startOffset="50%" text-anchor="middle" dominant-baseline="middle">David Waddle</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp32" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Margaret</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp33" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Evans</textPath></text>
+<text font-size="8.4" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp34" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Levi Grant</textPath></text>
+<text font-size="7.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp35" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Sarah Pruitt</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp36" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Sebastian</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp37" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Opel</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp38" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Elisabeth</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp39" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Huebner</textPath></text>
+<text font-size="8.4" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp40" startOffset="50%" text-anchor="middle" dominant-baseline="middle">John Seitz</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp41" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Elizabeth</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp42" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Neukam</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp43" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Charles</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp44" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Caldwell</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp45" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Daisie</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp46" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Martin</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp47" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Charles</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp48" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Tharp</textPath></text>
+<text font-size="7.6" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp49" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Jennie Webb</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp50" startOffset="50%" text-anchor="middle" dominant-baseline="middle">George</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp51" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Marquett</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp52" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Ruthie</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp53" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Prather</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp54" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Conrad</textPath></text>
+<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp55" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Heintz</textPath></text>
+<text font-size="7.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp56" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Barbara Baer</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp57" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Hiram</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp58" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Griffin</textPath></text>
+<text font-size="8.4" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp59" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Lucy Evans</textPath></text>
+<text font-size="8.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp60" startOffset="50%" text-anchor="middle" dominant-baseline="middle">William</textPath></text>
+<text font-size="8.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp61" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Harrington</textPath></text>
+<text font-size="7.6" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp62" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Emma Wright</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp63" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Robert</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp64" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Gosnell</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp65" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Elizabeth</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp66" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Bartlett</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp67" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Eli Helt</textPath></text>
+<text font-size="8.4" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp68" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Mary Jacks</textPath></text>
+<text font-size="8.4" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp69" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Robert Jr.</textPath></text>
+<text font-size="7.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp70" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Luanna Henry</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp71" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Robert</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp72" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Howlett</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp73" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Margaret</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp74" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Conley</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp75" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Samuel</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp76" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Martin</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp77" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Margaret</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp78" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Lancaster</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp79" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Theodore</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp80" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Magill</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp81" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Harriet</textPath></text>
+<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp82" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Wysong</textPath></text>
+</svg>
+      <div class="fan-legend">
+        <span class="lg"><i style="background:#8f1d1d"></i>Waddell</span>
+        <span class="lg"><i style="background:#b8923a"></i>Griffin</span>
+        <span class="lg"><i style="background:#161310"></i>Caldwell</span>
+        <span class="lg"><i style="background:#faf4e6"></i>Scobee</span>
+      </div>
+      <div class="fan-cap">Direct-line ancestors of Bryce Cole Waddell &middot; 6 generations</div>
+    </div>
+    <div class="btn-row" style="margin-top:18px">
+      <a class="btn" href="https://www.ancestry.com/family-tree/tree/111715624/family?cfpid=320091327090" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-2 9.58V14H7.5a1 1 0 0 0-1 1v1.42a3 3 0 1 0 2 0V16h7v.42a3 3 0 1 0 2 0V15a1 1 0 0 0-1-1H14v-2.42A5 5 0 0 0 12 2zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM7.5 18.2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm9 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+        View full tree on Ancestry
+      </a>
+    </div>
+  </section>
+
+  <!-- ARSENAL (gaming) -->
+  <section id="arsenal">
+    <div class="section-head"><span class="banner"></span><h2>The Arsenal</h2><span class="rule"></span></div>
+    <p class="section-intro">ITX Rig Assembled &amp; Optimized Myself</p>
+    <table class="rig">
+      <tbody>
+      <tr><td class="cat">Motherboard</td><td class="mk">MSI</td><td class="md">MPG B760I EDGE WF D5 ITX</td></tr>
+      <tr><td class="cat">CPU</td><td class="mk">Intel</td><td class="md">Core i5-12600KF</td></tr>
+      <tr><td class="cat">GPU</td><td class="mk">NVIDIA</td><td class="md">GeForce RTX 5070 Founders Edition — 12GB GDDR7, PCIe 5.0</td></tr>
+      <tr><td class="cat">RAM</td><td class="mk">TeamGroup</td><td class="md">32GB DDR5 6400 RGB (White Kit)</td></tr>
+      <tr><td class="cat">Storage</td><td class="mk">Samsung</td><td class="md">2TB 990 PRO NVMe Gen4 SSD</td></tr>
+      <tr><td class="cat">CPU Cooler</td><td class="mk">be quiet!</td><td class="md">Pure Rock LP</td></tr>
+      <tr><td class="cat">Fans</td><td class="mk">Arctic</td><td class="md">P12 PWM 120mm PST ×2</td></tr>
+      <tr><td class="cat">PSU</td><td class="mk">MSI</td><td class="md">MAG A850GL 80+ Gold ATX 3.0</td></tr>
+      <tr><td class="cat">Case</td><td class="mk">Antec</td><td class="md">Stryker</td></tr>
+      <tr><td class="cat">Monitor</td><td class="mk">ASUS ROG</td><td class="md">Strix XG27UCG-W — 27" 4K HDR USB-C, Dual Mode (4K 160Hz), White</td></tr>
+      <tr><td class="cat">Keyboard</td><td class="mk">Razer</td><td class="md">Huntsman V3 Pro (Full Size)</td></tr>
+      <tr><td class="cat">Mouse</td><td class="mk">Razer</td><td class="md">Basilisk V3</td></tr>
+      <tr><td class="cat">Microphone</td><td class="mk">Logitech</td><td class="md">Blue Yeti</td></tr>
+      <tr><td class="cat">OS</td><td class="mk">Linux</td><td class="md">Migrating to Linux</td></tr>
+      </tbody>
+    </table>
+    <div class="btn-row" style="margin-top:18px">
+      <a class="btn" href="https://steamcommunity.com/profiles/76561198123978518" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-9.96 9.13l5.37 2.22a2.82 2.82 0 0 1 1.6-.5l2.39-3.46v-.05a3.77 3.77 0 1 1 3.77 3.77h-.09l-3.41 2.43a2.83 2.83 0 0 1-5.62.4L2 16.97A10 10 0 1 0 12 2zm-3.5 15.18l-1.23-.51a2.13 2.13 0 0 0 3.93-1.6 2.13 2.13 0 0 0-2.83-1.13l1.27.53a1.57 1.57 0 1 1-1.14 2.92zm9.04-7.6a2.51 2.51 0 1 0-2.51 2.5 2.51 2.51 0 0 0 2.51-2.5zm-4.39 0a1.89 1.89 0 1 1 1.89 1.88 1.89 1.89 0 0 1-1.89-1.89z"/></svg>
+        Add me on Steam
+      </a>
+      <span class="pill" style="align-self:center">Steam ID &middot; 76561198123978518</span>
+    </div>
+  </section>
+
+  <!-- ATHLETICS -->
+  <section id="athletics">
+    <div class="section-head"><span class="banner"></span><h2>Athletics</h2><span class="rule"></span></div>
+    <div class="two">
+      <div class="card" style="margin:0">
+        <h3>On Foot</h3>
+        <p style="margin:10px 0 16px;color:var(--ink-soft)">When I'm not at a desk I'm usually outdoors chasing a summit or a switchback. My logged hikes &mdash; routes, distances, and elevation &mdash; all live on AllTrails.</p>
+        <div class="btn-row">
+          <a class="btn ghost" href="https://www.alltrails.com/members/bryce-waddell-3" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M14 6l-4.22 9.55 1.6 1.6L14 11l3 5h-4.5l-2 2H21L14 6zm-4.9 6.39l-2.1-2.39L2 22h9.5l-1.4-1.4-4.2.01 1.7-3.84-1.5-1.5-1.93 4.36-.6-.6 4.43-6.04z"/></svg>
+            View my hikes on AllTrails
+          </a>
+        </div>
+      </div>
+      <div class="card" style="margin:0">
+        <h3>Ironman 70.3 Steelhead</h3>
+        <table class="splits">
+          <tr><td class="leg">Swim</td><td class="dist">1.9 km</td><td class="time">1:00:51</td></tr>
+          <tr><td class="leg">Bike <span>Trek Domane AL 2 (Gen 4)</span></td><td class="dist">90.6 km</td><td class="time">3:43:56</td></tr>
+          <tr><td class="leg">Run</td><td class="dist">21.6 km</td><td class="time">2:18:57</td></tr>
+          <tr class="total"><td class="leg">Total</td><td class="dist"></td><td class="time">7:17:56</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="connect">
+  <div class="wm">Bryce Waddell</div>
+  <div class="social">
+    <a href="mailto:brycewaddell@gmail.com"><svg viewBox="0 0 24 24"><path d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5zm2 .5v.4l8 5 8-5v-.4H4zm16 2.3l-7.4 4.63a1 1 0 0 1-1.2 0L4 7.8V19h16V7.8z"/></svg>Email</a>
+    <a href="https://www.linkedin.com/in/bryce-waddell/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 9.5H5.67V18h2.67V9.5zM7 5.88a1.55 1.55 0 1 0 0 3.1 1.55 1.55 0 0 0 0-3.1zM18.34 18v-4.67c0-2.5-1.34-3.67-3.13-3.67a2.7 2.7 0 0 0-2.45 1.35V9.5h-2.67V18h2.67v-4.5c0-1.18.22-2.32 1.68-2.32 1.44 0 1.46 1.35 1.46 2.4V18h2.67z"/></svg>LinkedIn</a>
+    <a href="https://www.instagram.com/bryce_waddell_/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.8c-3.15 0-3.52.01-4.76.07-.9.04-1.39.19-1.71.32-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.13.32-.28.81-.32 1.71-.06 1.24-.07 1.61-.07 4.76s.01 3.52.07 4.76c.04.9.19 1.39.32 1.71.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.13.81.28 1.71.32 1.24.06 1.61.07 4.76.07s3.52-.01 4.76-.07c.9-.04 1.39-.19 1.71-.32.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.13-.32.28-.81.32-1.71.06-1.24.07-1.61.07-4.76s-.01-3.52-.07-4.76c-.04-.9-.19-1.39-.32-1.71a2.85 2.85 0 0 0-.69-1.06 2.85 2.85 0 0 0-1.06-.69c-.32-.13-.81-.28-1.71-.32-1.24-.06-1.61-.07-4.76-.07zm0 3.06a4.98 4.98 0 1 1 0 9.96 4.98 4.98 0 0 1 0-9.96zm0 8.21a3.23 3.23 0 1 0 0-6.46 3.23 3.23 0 0 0 0 6.46zm6.34-8.41a1.16 1.16 0 1 1-2.33 0 1.16 1.16 0 0 1 2.33 0z"/></svg>Instagram</a>
+    <a href="https://steamcommunity.com/profiles/76561198123978518" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-9.96 9.13l5.37 2.22a2.82 2.82 0 0 1 1.6-.5l2.39-3.46v-.05a3.77 3.77 0 1 1 3.77 3.77h-.09l-3.41 2.43a2.83 2.83 0 0 1-5.62.4L2 16.97A10 10 0 1 0 12 2zm-3.5 15.18l-1.23-.51a2.13 2.13 0 0 0 3.93-1.6 2.13 2.13 0 0 0-2.83-1.13l1.27.53a1.57 1.57 0 1 1-1.14 2.92zm9.04-7.6a2.51 2.51 0 1 0-2.51 2.5 2.51 2.51 0 0 0 2.51-2.5z"/></svg>Steam</a>
+    <a href="https://www.alltrails.com/members/bryce-waddell-3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 6l-4.22 9.55 1.6 1.6L14 11l3 5h-4.5l-2 2H21L14 6z"/></svg>AllTrails</a>
+  </div>
+</footer>
+
+</body>
+</html>
