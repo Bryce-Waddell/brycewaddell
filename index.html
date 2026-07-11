@@ -69,6 +69,12 @@
   nav a{font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
         padding:4px 2px;border-bottom:2px solid transparent}
   nav a:hover{color:var(--war-red);border-bottom-color:var(--gold)}
+  .nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px}
+  .nav-toggle{display:none;background:none;border:1px solid var(--rule);border-radius:3px;padding:9px 10px;cursor:pointer}
+  .nav-toggle span{display:block;width:20px;height:2px;background:var(--war-red);margin:4px 0;transition:transform .2s,opacity .2s}
+  nav.open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  nav.open .nav-toggle span:nth-child(2){opacity:0}
+  nav.open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
   /* ---- Hero ---- */
   header.hero{text-align:center;padding:40px 28px 14px}
@@ -170,6 +176,16 @@
   .splits .total .time{font-weight:700;font-size:17px}
   .splits .total td{border-top:2px solid var(--war-red);padding-top:12px}
 
+  /* reputation */
+  .rep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  .rep{background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:4px;
+       padding:20px 22px;text-align:center;box-shadow:0 4px 16px rgba(60,30,20,.06)}
+  .rep .platform{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .rep .score{font-family:'Cinzel',serif;font-size:34px;font-weight:700;color:var(--war-red);margin-top:8px;line-height:1}
+  .rep .score span{font-size:15px;font-weight:400;color:var(--ink-soft)}
+  .rep .what{font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-top:8px}
+  .rep-asof{font-family:'Cinzel',serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-top:14px}
+
   /* two-col generic */
   .two{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
 
@@ -187,6 +203,15 @@
     .reading,.two{grid-template-columns:1fr}
     .section-head .banner{display:none}
     nav .brand{font-size:20px}
+    .nav-toggle{display:block}
+    .nav-links{display:none;flex-basis:100%;flex-direction:column;align-items:flex-start;gap:0;padding:6px 0 4px}
+    nav.open .nav-links{display:flex}
+    .nav-links a{display:block;width:100%;padding:11px 2px;border-bottom:1px solid var(--rule);font-size:13.5px}
+    .nav-links a:last-child{border-bottom:none}
+    .section-head h2{white-space:normal;letter-spacing:.1em}
+    .rig .cat{width:auto;white-space:normal}
+    .rig .mk{width:auto}
+    .rig td{padding:9px 10px}
   }
 </style>
 </head>
@@ -195,12 +220,18 @@
 
 <nav><div class="inner">
   <span class="brand">Bryce Waddell</span>
-  <a href="#work">Work</a>
-  <a href="#scholarship">Scholarship</a>
-  <a href="#lineage">Lineage</a>
-  <a href="#arsenal">Arsenal</a>
-  <a href="#athletics">Athletics</a>
-  <a href="#connect">Connect</a>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" onclick="document.querySelector('nav').classList.toggle('open');this.setAttribute('aria-expanded',document.querySelector('nav').classList.contains('open'))">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#scholarship">Scholarship</a>
+    <a href="#lineage">Lineage</a>
+    <a href="#arsenal">Arsenal</a>
+    <a href="#athletics">Athletics</a>
+    <a href="#reputation">Reputation</a>
+    <a href="#connect">Connect</a>
+  </div>
 </div></nav>
 
 <header class="hero">
@@ -320,6 +351,7 @@
           <li><span class="t">Guns, Germs, &amp; Steel</span> &mdash; <span class="a">Jared Diamond</span></li>
           <li><span class="t">A Farewell to Alms</span> &mdash; <span class="a">Gregory Clark</span></li>
           <li><span class="t">The Gene</span> &mdash; <span class="a">Siddhartha Mukherjee</span></li>
+          <li><span class="t">The Complete Batman Runs</span> &mdash; <span class="a">Scott Snyder, Alan Moore &amp; Grant Morrison</span></li>
         </ul>
       </div>
     </div>
@@ -636,6 +668,40 @@
     </div>
   </section>
 
+  <!-- REPUTATION -->
+  <section id="reputation">
+    <div class="section-head"><span class="banner"></span><h2>Reputation</h2><span class="rule"></span></div>
+    <p class="section-intro">Standing on the platforms I use &mdash; a small ledger of trust, refreshed monthly.</p>
+    <!-- ============================================================
+         UPDATE THESE SCORES MONTHLY:
+         edit the numbers in the .score lines below, then update
+         the "As of" date at the bottom of this section.
+         ============================================================ -->
+    <div class="rep-grid">
+      <div class="rep">
+        <div class="platform">Uber</div>
+        <div class="score">4.91<span> / 5</span></div>
+        <div class="what">Rider rating</div>
+      </div>
+      <div class="rep">
+        <div class="platform">Lyft</div>
+        <div class="score">4.90<span> / 5</span></div>
+        <div class="what">Rider rating &middot; 85 rides</div>
+      </div>
+      <div class="rep">
+        <div class="platform">Airbnb</div>
+        <div class="score">5.00<span> / 5</span></div>
+        <div class="what">Guest rating &middot; 16 trips</div>
+      </div>
+      <div class="rep">
+        <div class="platform">Workday Advisory</div>
+        <div class="score">5.00<span> / 5</span></div>
+        <div class="what">Independent advisory &middot; 4 clients</div>
+      </div>
+    </div>
+    <div class="rep-asof">As of July 2026</div>
+  </section>
+
 </main>
 
 <footer id="connect">
@@ -649,5 +715,14 @@
   </div>
 </footer>
 
+<script>
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click',function(){
+    var n=document.querySelector('nav');
+    n.classList.remove('open');
+    n.querySelector('.nav-toggle').setAttribute('aria-expanded','false');
+  });
+});
+</script>
 </body>
 </html>
