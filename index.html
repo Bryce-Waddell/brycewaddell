@@ -190,40 +190,18 @@
   .splits .total .time{font-weight:700;font-size:17px}
   .splits .total td{border-top:2px solid var(--war-red);padding-top:12px}
 
-  /* reputation — struck word, real title beneath */
-  .struckword{position:relative;display:inline-block;font-family:'Cinzel',serif;font-weight:600;
-              text-transform:uppercase;letter-spacing:.16em;font-size:clamp(15px,2.2vw,20px);
-              color:var(--ink-soft);line-height:1.2}
-  .struckword .strike{position:absolute;left:-2%;top:54%;height:3px;width:0;background:#571010;
-                      transform:rotate(-1.8deg);border-radius:2px;animation:strikedraw .6s ease-out .6s forwards}
-  @keyframes strikedraw{to{width:104%}}
-  @media(prefers-reduced-motion:reduce){.struckword .strike{animation:none;width:104%}}
+  /* social credit score */
+  .rep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  .rep{background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:4px;
+       padding:20px 22px;text-align:center;box-shadow:0 4px 16px rgba(60,30,20,.06)}
+  .rep .platform{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .rep .score{font-family:'Cinzel',serif;font-size:34px;font-weight:700;color:var(--war-red);margin-top:8px;line-height:1}
+  .rep .score span{font-size:15px;font-weight:400;color:var(--ink-soft)}
+  .rep .what{font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-top:8px}
+  .rep-asof{font-family:'Cinzel',serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-top:14px}
 
-  /* the ledger — green ruled stock, red margin rule, monospace figures */
-  .ledger{position:relative;background:#edf2e3;border:1px solid #b7c2a5;border-radius:3px;overflow-x:auto;
-          background-image:repeating-linear-gradient(180deg,transparent 0 39px,#ccd8ba 39px 40px);
-          box-shadow:0 4px 16px rgba(60,30,20,.08)}
-  .ledger::before{content:"";position:absolute;top:0;bottom:0;left:56px;width:1.5px;
-                  background:rgba(155,28,28,.55);box-shadow:4px 0 0 rgba(155,28,28,.3)}
-  .ledger table{width:100%;border-collapse:collapse;min-width:430px}
-  .ledger th{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
-             color:#3d4a33;text-align:right;padding:0 20px;height:40px;border-bottom:1.5px solid #93a37c;font-weight:600}
-  .ledger th span{color:#6b7860;font-size:11px;letter-spacing:.06em}
-  .ledger th.acct{text-align:left;padding-left:74px}
-  .ledger td{height:40px;padding:0 20px;font-family:Consolas,'Courier New',monospace;
-             font-size:15.5px;color:#26301f;text-align:right;white-space:nowrap}
-  .ledger td.acct{text-align:left;padding-left:74px;font-family:'Cinzel',serif;font-size:14px;
-                  letter-spacing:.04em;color:#2f3a26}
-  .ledger .memo{font-family:'EB Garamond',serif;font-style:italic;color:#6b7860;font-size:13px;
-                margin-left:8px;letter-spacing:0;text-transform:none}
-  .ledger .dash{color:#7c8a68}
-  .ledger .dag{color:#9b1c1c;font-size:13px;vertical-align:super}
-  .ledger-note{font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-top:10px}
-  .ledger-note .dag{color:#9b1c1c;font-style:normal}
-  .rep-asof{font-family:'Cinzel',serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-top:8px}
-
-  /* two-col generic */
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  /* multi-col generic */
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;align-items:start}
 
   /* footer / connect */
   footer{text-align:center;padding:54px 28px 64px;border-top:1px solid var(--rule);margin-top:24px}
@@ -265,7 +243,7 @@
     <a href="#lineage">Lineage</a>
     <a href="#arsenal">Arsenal</a>
     <a href="#athletics">Athletics</a>
-    <a href="#reputation">Reputation</a>
+    <a href="#civility">Civility</a>
     <a href="#connect">Connect</a>
   </div>
 </div></nav>
@@ -707,6 +685,11 @@
           <tr class="total"><td class="leg">Total</td><td class="dist"></td><td class="time">7:17:56</td></tr>
         </table>
       </div>
+      <div class="card" style="margin:0">
+        <h3>Open Water Diver</h3>
+        <p style="margin:10px 0 0;color:var(--ink-soft)">PADI &middot; Issued Mar 2016<br>
+        Credential ID: <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">16030K5528</span></p>
+      </div>
     </div>
     <div class="btn-row" style="margin-top:18px">
       <a class="btn" href="https://www.alltrails.com/members/bryce-waddell-3" target="_blank" rel="noopener">
@@ -716,40 +699,33 @@
     </div>
   </section>
 
-  <!-- REPUTATION (struck) / THE LEDGER -->
-  <section id="reputation">
-    <div class="section-head"><span class="banner"></span>
-      <div>
-        <div class="struckword">Reputation<span class="strike"></span></div>
-        <h2>The Ledger</h2>
-      </div>
-      <span class="rule"></span>
-    </div>
-    <p class="section-intro">For those who keep score of such things &mdash; and I trust you are well.</p>
+  <!-- SOCIAL CREDIT SCORE -->
+  <section id="civility">
+    <div class="section-head"><span class="banner"></span><h2>Social Credit Score</h2><span class="rule"></span></div>
+    <p class="section-intro">Unvarnished Ledger of Street Cred</p>
     <!-- ============================================================
-         UPDATE THESE FIGURES MONTHLY:
-         edit the Assigned (Cr.) figures below, then update the
-         Statement date at the bottom of this section.
-         The Intrinsic (Dr.) column stays em-dashes — by design.
+         UPDATE THESE SCORES MONTHLY:
+         edit the numbers in the .score lines below, then update
+         the "As of" date at the bottom of this section.
          ============================================================ -->
-    <div class="ledger">
-      <table>
-        <thead>
-          <tr>
-            <th class="acct">Account</th>
-            <th>Assigned <span>(Cr.)</span></th>
-            <th>Intrinsic <span>(Dr.)</span><span class="dag">&dagger;</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="acct">Uber</td><td>4.91 / 5.00</td><td class="dash">&mdash;</td></tr>
-          <tr><td class="acct">Lyft<span class="memo">85 rides</span></td><td>4.90 / 5.00</td><td class="dash">&mdash;</td></tr>
-          <tr><td class="acct">Airbnb<span class="memo">16 trips</span></td><td>5.00 / 5.00</td><td class="dash">&mdash;</td></tr>
-        </tbody>
-      </table>
+    <div class="rep-grid">
+      <div class="rep">
+        <div class="platform">Uber</div>
+        <div class="score">4.91<span> / 5</span></div>
+        <div class="what">Rider rating</div>
+      </div>
+      <div class="rep">
+        <div class="platform">Lyft</div>
+        <div class="score">4.90<span> / 5</span></div>
+        <div class="what">Rider rating &middot; 85 rides</div>
+      </div>
+      <div class="rep">
+        <div class="platform">Airbnb</div>
+        <div class="score">5.00<span> / 5</span></div>
+        <div class="what">Guest rating &middot; 16 trips</div>
+      </div>
     </div>
-    <div class="ledger-note"><span class="dag">&dagger;</span> Column intentionally left blank &mdash; accepts no external postings.</div>
-    <div class="rep-asof">Statement date &middot; July 2026</div>
+    <div class="rep-asof">As of July 2026</div>
   </section>
 
 </main>
