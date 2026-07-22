@@ -178,17 +178,6 @@
   .rig .md{color:var(--ink-soft)}
   .rig tr:hover td{background:rgba(184,146,58,.06)}
 
-  /* ironman splits */
-  .splits{width:100%;border-collapse:collapse;margin-top:14px}
-  .splits td{padding:9px 4px;border-bottom:1px solid var(--rule);vertical-align:baseline}
-  .splits .leg{font-family:'Cinzel',serif;font-size:14px;color:var(--ink)}
-  .splits .leg span{display:block;font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:var(--ink-soft);letter-spacing:0}
-  .splits .dist{color:var(--ink-soft);font-size:14.5px;text-align:right;white-space:nowrap;padding-right:18px}
-  .splits .time{font-family:'Cinzel',serif;font-size:15px;color:var(--war-red);text-align:right;white-space:nowrap}
-  .splits tr:last-child td{border-bottom:none}
-  .splits .total .leg{text-transform:uppercase;letter-spacing:.08em;color:var(--war-red)}
-  .splits .total .time{font-weight:700;font-size:17px}
-  .splits .total td{border-top:2px solid var(--war-red);padding-top:12px}
 
   /* social credit score */
   .rep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
@@ -200,8 +189,6 @@
   .rep .what{font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-top:8px}
   .rep-asof{font-family:'Cinzel',serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-top:14px}
 
-  /* multi-col generic */
-  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;align-items:start}
 
   /* footer / connect */
   footer{text-align:center;padding:54px 28px 64px;border-top:1px solid var(--rule);margin-top:24px}
@@ -214,7 +201,7 @@
   footer .small{color:var(--ink-soft);font-size:14px;margin-top:24px;font-style:italic}
 
   @media(max-width:760px){
-    .reading,.two{grid-template-columns:1fr}
+    .reading{grid-template-columns:1fr}
     .section-head .banner{display:none}
     nav .brand{font-size:20px}
     .nav-toggle{display:block}
@@ -671,26 +658,37 @@
   <!-- ATHLETICS -->
   <section id="athletics">
     <div class="section-head"><span class="banner"></span><h2>Athletics</h2><span class="rule"></span></div>
-    <div class="two">
-      <div class="card" style="margin:0">
-        <h3>Expeditions & Prospection</h3>
-        <p style="margin:10px 0 0;color:var(--ink-soft)">Hikes, Bikes, & Climbs. On AllTrails.</p>
-      </div>
-      <div class="card" style="margin:0">
-        <h3>Ironman 70.3 Steelhead</h3>
-        <table class="splits">
-          <tr><td class="leg">Swim</td><td class="dist">1.9 km</td><td class="time">1:00:51</td></tr>
-          <tr><td class="leg">Bike <span>Trek Domane AL 2 (Gen 4)</span></td><td class="dist">90.6 km</td><td class="time">3:43:56</td></tr>
-          <tr><td class="leg">Run</td><td class="dist">21.6 km</td><td class="time">2:18:57</td></tr>
-          <tr class="total"><td class="leg">Total</td><td class="dist"></td><td class="time">7:17:56</td></tr>
-        </table>
-      </div>
-      <div class="card" style="margin:0">
-        <h3>Open Water Diver</h3>
-        <p style="margin:10px 0 0;color:var(--ink-soft)">PADI &middot; Issued Mar 2016<br>
-        Credential ID: <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">16030K5528</span></p>
-      </div>
-    </div>
+    <table class="rig">
+      <tbody>
+        <tr>
+          <td class="cat">Diving</td>
+          <td class="mk">PADI</td>
+          <td class="md">Open Water Diver &middot; Issued Mar 2016 &middot; Credential ID
+              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">16030K5528</span></td>
+        </tr>
+        <tr>
+          <td class="cat">Triathlon</td>
+          <td class="mk">Ironman 70.3</td>
+          <td class="md">Steelhead &middot; Total
+              <span style="font-family:'Cinzel',serif;font-weight:700;color:var(--war-red)">7:17:56</span><br>
+              <span style="font-size:13.5px;font-style:italic">Swim 1.9 km &mdash; 1:00:51 &nbsp;&middot;&nbsp;
+              Bike 90.6 km &mdash; 3:43:56 (Trek Domane AL 2, Gen 4) &nbsp;&middot;&nbsp;
+              Run 21.6 km &mdash; 2:18:57</span></td>
+        </tr>
+        <tr>
+          <td class="cat">Skydiving</td>
+          <td class="mk">USPA</td>
+          <td class="md">Pursuing A License &middot;
+              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">6</span> jumps &middot;
+              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">5:45</span> freefall</td>
+        </tr>
+        <tr>
+          <td class="cat">Expeditions</td>
+          <td class="mk">AllTrails</td>
+          <td class="md">Hikes, bikes, &amp; climbs &mdash; prospection logged on AllTrails</td>
+        </tr>
+      </tbody>
+    </table>
     <div class="btn-row" style="margin-top:18px">
       <a class="btn" href="https://www.alltrails.com/members/bryce-waddell-3" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M14 6l-4.22 9.55 1.6 1.6L14 11l3 5h-4.5l-2 2H21L14 6zm-4.9 6.39l-2.1-2.39L2 22h9.5l-1.4-1.4-4.2.01 1.7-3.84-1.5-1.5-1.93 4.36-.6-.6 4.43-6.04z"/></svg>
