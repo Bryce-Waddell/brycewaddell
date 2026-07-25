@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Security: Content-Security-Policy.
+     Google Fonts must be allowed explicitly (stylesheet from fonts.googleapis.com,
+     font files from fonts.gstatic.com) or every typeface on the site falls back.
+     script-src is strict 'self' — all JS lives in /app.js, no inline handlers. -->
+<meta http-equiv="Content-Security-Policy"
+  content="default-src 'self';
+           script-src 'self';
+           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+           font-src 'self' https://fonts.gstatic.com;
+           img-src 'self' data:;
+           connect-src 'self';
+           object-src 'none';
+           base-uri 'self';
+           form-action 'self';
+           upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <title>Bryce Waddell</title>
 <meta name="description" content="Bryce Waddell — philosopher and Workday Financial Consultant. Professional work, genealogy, reading, PC building, and the trail.">
 
@@ -33,7 +51,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 <style>
   :root{
     /* PRIMARY schema — Military / War Banner (white & red) */
@@ -83,12 +101,6 @@
 
   /* ---- Hero ---- */
   header.hero{text-align:center;padding:40px 28px 14px}
-  .wordmark{font-family:'UnifrakturMaguntia',serif;font-size:clamp(48px,9vw,92px);line-height:1;color:var(--war-red);
-            text-shadow:0 1px 0 rgba(0,0,0,.12)}
-  .interests{font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:.26em;
-             font-size:clamp(11px,2vw,15px);color:var(--ink);margin-top:20px}
-  .interests span{color:var(--gold-dim)}
-  .motto{font-style:italic;color:var(--ink-soft);margin:18px auto 0;max-width:680px;font-size:19px}
   .crest-divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:28px auto 0;max-width:460px}
   .crest-divider .line{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--war-red))}
   .crest-divider .line.r{background:linear-gradient(90deg,var(--war-red),transparent)}
@@ -226,7 +238,7 @@
 
 <nav><div class="inner">
   <span class="brand">Bryce Waddell</span>
-  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" onclick="document.querySelector('nav').classList.toggle('open');this.setAttribute('aria-expanded',document.querySelector('nav').classList.contains('open'))">
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
   <div class="nav-links">
@@ -787,46 +799,6 @@
   </div>
 </footer>
 
-<script>
-document.querySelectorAll('.nav-links a').forEach(function(a){
-  a.addEventListener('click',function(){
-    var n=document.querySelector('nav');
-    n.classList.remove('open');
-    n.querySelector('.nav-toggle').setAttribute('aria-expanded','false');
-  });
-});
-
-/* Fan-chart ancestor tooltip */
-(function(){
-  var tip=document.createElement('div');
-  tip.className='fan-tip';
-  document.body.appendChild(tip);
-  function show(el){
-    var yrs=el.getAttribute('data-years');
-    var pl=el.getAttribute('data-place');
-    var h='<div class="tn">'+el.getAttribute('data-name')+'</div>';
-    if(yrs)h+='<div class="ty">'+yrs+'</div>';
-    if(pl)h+='<div class="tl"><b>Born</b>'+pl+'</div>';
-    h+='<div class="tl"><b>Estimated Roots</b>'+el.getAttribute('data-eth')+'</div>';
-    tip.innerHTML=h;
-    tip.style.display='block';
-  }
-  function move(e){
-    var x=e.clientX+16,y=e.clientY+14;
-    var r=tip.getBoundingClientRect();
-    if(x+r.width>window.innerWidth-8)x=e.clientX-r.width-14;
-    if(y+r.height>window.innerHeight-8)y=e.clientY-r.height-12;
-    tip.style.left=Math.max(6,x)+'px';
-    tip.style.top=Math.max(6,y)+'px';
-  }
-  document.querySelectorAll('.fanchart .seg').forEach(function(el){
-    el.addEventListener('mouseenter',function(){show(el);});
-    el.addEventListener('mousemove',move);
-    el.addEventListener('mouseleave',function(){tip.style.display='none';});
-    el.addEventListener('click',function(e){show(el);move(e);e.stopPropagation();});
-  });
-  document.addEventListener('click',function(){tip.style.display='none';});
-})();
-</script>
+<script src="/app.js" defer></script>
 </body>
 </html>
