@@ -5,16 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Security: Content-Security-Policy.
-     Google Fonts must be allowed explicitly (stylesheet from fonts.googleapis.com,
-     font files from fonts.gstatic.com) or every typeface on the site falls back.
+     Fonts are self-hosted in /fonts, so no third-party origins are allowed at all.
      script-src stays strict (no 'unsafe-inline'): the one inline script is
      authorized by its sha256 hash below. If that script is EDITED, the hash
      must be regenerated or the script will be blocked. -->
 <meta http-equiv="Content-Security-Policy"
   content="default-src 'self';
            script-src 'self' 'sha256-P8NNxuC8u2E6qqDXemYiU2cLP1molZzCDCa1TZkBqNs=';
-           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-           font-src 'self' https://fonts.gstatic.com;
+           style-src 'self' 'unsafe-inline';
+           font-src 'self';
            img-src 'self' data:;
            connect-src 'self';
            object-src 'none';
@@ -24,23 +23,23 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <title>Bryce Waddell</title>
-<meta name="description" content="Bryce Waddell — philosopher and Workday Financial Consultant. Professional work, genealogy, reading, PC building, and the trail.">
+<meta name="description" content="Bryce Waddell — Workday Financial Consultant. Professional work, genealogy, reading, PC building, and athletics.">
 
 <!-- Open Graph / link preview (iMessage, social) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bryce Waddell">
 <meta property="og:title" content="Bryce Waddell">
-<meta property="og:description" content="Philosopher and Workday Financial Consultant — professional work, genealogy, reading, PC building, and athletics.">
+<meta property="og:description" content="Workday Financial Consultant — professional work, genealogy, reading, PC building, and athletics.">
 <meta property="og:url" content="https://brycewaddell.com/">
 <meta property="og:image" content="https://brycewaddell.com/og-eagle.png">
 <meta property="og:image:secure_url" content="https://brycewaddell.com/og-eagle.png">
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="3840">
-<meta property="og:image:height" content="2560">
-<meta property="og:image:alt" content="Banner of the Holy Roman Emperor — black double-headed eagle on a gold field">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Imperial German eagle bearing the arms of Alsace-Lorraine">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Bryce Waddell">
-<meta name="twitter:description" content="Philosopher and Workday Financial Consultant — professional work, genealogy, reading, PC building, and athletics.">
+<meta name="twitter:description" content="Workday Financial Consultant — professional work, genealogy, reading, PC building, and athletics.">
 <meta name="twitter:image" content="https://brycewaddell.com/og-eagle.png">
 
 <!-- Favicon (Imperial German eagle — Alsace-Lorraine arms) -->
@@ -51,10 +50,26 @@
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#8f1d1d">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 <style>
+/* ---- Self-hosted fonts (no third-party requests; works offline) ---- */
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/cinzel-400-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/cinzel-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/cinzel-500-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/cinzel-500-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/cinzel-600-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/cinzel-600-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/cinzel-700-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Cinzel';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/cinzel-700-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'EB Garamond';font-style:italic;font-weight:400;font-display:swap;src:url('fonts/ebgaramond-400i-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'EB Garamond';font-style:italic;font-weight:400;font-display:swap;src:url('fonts/ebgaramond-400i-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/ebgaramond-400-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/ebgaramond-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/ebgaramond-500-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/ebgaramond-500-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/ebgaramond-600-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/ebgaramond-600-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'UnifrakturMaguntia';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/unifraktur-400-latin.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+
   :root{
     /* PRIMARY schema — Military / War Banner (white & red) */
     --parchment:#f5eede;
@@ -355,9 +370,9 @@
     </div>
   </section>
 
-  <!-- SCHOLARSHIP -->
+  <!-- SCHOLARSHIP & READING -->
   <section id="scholarship">
-    <div class="section-head"><span class="banner"></span><h2>Scholarship</h2><span class="rule"></span></div>
+    <div class="section-head"><span class="banner"></span><h2>Scholarship &amp; Reading</h2><span class="rule"></span></div>
 
     <div class="card">
       <div class="role-row"><h3>Indiana University</h3><span class="org-when">Bloomington, IN &middot; May 2021</span></div>
@@ -365,7 +380,7 @@
       <div class="subrole">Honors Area Certificate, Liberal Arts and Management (LAMP) &mdash; Kelley School of Business &amp; Philosophy</div>
       <ul>
         <li>GPA: 3.567 / 4.000</li>
-        <li>Pupil of <b><a class="scholar-link" href="https://en.wikipedia.org/wiki/Allen_W._Wood" target="_blank" rel="noopener">Allen W. Wood</a></b> &mdash; existentialism &amp; the forefront American philosopher of German Idealism, and Todd B. Walker of Economics.</li>
+        <li>Pupil of <b><a class="scholar-link" href="https://en.wikipedia.org/wiki/Allen_W._Wood" target="_blank" rel="noopener">Allen William Wood</a></b> &mdash; existentialism &amp; the forefront American philosopher of German Idealism, and Todd B. Walker of Economics.</li>
         <li>Diploma CeDiD Keys &mdash; B.A. Economics: <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">21YX-78WV-B0L7</span> &nbsp;&middot;&nbsp; LAMP: <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">216N-YOHT-BNLY</span></li>
       </ul>
     </div>
@@ -736,7 +751,7 @@
         <tr>
           <td class="cat">Expeditions</td>
           <td class="mk">AllTrails</td>
-          <td class="md">Prospections logged on AllTrails &mdash; hikes, bikes, &amp; climbs</td>
+          <td class="md">Hikes, bikes, &amp; climbs &mdash; prospection logged on AllTrails</td>
         </tr>
       </tbody>
     </table>
