@@ -1,0 +1,6 @@
+# local version snapshots: keep out of the public site
+brycewaddell.com_v*.html
+Archives/
+
+# source artwork, not used by the site
+images/Alsace-Loraine Coat of Arms.png
