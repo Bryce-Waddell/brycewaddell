@@ -11,7 +11,7 @@
      must be regenerated or the script will be blocked. -->
 <meta http-equiv="Content-Security-Policy"
   content="default-src 'self';
-           script-src 'self' 'sha256-P8NNxuC8u2E6qqDXemYiU2cLP1molZzCDCa1TZkBqNs=';
+           script-src 'self' 'sha256-sv5wgDAS0sBFkWJcRAcjfploER1K1SuTcPCm52ZJoiE=';
            style-src 'self' 'unsafe-inline';
            font-src 'self';
            img-src 'self' data:;
@@ -86,7 +86,7 @@
     --rule:rgba(143,29,29,.22);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
   body{
     font-family:'EB Garamond',Georgia,serif;
     background:
@@ -170,10 +170,29 @@
 
   /* reading */
   .reading{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:start}
-  .now-reading{background:var(--imperial-black);color:var(--parchment);border-radius:4px;padding:24px 26px;border-left:3px solid var(--gold)}
-  .now-reading .tag{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-  .now-reading .bk{font-family:'Cinzel',serif;font-size:23px;margin-top:8px;line-height:1.25}
-  .now-reading .au{font-style:italic;color:var(--parchment);opacity:.82;margin-top:6px}
+  .pub{background:var(--imperial-black);color:var(--parchment);border-radius:4px;padding:24px 26px;border-left:3px solid var(--gold)}
+  .pub .tag{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .pub .bk{font-family:'Cinzel',serif;font-size:23px;margin-top:8px;line-height:1.25}
+  .pub .au{font-style:italic;opacity:.82;margin-top:6px}
+  .pub p{margin-top:14px;font-size:16.5px;line-height:1.6;opacity:.92}
+  .pub .btn{margin-top:18px;border-color:var(--gold)}
+  .pub .btn:hover{background:var(--gold);border-color:var(--gold);color:var(--imperial-black)}
+  details.fold summary{list-style:none;cursor:pointer;display:inline-block;margin-top:14px;font-family:'Cinzel',serif;
+        font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--war-red);
+        border:1px solid var(--rule);border-radius:3px;padding:8px 14px}
+  details.fold summary::-webkit-details-marker{display:none}
+  details.fold summary:hover{border-color:var(--gold)}
+  details.fold summary::after{content:"";display:inline-block;margin-left:9px;vertical-align:middle;border:5px solid transparent;border-top-color:currentColor;border-bottom-width:0}
+  details.fold[open] summary::after{border-top-color:transparent;border-top-width:0;border-bottom:5px solid currentColor}
+  details.fold .less{display:none}
+  details.fold[open] .more{display:none}
+  details.fold[open] .less{display:inline}
+  details.fold ul{margin-bottom:2px}
+  details.fold[open]>summary{margin-bottom:16px}
+  details.fold.roles>summary{margin-top:0}
+  @media(min-width:761px){details.fold.roles[open]>summary{display:none}}
+  .digest{display:flex;flex-wrap:wrap;gap:8px 26px;align-items:baseline;color:var(--ink-soft);font-size:16px}
+  .digest b{font-family:'Cinzel',serif;font-size:21px;font-weight:700;color:var(--war-red);margin-right:5px}
   .shelf h4{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
   .shelf ul{list-style:none}
   .shelf li{padding:7px 0;border-bottom:1px dashed var(--rule)}
@@ -184,7 +203,8 @@
   .fanwrap{background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:14px;box-shadow:0 4px 16px rgba(60,30,20,.06)}
   .fanchart{display:block;width:100%;height:auto;max-width:720px;margin:0 auto}
   .fanchart .seg{cursor:pointer;transition:opacity .15s}
-  .fanchart .seg:hover{opacity:.78}
+  @media(hover:hover){.fanchart .seg:hover{opacity:.78}}
+  .fan-hint{display:none}
   .fan-tip{position:fixed;z-index:60;display:none;pointer-events:none;max-width:280px;
            background:var(--imperial-black);color:var(--parchment);border:1px solid var(--gold);
            border-radius:4px;padding:12px 15px;box-shadow:0 8px 26px rgba(0,0,0,.4);font-size:14.5px;line-height:1.5}
@@ -235,18 +255,71 @@
   footer .small{color:var(--ink-soft);font-size:14px;margin-top:24px;font-style:italic}
 
   @media(max-width:760px){
+    body{font-size:17px}
+    .wrap{padding:0 18px}
+    nav .inner{padding:8px 18px}
+    section{padding:36px 0}
+    header.hero{padding:26px 18px 6px}
+    .section-head{margin-bottom:20px}
     .reading{grid-template-columns:1fr}
     .section-head .banner{display:none}
-    nav .brand{font-size:20px}
-    .nav-toggle{display:block}
-    .nav-links{display:none;flex-basis:100%;flex-direction:column;align-items:flex-start;gap:0;padding:6px 0 4px}
-    nav.open .nav-links{display:flex}
-    .nav-links a{display:block;width:100%;padding:11px 2px;border-bottom:1px solid var(--rule);font-size:13.5px}
-    .nav-links a:last-child{border-bottom:none}
     .section-head h2{white-space:normal;letter-spacing:.1em}
-    .rig .cat{width:auto;white-space:normal}
-    .rig .mk{width:auto}
-    .rig td{padding:9px 10px}
+
+    /* nav: comfortable tap targets */
+    nav .brand{font-size:21px}
+    .nav-toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;width:44px;height:44px;padding:0}
+    .nav-links{display:none;flex-basis:100%;flex-direction:column;align-items:flex-start;gap:0;padding:4px 0}
+    nav.open .nav-links{display:flex}
+    .nav-links a{display:block;width:100%;padding:14px 2px;border-bottom:1px solid var(--rule);font-size:14px}
+    .nav-links a:last-child{border-bottom:none}
+
+    /* cards + buttons */
+    .card{padding:18px 18px;margin-bottom:16px}
+    .card h3{font-size:19px}
+    .card .role-row{flex-direction:column;gap:2px}
+    .card li{margin-bottom:9px}
+    .btn-row .btn{width:100%;justify-content:center;min-height:48px}
+    .pub{padding:20px 20px}
+    .pub .bk{font-size:21px}
+    .pub .btn{width:100%;justify-content:center;min-height:48px}
+    details.fold summary{display:block;text-align:center;padding:14px 14px}
+    .digest{gap:6px 20px;font-size:15px}
+    .digest b{font-size:19px}
+    .scholar-link{padding:8px 0}
+
+    /* client engagements: two compact columns instead of one long one */
+    .clients{grid-template-columns:1fr 1fr;gap:10px}
+    .client{padding:11px 12px}
+    .client .name{font-size:13px;line-height:1.3}
+    .client .meta{font-size:13px;line-height:1.4}
+
+    /* spec tables: label + maker on one line, detail beneath */
+    .rig,.rig tbody{display:block}
+    .rig tr{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:baseline;padding:11px 14px;border-bottom:1px solid var(--rule)}
+    .rig tr:last-child{border-bottom:none}
+    .rig td{padding:0;border:0}
+    .rig .cat{width:auto;white-space:nowrap}
+    .rig .mk{width:auto;text-align:right}
+    .rig .md{grid-column:1 / -1;margin-top:3px;font-size:16px}
+
+    /* fan chart: render at a legible size and pan sideways */
+    .fanwrap{padding:12px 0 14px}
+    .fan-hint{display:block;text-align:center;font-family:'Cinzel',serif;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:0 12px 8px}
+    .fan-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;padding:0 12px}
+    .fanchart{width:780px;max-width:none}
+    .fan-legend,.fan-cap,.fan-progenitor{padding-left:14px;padding-right:14px}
+    .fan-tip{max-width:240px;font-size:14px}
+
+    /* ratings: 2 x 2 */
+    .rep-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .rep{padding:16px 10px}
+    .rep .score{font-size:29px}
+    .rep .what{font-size:13.5px}
+
+    /* footer */
+    footer{padding:40px 18px 48px}
+    .social{gap:10px}
+    .social a{flex:1 1 calc(50% - 10px);justify-content:center;min-height:46px}
   }
 </style>
 </head>
@@ -278,7 +351,7 @@
   <!-- PROFESSIONAL WORK -->
   <section id="work">
     <div class="section-head"><span class="banner"></span><h2>Professional Work</h2><span class="rule"></span></div>
-    <p class="section-intro">Workday Financials consultant — <b>~20+ full-lifecycle implementations</b> across the Foundation Data Model, Procurement, Accounts, Banking &amp; Settlement, Assets, and Expenses. I convert and reconcile the general ledger to the penny and lead solution design for global, multi-currency, intercompany accounting.</p>
+    <p class="section-intro">Workday Financials consultant — <b>~20 full-lifecycle implementations</b> across the Foundation Data Model, Procurement, Accounts, Banking &amp; Settlement, Assets, and Expenses. I convert and reconcile the general ledger to the penny and lead solution design for global, multi-currency, intercompany accounting.</p>
     <div class="pill-row" style="margin-bottom:22px">
       <span class="pill">Workday &middot; Record to Report</span>
       <span class="pill">Workday &middot; Human Capital Management</span>
@@ -289,13 +362,16 @@
       <div class="role-row"><h3>Kainos Group plc</h3><span class="org-when">Chicago, IL &middot; 2025 &ndash; 2026</span></div>
       <div class="subrole">Workday Financial Consultant &mdash; Implementation &amp; Data Conversion</div>
       <ul>
-        <li>Architected and deployed ~10 full-suite Workday Financials implementations spanning the FDM, Procurement, Supplier &amp; Customer Accounts, Banking &amp; Settlement, Assets, and Expenses &mdash; including public-sector clients such as a statewide pension fund and Phase X Financials deployments.</li>
-        <li>Converted and reconciled payables, receivables, cash, and assets &mdash; plus the full general ledger with complete worktag detail &mdash; balanced to the penny.</li>
-        <li>Led solution-design decisions for global intercompany multi-currency accounting, ran discovery sessions, and facilitated stakeholder design workshops.</li>
-        <li>Partnered with technical, reporting, integration, and change-management teams to deliver custom reconciliation and payment-integration reports, and helped craft a change-management strategy for period close &amp; consolidation.</li>
+        <li>Architected and deployed ~10 full-suite Workday systems spanning Financial Accounting, Payables, Receivables, Cash, Assets, &amp; HCM.</li>
+        <li>Built a Period Close dashboard and supporting automations that compressed period-end and year-end close cycles.</li>
+        <li>Designed aggressive &amp; conservative financial models for every client.</li>
+        <li>Automated payroll accounting.</li>
+        <li>Designed global multi-currency intercompany configuration &mdash; automating intercompany transactions and removing the need for manual elimination entries across entities.</li>
       </ul>
     </div>
 
+    <details class="fold roles">
+      <summary><span class="more">Show 4 earlier roles</span><span class="less">Hide earlier roles</span></summary>
     <div class="card">
       <div class="role-row"><h3>Huron Consulting Group, Inc.</h3><span class="org-when">Chicago, IL &middot; 2023 &ndash; 2024</span></div>
       <div class="subrole">Workday Financial Consultant &mdash; Implementation &amp; Data Conversion</div>
@@ -335,8 +411,9 @@
         <li><b>Fundamentals of Economics for Business (ECON-B251):</b> Tailored a curriculum and, without oversight, taught 3 classes/week to more than 100 students; worked with Dr. Gerhard Glomm to facilitate the main lecture (moral hazard, comparative advantage, Coase theorem, basic game theory, rational choice theory).</li>
       </ul>
     </div>
+    </details>
 
-    <div class="btn-row">
+    <div class="btn-row" style="margin-top:18px">
       <a class="btn" href="https://www.linkedin.com/in/bryce-waddell/" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 9.5H5.67V18h2.67V9.5zM7 5.88a1.55 1.55 0 1 0 0 3.1 1.55 1.55 0 0 0 0-3.1zM18.34 18v-4.67c0-2.5-1.34-3.67-3.13-3.67a2.7 2.7 0 0 0-2.45 1.35V9.5h-2.67V18h2.67v-4.5c0-1.18.22-2.32 1.68-2.32 1.44 0 1.46 1.35 1.46 2.4V18h2.67z"/></svg>
         Connect on LinkedIn
@@ -344,7 +421,10 @@
     </div>
 
     <div style="margin-top:30px">
-      <div class="section-head" style="margin-bottom:18px"><h2 style="font-size:18px">Selected Client Engagements</h2><span class="rule"></span></div>
+      <div class="section-head" style="margin-bottom:14px"><h2 style="font-size:18px">Workday Client Engagements</h2><span class="rule"></span></div>
+      <div class="digest"><span><b>20</b>clients</span><span><b>11</b>Financials</span><span><b>7</b>HCM</span><span><b>2</b>both</span><span><b>13</b>countries</span></div>
+      <details class="fold">
+        <summary><span class="more">View all 20 engagements</span><span class="less">Hide engagements</span></summary>
       <div class="clients">
         <div class="client"><div class="name">R1 University</div><div class="meta"><b>Financials</b> &middot; USA<br>Grants Management &amp; financial-aid FDM, unearned-revenue recognition</div></div>
         <div class="client"><div class="name">Non-Profit (NGO)</div><div class="meta"><b>Financials</b> &middot; USA<br>FDM &amp; fund accounting, endowments, financial statements</div></div>
@@ -367,10 +447,11 @@
         <div class="client"><div class="name">Mining &amp; Metals</div><div class="meta"><b>HCM</b> &middot; USA<br>Time tracking, payroll, workers</div></div>
         <div class="client"><div class="name">Mining &amp; Metals &mdash; Software</div><div class="meta"><b>HCM Conversion</b> &middot; USA<br>Time tracking, payroll, workers</div></div>
       </div>
+      </details>
     </div>
   </section>
 
-  <!-- SCHOLARSHIP & READING -->
+  <!-- SCHOLARSHIP, PUBLICATIONS & LIBRARY -->
   <section id="scholarship">
     <div class="section-head"><span class="banner"></span><h2>Scholarship</h2><span class="rule"></span></div>
 
@@ -393,41 +474,45 @@
     </div>
 
     <div class="reading">
-      <div>
-        <div class="now-reading">
-          <div class="tag">Currently Reading</div>
-          <div class="bk">The Decline of the West</div>
-          <div class="au">Oswald Spengler</div>
-        </div>
-        <div class="shelf" style="margin-top:22px">
-          <h4>Further Reading</h4>
-          <ul>
-            <li><span class="t">The Holy Bible</span> &mdash; <span class="a">New International Version</span></li>
-            <li><span class="t">Watchmen</span> &mdash; <span class="a">Alan Moore</span></li>
-            <li><span class="t">The Odyssey</span> &mdash; <span class="a">Homer, trans. Barry B. Powell</span></li>
-            <li><span class="t">Nietzsche and the Nazis</span> &mdash; <span class="a">Stephen R.C. Hicks</span></li>
-            <li><span class="t">Selected Writings</span> &mdash; <span class="a">Karl Marx</span></li>
-            <li><span class="t">The Gulag Archipelago</span> &mdash; <span class="a">Aleksandr Solzhenitsyn</span></li>
-            <li><span class="t">The Magic Tree House <span style="font-weight:400;font-style:italic">(series)</span></span> &mdash; <span class="a">Mary Pope Osborne</span></li>
-          </ul>
-        </div>
+      <div class="pub">
+        <div class="tag">Research &amp; Publications</div>
+        <div class="bk">Atlas of European Collectives</div>
+        <div class="au">A faceted comparative atlas &mdash; 8 facets, 54 regions</div>
+        <p>What does a peoplehood actually consist of? The Atlas scores fifty-four regions across eight facets &mdash; two fixed at birth (ancient ancestry and geographic descent) and six culturally transmitted (language, script, the Latin Roman juridical inheritance, religion, art &amp; architecture, and legal family) &mdash; then clusters them statistically. Three commonwealths emerge: the Latin Roman, the Byzantine, and the Hebraic. They hold with the birthright facets switched off entirely.</p>
+        <a class="btn" href="https://europeanatlas.net/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.6 15.6 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26zm.84 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 0 1 5.1 16zm2.95-8H5.1a7.99 7.99 0 0 1 4.33-3.56A15.6 15.6 0 0 0 8.05 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.23 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4h-3.38z"/></svg>
+          Read the Atlas
+        </a>
       </div>
       <div class="shelf">
-        <h4>Also on the shelf</h4>
+        <h4>Library</h4>
         <ul>
-          <li><span class="t">Incerto</span> &mdash; <span class="a">Nassim Taleb</span></li>
-          <li><span class="t">The Selfish Gene</span> &mdash; <span class="a">Richard Dawkins</span></li>
-          <li><span class="t">The Road to Serfdom</span> &mdash; <span class="a">Friedrich Hayek</span></li>
-          <li><span class="t">Governing the Commons</span> &mdash; <span class="a">Elinor Ostrom</span></li>
-          <li><span class="t">Fanged Noumena</span> &mdash; <span class="a">Nick Land</span></li>
-          <li><span class="t">Selected Writings</span> &mdash; <span class="a">Friedrich Nietzsche</span></li>
-          <li><span class="t">12 Rules for Life</span> &mdash; <span class="a">Jordan Peterson</span></li>
-          <li><span class="t">The Storm of Steel</span> &mdash; <span class="a">Ernst J&uuml;nger</span></li>
-          <li><span class="t">Guns, Germs, &amp; Steel</span> &mdash; <span class="a">Jared Diamond</span></li>
-          <li><span class="t">A Farewell to Alms</span> &mdash; <span class="a">Gregory Clark</span></li>
-          <li><span class="t">The Gene</span> &mdash; <span class="a">Siddhartha Mukherjee</span></li>
-          <li><span class="t">The Complete Batman Runs</span> &mdash; <span class="a">Scott Snyder, Alan Moore &amp; Grant Morrison</span></li>
+            <li><span class="t">The Holy Bible</span> &mdash; <span class="a">New International Version</span></li>
+            <li><span class="t">The Decline of the West</span> &mdash; <span class="a">Oswald Spengler</span></li>
+            <li><span class="t">Incerto</span> &mdash; <span class="a">Nassim Taleb</span></li>
+            <li><span class="t">The Road to Serfdom</span> &mdash; <span class="a">Friedrich Hayek</span></li>
+            <li><span class="t">The Gulag Archipelago</span> &mdash; <span class="a">Aleksandr Solzhenitsyn</span></li>
         </ul>
+        <details class="fold">
+          <summary><span class="more">Show all 20 volumes</span><span class="less">Show fewer</span></summary>
+          <ul>
+            <li><span class="t">The Odyssey</span> &mdash; <span class="a">Homer, trans. Barry B. Powell</span></li>
+            <li><span class="t">Selected Writings</span> &mdash; <span class="a">Friedrich Nietzsche</span></li>
+            <li><span class="t">Nietzsche and the Nazis</span> &mdash; <span class="a">Stephen R.C. Hicks</span></li>
+            <li><span class="t">Selected Writings</span> &mdash; <span class="a">Karl Marx</span></li>
+            <li><span class="t">The Storm of Steel</span> &mdash; <span class="a">Ernst J&uuml;nger</span></li>
+            <li><span class="t">Fanged Noumena</span> &mdash; <span class="a">Nick Land</span></li>
+            <li><span class="t">Governing the Commons</span> &mdash; <span class="a">Elinor Ostrom</span></li>
+            <li><span class="t">The Selfish Gene</span> &mdash; <span class="a">Richard Dawkins</span></li>
+            <li><span class="t">The Gene</span> &mdash; <span class="a">Siddhartha Mukherjee</span></li>
+            <li><span class="t">Guns, Germs, &amp; Steel</span> &mdash; <span class="a">Jared Diamond</span></li>
+            <li><span class="t">A Farewell to Alms</span> &mdash; <span class="a">Gregory Clark</span></li>
+            <li><span class="t">12 Rules for Life</span> &mdash; <span class="a">Jordan Peterson</span></li>
+            <li><span class="t">Watchmen</span> &mdash; <span class="a">Alan Moore</span></li>
+            <li><span class="t">The Complete Batman Runs</span> &mdash; <span class="a">Scott Snyder, Alan Moore &amp; Grant Morrison</span></li>
+            <li><span class="t">The Magic Tree House <span style="font-weight:400;font-style:italic">(series)</span></span> &mdash; <span class="a">Mary Pope Osborne</span></li>
+          </ul>
+        </details>
       </div>
     </div>
   </section>
@@ -437,6 +522,8 @@
     <div class="section-head"><span class="banner"></span><h2>Lineage</h2><span class="rule"></span></div>
     <p class="section-intro">A lifelong genealogy project. Below is my direct paternal-and-maternal lines; six generations of ancestors, rendered as a fan chart (63 forebears, charted to the 1830s).</p>
     <div class="fanwrap">
+      <div class="fan-hint">Swipe to explore &middot; tap a name for details</div>
+      <div class="fan-scroll">
       <svg viewBox="-340 -340 680 680" xmlns="http://www.w3.org/2000/svg" class="fanchart" role="img" aria-label="Interactive fan chart of the direct-line ancestors of Bryce Cole Waddell, six generations">
 <defs>
 <path id="fp1" d="M3.66,-83.92 A84.00,84.00 0 0 1 3.66,83.92" fill="none"/>
@@ -674,6 +761,7 @@
 <text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp83" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Wysong</textPath></text>
 </g>
 </svg>
+      </div>
       <div class="fan-legend">
         <span class="lg"><i style="background:#8f1d1d"></i>Waddell</span>
         <span class="lg"><i style="background:#b8923a"></i>Griffin</span>
@@ -843,6 +931,10 @@
     });
   }
 
+  /* ---- Earlier roles: collapsed on phones, open on wider screens ---- */
+  var roles = document.querySelector('details.roles');
+  if (roles && window.matchMedia('(min-width: 761px)').matches) roles.open = true;
+
   /* ---- Fan-chart ancestor tooltip ---- */
   var segs = document.querySelectorAll('.fanchart .seg');
   if (!segs.length) return;
@@ -914,6 +1006,16 @@
   });
 
   document.addEventListener('click', hide);
+  window.addEventListener('scroll', hide, { passive: true });
+
+  /* On phones the chart is wider than the screen: start centred on Bryce. */
+  var pan = document.querySelector('.fan-scroll');
+  if (pan) {
+    pan.addEventListener('scroll', hide, { passive: true });
+    var centre = function () { pan.scrollLeft = (pan.scrollWidth - pan.clientWidth) / 2; };
+    centre();
+    window.addEventListener('load', centre);
+  }
 })();
 </script>
 </body>
