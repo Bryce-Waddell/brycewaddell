@@ -144,6 +144,12 @@
   .card ul{list-style:none;margin:0}
   .card li{position:relative;padding-left:20px;margin-bottom:8px}
   .card li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;background:var(--war-red);transform:rotate(45deg)}
+  /* build photos (Engineering) — 2fr/3fr keeps the portrait + landscape shots the same height */
+  .card .builds{display:grid;grid-template-columns:2fr 3fr;gap:14px;margin:16px 0 0}
+  .card .builds figure{margin:0}
+  .card .builds img{display:block;width:100%;height:auto;border:1px solid var(--rule);border-radius:3px}
+  .card .builds figcaption{color:var(--ink-soft);font-style:italic;font-size:15px;margin-top:6px;line-height:1.35}
+  @media(max-width:760px){.card .builds{grid-template-columns:1fr}}
 
   /* buttons */
   .btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
@@ -454,7 +460,7 @@
   <!-- ENGINEERING -->
   <section id="engineering">
     <div class="section-head"><span class="banner"></span><h2>Engineering</h2><span class="rule"></span></div>
-    <p class="section-intro">Systems I design and build outside the ERP &mdash; hardware, web infrastructure, and data visualization.</p>
+    <p class="section-intro">Systems I built outside the ERP &mdash; hardware, timber structures, web infrastructure, and data visualization.</p>
 
     <div class="card">
       <div class="role-row"><h3>Custom Small-Form-Factor Workstation</h3><span class="org-when">Hardware</span></div>
@@ -473,6 +479,34 @@
       <tr><td class="cat">OS</td><td class="mk">Linux</td><td class="md">Omarchy (Arch + Hyprland)</td></tr>
       </tbody>
       </table>
+    </div>
+
+    <div class="card">
+      <div class="role-row"><h3>Waterfront Structures</h3><span class="org-when">Carpentry</span></div>
+      <div class="subrole">Apprentice Carpenter &middot; Indiana &middot; Summer 2018</div>
+      <ul>
+        <li>Built a covered boat slip and a shoreline boardwalk on an Indiana lake as one of a four-person crew.</li>
+        <li>Boardwalk set in angled segments that follow the bank's contour above the riprap.</li>
+        <li>Boat slip framed in braced timber under a gable metal roof, with lift cables for the boat.</li>
+      </ul>
+      <div class="builds">
+        <figure>
+          <picture>
+            <source srcset="images/shoreline-boardwalk-2018.webp" type="image/webp">
+            <img src="images/shoreline-boardwalk-2018.jpg" width="1432" height="1600" loading="lazy" decoding="async"
+                 alt="New pressure-treated boardwalk curving along a wooded lakeshore above a riprap bank">
+          </picture>
+          <figcaption>Shoreline boardwalk, segmented to track the bank.</figcaption>
+        </figure>
+        <figure>
+          <picture>
+            <source srcset="images/boat-slip-2018.webp" type="image/webp">
+            <img src="images/boat-slip-2018.jpg" width="1600" height="1200" loading="lazy" decoding="async"
+                 alt="Covered boat slip with timber posts, knee braces and a gable metal roof, during final build-out">
+          </picture>
+          <figcaption>Covered boat slip during final build-out.</figcaption>
+        </figure>
+      </div>
     </div>
 
     <div class="card">
