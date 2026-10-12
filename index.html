@@ -103,12 +103,12 @@
   /* ---- Nav ---- */
   nav{position:sticky;top:0;z-index:20;background:rgba(245,238,222,.92);backdrop-filter:blur(6px);
       border-bottom:1px solid var(--rule)}
-  nav .inner{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px;padding:11px 28px}
+  nav .inner{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;padding:11px 28px}
   nav .brand{font-family:'EB Garamond',Georgia,serif;font-weight:600;font-size:22px;letter-spacing:.02em;color:var(--ink);margin-right:auto}
-  nav a{font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
+  nav a{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
         padding:4px 2px;border-bottom:2px solid transparent}
   nav a:hover{color:var(--war-red);border-bottom-color:var(--gold)}
-  .nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px}
+  .nav-links{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px}
   .nav-toggle{display:none;background:none;border:1px solid var(--rule);border-radius:3px;padding:9px 10px;cursor:pointer}
   .nav-toggle span{display:block;width:20px;height:2px;background:var(--war-red);margin:4px 0;transition:transform .2s,opacity .2s}
   nav.open .nav-toggle span:nth-child(1){transform:translateY(6px) rotate(45deg)}
@@ -116,11 +116,7 @@
   nav.open .nav-toggle span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
 
   /* ---- Hero ---- */
-  header.hero{text-align:center;padding:56px 28px 14px}
-  .hero h1{font-family:'EB Garamond',Georgia,serif;font-weight:600;font-size:56px;line-height:1.05;letter-spacing:.01em;color:var(--ink)}
-  .hero .title{font-family:'Cinzel',serif;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--war-red);margin-top:14px}
-  .hero .lede{max-width:640px;margin:16px auto 0;color:var(--ink-soft);font-size:19px}
-  .hero .btn-row{justify-content:center;margin-top:24px}
+  header.hero{text-align:center;padding:40px 28px 14px}
   .crest-divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:28px auto 0;max-width:460px}
   .crest-divider .line{height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--war-red))}
   .crest-divider .line.r{background:linear-gradient(90deg,var(--war-red),transparent)}
@@ -197,6 +193,7 @@
   .digest{display:flex;flex-wrap:wrap;gap:8px 26px;align-items:baseline;color:var(--ink-soft);font-size:16px}
   .digest b{font-family:'Cinzel',serif;font-size:21px;font-weight:700;color:var(--war-red);margin-right:5px}
   .shelf h4{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+  .library{max-width:720px}
   .shelf ul{list-style:none}
   .shelf li{padding:7px 0;border-bottom:1px dashed var(--rule)}
   .shelf li .t{font-weight:600;color:var(--ink)}
@@ -259,10 +256,6 @@
 
   @media(max-width:760px){
     body{font-size:17px}
-    header.hero{padding:40px 18px 8px}
-    .hero h1{font-size:40px}
-    .hero .title{font-size:12.5px;letter-spacing:.16em}
-    .hero .lede{font-size:17px}
     .wrap{padding:0 18px}
     nav .inner{padding:8px 18px}
     section{padding:36px 0}
@@ -340,29 +333,17 @@
   </button>
   <div class="nav-links">
     <a href="#work">Work</a>
-    <a href="#scholarship">Scholarship</a>
-    <a href="#lineage">Lineage</a>
     <a href="#engineering">Engineering</a>
+    <a href="#scholarship">Scholarship</a>
     <a href="#athletics">Athletics</a>
-    <a href="#civility">Civility</a>
+    <a href="#civility">Ratings</a>
+    <a href="#library">Library</a>
+    <a href="#lineage">Lineage</a>
     <a href="#connect">Connect</a>
   </div>
 </div></nav>
 
 <header class="hero">
-  <h1>Bryce Waddell</h1>
-  <div class="title">Finance Systems Architect</div>
-  <p class="lede">Twenty end-to-end Workday Financials implementations &mdash; designing the financial data model, close, and intercompany architecture for organizations across 13 countries.</p>
-  <div class="btn-row">
-    <a class="btn" href="mailto:brycewaddell@gmail.com">
-      <svg viewBox="0 0 24 24"><path d="M2 5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5zm2 .5v.4l8 5 8-5v-.4H4zm16 2.3l-7.4 4.63a1 1 0 0 1-1.2 0L4 7.8V19h16V7.8z"/></svg>
-      Email me
-    </a>
-    <a class="btn" href="https://www.linkedin.com/in/bryce-waddell/" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 9.5H5.67V18h2.67V9.5zM7 5.88a1.55 1.55 0 1 0 0 3.1 1.55 1.55 0 0 0 0-3.1zM18.34 18v-4.67c0-2.5-1.34-3.67-3.13-3.67a2.7 2.7 0 0 0-2.45 1.35V9.5h-2.67V18h2.67v-4.5c0-1.18.22-2.32 1.68-2.32 1.44 0 1.46 1.35 1.46 2.4V18h2.67z"/></svg>
-      LinkedIn
-    </a>
-  </div>
   <div class="crest-divider"><span class="line"></span><span class="pip">&#10022;</span><span class="line r"></span></div>
 </header>
 
@@ -371,7 +352,7 @@
   <!-- PROFESSIONAL WORK -->
   <section id="work">
     <div class="section-head"><span class="banner"></span><h2>Professional Work</h2><span class="rule"></span></div>
-    <p class="section-intro">Workday Financials consultant — <b>~20 full-lifecycle implementations</b> across the Foundation Data Model, Procurement, Accounts, Banking &amp; Settlement, Assets, and Expenses. I convert and reconcile the general ledger to the penny and lead solution design for global, multi-currency, intercompany accounting.</p>
+    <p class="section-intro">Finance systems architect. I design the financial data model, close process, and global multi-currency intercompany architecture that organizations run their accounting on &mdash; <b>~20 full-lifecycle implementations</b> spanning ledger, procurement, banking &amp; settlement, assets, and expenses.</p>
     <div class="pill-row" style="margin-bottom:22px">
       <span class="pill">Workday &middot; Record to Report</span>
       <span class="pill">Workday &middot; Human Capital Management</span>
@@ -419,7 +400,7 @@
       <div class="subrole">Trading and Purchasing Coordinator</div>
       <ul>
         <li>Co-managed the Hot &amp; Cold Rolled Coil Steel futures derivatives trading desk via Chicago Mercantile Exchange.</li>
-        <li>Negotiated contracts &amp; Sourced Steel from every mill across the continguous USA.</li>
+        <li>Negotiated contracts &amp; Sourced Steel from every mill across the contiguous USA.</li>
       </ul>
     </div>
 
@@ -471,7 +452,67 @@
     </div>
   </section>
 
-  <!-- SCHOLARSHIP, PUBLICATIONS & LIBRARY -->
+  <!-- ENGINEERING -->
+  <section id="engineering">
+    <div class="section-head"><span class="banner"></span><h2>Engineering</h2><span class="rule"></span></div>
+    <p class="section-intro">Systems I design and build outside the ERP &mdash; hardware, web infrastructure, and data visualization.</p>
+
+    <div class="card">
+      <div class="role-row"><h3>Custom Small-Form-Factor Workstation</h3><span class="org-when">Hardware</span></div>
+      <div class="subrole">Self-assembled and tuned Mini-ITX build</div>
+      <table class="rig">
+      <tbody>
+      <tr><td class="cat">Motherboard</td><td class="mk">MSI</td><td class="md">MPG B760I EDGE WF D5 ITX</td></tr>
+      <tr><td class="cat">CPU</td><td class="mk">Intel</td><td class="md">Core i5-12600KF</td></tr>
+      <tr><td class="cat">GPU</td><td class="mk">NVIDIA</td><td class="md">GeForce RTX 5070 Founders Edition — 12GB GDDR7, PCIe 5.0</td></tr>
+      <tr><td class="cat">RAM</td><td class="mk">TeamGroup</td><td class="md">32GB DDR5 6400 RGB (White Kit)</td></tr>
+      <tr><td class="cat">Storage</td><td class="mk">Samsung</td><td class="md">2TB 990 PRO NVMe Gen4 SSD</td></tr>
+      <tr><td class="cat">CPU Cooler</td><td class="mk">be quiet!</td><td class="md">Pure Rock LP</td></tr>
+      <tr><td class="cat">Fans</td><td class="mk">Arctic</td><td class="md">P12 PWM 120mm PST ×2</td></tr>
+      <tr><td class="cat">PSU</td><td class="mk">MSI</td><td class="md">MAG A850GL 80+ Gold ATX 3.0</td></tr>
+      <tr><td class="cat">Case</td><td class="mk">Antec</td><td class="md">Stryker</td></tr>
+      <tr><td class="cat">OS</td><td class="mk">Linux</td><td class="md">Omarchy (Arch + Hyprland) &mdash; migration in progress</td></tr>
+      </tbody>
+      </table>
+      <details class="fold">
+        <summary><span class="more">Show peripherals</span><span class="less">Hide peripherals</span></summary>
+      <table class="rig" style="margin-top:14px">
+      <tbody>
+      <tr><td class="cat">Monitor</td><td class="mk">ASUS ROG</td><td class="md">Strix XG27UCG-W — 27" 4K HDR USB-C, Dual Mode (4K 160Hz), White</td></tr>
+      <tr><td class="cat">Keyboard</td><td class="mk">Razer</td><td class="md">Huntsman V3 Pro (Full Size)</td></tr>
+      <tr><td class="cat">Mouse</td><td class="mk">Razer</td><td class="md">Basilisk V3</td></tr>
+      <tr><td class="cat">Microphone</td><td class="mk">Logitech</td><td class="md">Blue Yeti</td></tr>
+      </tbody>
+      </table>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="role-row"><h3>brycewaddell.com</h3><span class="org-when">Web &amp; Security</span></div>
+      <div class="subrole">Hand-built static site, hosted on GitHub Pages</div>
+      <ul>
+        <li>Strict Content-Security-Policy: scripts authorized by hash, no third-party origins, all fonts self-hosted.</li>
+        <li>Domain hardened against spoofing with SPF, DMARC (reject), and null DKIM records.</li>
+        <li>Responsive, dependency-free HTML &amp; CSS &mdash; no frameworks, no trackers.</li>
+      </ul>
+      <div class="btn-row" style="margin-top:14px">
+        <a class="btn" href="https://github.com/Bryce-Waddell/brycewaddell" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+          View source on GitHub
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="role-row"><h3>Ancestry Fan Chart</h3><span class="org-when">Data Visualization</span></div>
+      <div class="subrole">Six generations of GEDCOM genealogy data rendered as an interactive SVG sunburst</div>
+      <ul>
+        <li>Color-coded lineages, curved arc labels, and hover tooltips &mdash; see <a class="scholar-link" href="#lineage">Lineage</a> below.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SCHOLARSHIP & PUBLICATIONS -->
   <section id="scholarship">
     <div class="section-head"><span class="banner"></span><h2>Scholarship</h2><span class="rule"></span></div>
 
@@ -493,47 +534,130 @@
       </a>
     </div>
 
-    <div class="reading">
-      <div class="pub">
-        <div class="tag">Research &amp; Publications</div>
-        <div class="bk">Atlas of European Collectives</div>
-        <div class="au">A faceted comparative atlas &mdash; 8 facets, 54 regions</div>
-        <p>What does a peoplehood actually consist of? The Atlas scores fifty-four regions across eight facets &mdash; two fixed at birth (ancient ancestry and geographic descent) and six culturally transmitted (language, script, the Latin Roman juridical inheritance, religion, art &amp; architecture, and legal family) &mdash; then clusters them statistically. Three commonwealths emerge: the Latin Roman, the Byzantine, and the Hebraic. They hold with the birthright facets switched off entirely.</p>
-        <a class="btn" href="https://europeanatlas.net/" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.6 15.6 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26zm.84 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 0 1 5.1 16zm2.95-8H5.1a7.99 7.99 0 0 1 4.33-3.56A15.6 15.6 0 0 0 8.05 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.23 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4h-3.38z"/></svg>
-          Read the Atlas
-        </a>
+    <div class="pub">
+      <div class="tag">Research &amp; Publications</div>
+      <div class="bk">Atlas of European Collectives</div>
+      <div class="au">A faceted comparative atlas &mdash; 8 facets, 54 regions</div>
+      <p>What does a peoplehood actually consist of? The Atlas scores fifty-four regions across eight facets &mdash; two fixed at birth (ancient ancestry and geographic descent) and six culturally transmitted (language, script, the Latin Roman juridical inheritance, religion, art &amp; architecture, and legal family) &mdash; then clusters them statistically. Three commonwealths emerge: the Latin Roman, the Byzantine, and the Hebraic. They hold with the birthright facets switched off entirely.</p>
+      <a class="btn" href="https://europeanatlas.net/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-2.95a15.6 15.6 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.9 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a8.2 8.2 0 0 1 0-4h3.38a16.5 16.5 0 0 0 0 4H4.26zm.84 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 0 1 5.1 16zm2.95-8H5.1a7.99 7.99 0 0 1 4.33-3.56A15.6 15.6 0 0 0 8.05 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66a14.7 14.7 0 0 1 0-4h4.68a14.7 14.7 0 0 1 0 4zm.23 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.5 16.5 0 0 0 0-4h3.38a8.2 8.2 0 0 1 0 4h-3.38z"/></svg>
+        Read the Atlas
+      </a>
+    </div>
+  </section>
+
+  <!-- ATHLETICS -->
+  <section id="athletics">
+    <div class="section-head"><span class="banner"></span><h2>Athletics</h2><span class="rule"></span></div>
+    <table class="rig">
+      <tbody>
+        <tr>
+          <td class="cat">Diving</td>
+          <td class="mk">PADI</td>
+          <td class="md">Open Water Diver &middot; Issued Mar 2016 &middot; Credential ID
+              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">16030K5528</span></td>
+        </tr>
+        <tr>
+          <td class="cat">Triathlon</td>
+          <td class="mk">Ironman 70.3</td>
+          <td class="md">Steelhead &middot; Total
+              <span style="font-family:'Cinzel',serif;font-weight:700;color:var(--war-red)">7:17:56</span><br>
+              <span style="font-size:13.5px;font-style:italic">Swim 1.9 km &mdash; 1:00:51 &nbsp;&middot;&nbsp;
+              Bike 90.6 km &mdash; 3:43:56 (Trek Domane AL 2, Gen 4) &nbsp;&middot;&nbsp;
+              Run 21.6 km &mdash; 2:18:57</span></td>
+        </tr>
+        <tr>
+          <td class="cat">Skydiving</td>
+          <td class="mk">USPA</td>
+          <td class="md">Pursuing A License &middot;
+              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">6</span> jumps &middot;
+              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">5:45</span> freefall</td>
+        </tr>
+        <tr>
+          <td class="cat">Expeditions</td>
+          <td class="mk">AllTrails</td>
+          <td class="md">Hikes, bikes, &amp; climbs &mdash; prospection logged on AllTrails</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="btn-row" style="margin-top:18px">
+      <a class="btn" href="https://www.alltrails.com/members/bryce-waddell-3" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M14 6l-4.22 9.55 1.6 1.6L14 11l3 5h-4.5l-2 2H21L14 6zm-4.9 6.39l-2.1-2.39L2 22h9.5l-1.4-1.4-4.2.01 1.7-3.84-1.5-1.5-1.93 4.36-.6-.6 4.43-6.04z"/></svg>
+        View my hikes on AllTrails
+      </a>
+    </div>
+  </section>
+
+  <!-- SKIN IN THE GAME (counterparty ratings) -->
+  <section id="civility">
+    <div class="section-head"><span class="banner"></span><h2>Skin in the Game</h2><span class="rule"></span></div>
+    <p class="section-intro">Ratings from the other side of the transaction &mdash; drivers, hosts, and buyers.</p>
+    <!-- ============================================================
+         UPDATE THESE SCORES MONTHLY:
+         edit the numbers in the .score lines below, then update
+         the "As of" date at the bottom of this section.
+         ============================================================ -->
+    <div class="rep-grid">
+      <div class="rep">
+        <div class="platform">Uber</div>
+        <div class="score">4.91<span> / 5</span></div>
+        <div class="what">Rider rating</div>
       </div>
-      <div class="shelf">
-        <h4>Library</h4>
+      <div class="rep">
+        <div class="platform">Lyft</div>
+        <div class="score">4.90<span> / 5</span></div>
+        <div class="what">Rider rating &middot; 85 rides</div>
+      </div>
+      <div class="rep">
+        <div class="platform">Airbnb</div>
+        <div class="score">5.00<span> / 5</span></div>
+        <div class="what">Guest rating &middot; 16 trips</div>
+      </div>
+      <div class="rep">
+        <div class="platform">eBay</div>
+        <div class="score">100<span>%</span></div>
+        <div class="what">Positive feedback &middot; 17 items sold</div>
+      </div>
+    </div>
+    <div class="rep-asof">As of July 2026</div>
+    <div class="btn-row" style="margin-top:18px">
+      <a class="btn" href="https://www.ebay.com/usr/b-ryce88" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 .59 1.42l9 9a2 2 0 0 0 2.83 0l7-7a2 2 0 0 0-.01-2.84zM6.5 8A1.5 1.5 0 1 1 8 6.5 1.5 1.5 0 0 1 6.5 8z"/></svg>
+        View my eBay profile
+      </a>
+    </div>
+  </section>
+
+  <!-- LIBRARY -->
+  <section id="library">
+    <div class="section-head"><span class="banner"></span><h2>Library</h2><span class="rule"></span></div>
+    <div class="shelf library">
+      <ul>
+          <li><span class="t">The Holy Bible</span> &mdash; <span class="a">New International Version</span></li>
+          <li><span class="t">The Decline of the West</span> &mdash; <span class="a">Oswald Spengler</span></li>
+          <li><span class="t">Incerto</span> &mdash; <span class="a">Nassim Taleb</span></li>
+          <li><span class="t">The Road to Serfdom</span> &mdash; <span class="a">Friedrich Hayek</span></li>
+          <li><span class="t">The Gulag Archipelago</span> &mdash; <span class="a">Aleksandr Solzhenitsyn</span></li>
+      </ul>
+      <details class="fold">
+        <summary><span class="more">Show all 19 volumes</span><span class="less">Show fewer</span></summary>
         <ul>
-            <li><span class="t">The Holy Bible</span> &mdash; <span class="a">New International Version</span></li>
-            <li><span class="t">The Decline of the West</span> &mdash; <span class="a">Oswald Spengler</span></li>
-            <li><span class="t">Incerto</span> &mdash; <span class="a">Nassim Taleb</span></li>
-            <li><span class="t">The Road to Serfdom</span> &mdash; <span class="a">Friedrich Hayek</span></li>
-            <li><span class="t">The Gulag Archipelago</span> &mdash; <span class="a">Aleksandr Solzhenitsyn</span></li>
+          <li><span class="t">The Odyssey</span> &mdash; <span class="a">Homer, trans. Barry B. Powell</span></li>
+          <li><span class="t">Selected Writings</span> &mdash; <span class="a">Friedrich Nietzsche</span></li>
+          <li><span class="t">Selected Writings</span> &mdash; <span class="a">Karl Marx</span></li>
+          <li><span class="t">The Storm of Steel</span> &mdash; <span class="a">Ernst J&uuml;nger</span></li>
+          <li><span class="t">Fanged Noumena</span> &mdash; <span class="a">Nick Land</span></li>
+          <li><span class="t">Governing the Commons</span> &mdash; <span class="a">Elinor Ostrom</span></li>
+          <li><span class="t">The Selfish Gene</span> &mdash; <span class="a">Richard Dawkins</span></li>
+          <li><span class="t">The Gene</span> &mdash; <span class="a">Siddhartha Mukherjee</span></li>
+          <li><span class="t">Guns, Germs, &amp; Steel</span> &mdash; <span class="a">Jared Diamond</span></li>
+          <li><span class="t">A Farewell to Alms</span> &mdash; <span class="a">Gregory Clark</span></li>
+          <li><span class="t">12 Rules for Life</span> &mdash; <span class="a">Jordan Peterson</span></li>
+          <li><span class="t">Watchmen</span> &mdash; <span class="a">Alan Moore</span></li>
+          <li><span class="t">The Complete Batman Runs</span> &mdash; <span class="a">Scott Snyder, Alan Moore &amp; Grant Morrison</span></li>
+          <li><span class="t">The Magic Tree House <span style="font-weight:400;font-style:italic">(series)</span></span> &mdash; <span class="a">Mary Pope Osborne</span></li>
         </ul>
-        <details class="fold">
-          <summary><span class="more">Show all 20 volumes</span><span class="less">Show fewer</span></summary>
-          <ul>
-            <li><span class="t">The Odyssey</span> &mdash; <span class="a">Homer, trans. Barry B. Powell</span></li>
-            <li><span class="t">Selected Writings</span> &mdash; <span class="a">Friedrich Nietzsche</span></li>
-            <li><span class="t">Nietzsche and the Nazis</span> &mdash; <span class="a">Stephen R.C. Hicks</span></li>
-            <li><span class="t">Selected Writings</span> &mdash; <span class="a">Karl Marx</span></li>
-            <li><span class="t">The Storm of Steel</span> &mdash; <span class="a">Ernst J&uuml;nger</span></li>
-            <li><span class="t">Fanged Noumena</span> &mdash; <span class="a">Nick Land</span></li>
-            <li><span class="t">Governing the Commons</span> &mdash; <span class="a">Elinor Ostrom</span></li>
-            <li><span class="t">The Selfish Gene</span> &mdash; <span class="a">Richard Dawkins</span></li>
-            <li><span class="t">The Gene</span> &mdash; <span class="a">Siddhartha Mukherjee</span></li>
-            <li><span class="t">Guns, Germs, &amp; Steel</span> &mdash; <span class="a">Jared Diamond</span></li>
-            <li><span class="t">A Farewell to Alms</span> &mdash; <span class="a">Gregory Clark</span></li>
-            <li><span class="t">12 Rules for Life</span> &mdash; <span class="a">Jordan Peterson</span></li>
-            <li><span class="t">Watchmen</span> &mdash; <span class="a">Alan Moore</span></li>
-            <li><span class="t">The Complete Batman Runs</span> &mdash; <span class="a">Scott Snyder, Alan Moore &amp; Grant Morrison</span></li>
-            <li><span class="t">The Magic Tree House <span style="font-weight:400;font-style:italic">(series)</span></span> &mdash; <span class="a">Mary Pope Osborne</span></li>
-          </ul>
-        </details>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -790,148 +914,6 @@
       </div>
       <div class="fan-cap">Direct-line ancestors of Bryce Waddell &middot; 6 generations</div>
       <div class="fan-progenitor"><b>Stirps Waddell</b> &mdash; descended from Johannes Peter &ldquo;John&rdquo; Weidel <em>(Wedel &rarr; Waddle &rarr; Waddell)</em>, b.&nbsp;29 January 1736, Palatinate &middot; Alsace&#8209;Lorraine &middot; Allemagne; d.&nbsp;February 1828.</div>
-    </div>
-  </section>
-
-  <!-- ENGINEERING -->
-  <section id="engineering">
-    <div class="section-head"><span class="banner"></span><h2>Engineering</h2><span class="rule"></span></div>
-    <p class="section-intro">Systems I design and build outside the ERP &mdash; hardware, web infrastructure, and data visualization.</p>
-
-    <div class="card">
-      <div class="role-row"><h3>Custom Small-Form-Factor Workstation</h3><span class="org-when">Hardware</span></div>
-      <div class="subrole">Self-assembled and tuned Mini-ITX build</div>
-      <table class="rig">
-      <tbody>
-      <tr><td class="cat">Motherboard</td><td class="mk">MSI</td><td class="md">MPG B760I EDGE WF D5 ITX</td></tr>
-      <tr><td class="cat">CPU</td><td class="mk">Intel</td><td class="md">Core i5-12600KF</td></tr>
-      <tr><td class="cat">GPU</td><td class="mk">NVIDIA</td><td class="md">GeForce RTX 5070 Founders Edition — 12GB GDDR7, PCIe 5.0</td></tr>
-      <tr><td class="cat">RAM</td><td class="mk">TeamGroup</td><td class="md">32GB DDR5 6400 RGB (White Kit)</td></tr>
-      <tr><td class="cat">Storage</td><td class="mk">Samsung</td><td class="md">2TB 990 PRO NVMe Gen4 SSD</td></tr>
-      <tr><td class="cat">CPU Cooler</td><td class="mk">be quiet!</td><td class="md">Pure Rock LP</td></tr>
-      <tr><td class="cat">Fans</td><td class="mk">Arctic</td><td class="md">P12 PWM 120mm PST ×2</td></tr>
-      <tr><td class="cat">PSU</td><td class="mk">MSI</td><td class="md">MAG A850GL 80+ Gold ATX 3.0</td></tr>
-      <tr><td class="cat">Case</td><td class="mk">Antec</td><td class="md">Stryker</td></tr>
-      <tr><td class="cat">OS</td><td class="mk">Linux</td><td class="md">Migrating to Linux</td></tr>
-      </tbody>
-      </table>
-      <details class="fold">
-        <summary><span class="more">Show peripherals</span><span class="less">Hide peripherals</span></summary>
-      <table class="rig" style="margin-top:14px">
-      <tbody>
-      <tr><td class="cat">Monitor</td><td class="mk">ASUS ROG</td><td class="md">Strix XG27UCG-W — 27" 4K HDR USB-C, Dual Mode (4K 160Hz), White</td></tr>
-      <tr><td class="cat">Keyboard</td><td class="mk">Razer</td><td class="md">Huntsman V3 Pro (Full Size)</td></tr>
-      <tr><td class="cat">Mouse</td><td class="mk">Razer</td><td class="md">Basilisk V3</td></tr>
-      <tr><td class="cat">Microphone</td><td class="mk">Logitech</td><td class="md">Blue Yeti</td></tr>
-      </tbody>
-      </table>
-      </details>
-    </div>
-
-    <div class="card">
-      <div class="role-row"><h3>brycewaddell.com</h3><span class="org-when">Web &amp; Security</span></div>
-      <div class="subrole">Hand-built static site, hosted on GitHub Pages</div>
-      <ul>
-        <li>Strict Content-Security-Policy: scripts authorized by hash, no third-party origins, all fonts self-hosted.</li>
-        <li>Domain hardened against spoofing with SPF, DMARC (reject), and null DKIM records.</li>
-        <li>Responsive, dependency-free HTML &amp; CSS &mdash; no frameworks, no trackers.</li>
-      </ul>
-      <div class="btn-row" style="margin-top:14px">
-        <a class="btn" href="https://github.com/Bryce-Waddell/brycewaddell" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
-          View source on GitHub
-        </a>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="role-row"><h3>Ancestry Fan Chart</h3><span class="org-when">Data Visualization</span></div>
-      <div class="subrole">Six generations of GEDCOM genealogy data rendered as an interactive SVG sunburst</div>
-      <ul>
-        <li>Color-coded lineages, curved arc labels, and hover tooltips &mdash; see <a class="scholar-link" href="#lineage">Lineage</a> above.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ATHLETICS -->
-  <section id="athletics">
-    <div class="section-head"><span class="banner"></span><h2>Athletics</h2><span class="rule"></span></div>
-    <table class="rig">
-      <tbody>
-        <tr>
-          <td class="cat">Diving</td>
-          <td class="mk">PADI</td>
-          <td class="md">Open Water Diver &middot; Issued Mar 2016 &middot; Credential ID
-              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">16030K5528</span></td>
-        </tr>
-        <tr>
-          <td class="cat">Triathlon</td>
-          <td class="mk">Ironman 70.3</td>
-          <td class="md">Steelhead &middot; Total
-              <span style="font-family:'Cinzel',serif;font-weight:700;color:var(--war-red)">7:17:56</span><br>
-              <span style="font-size:13.5px;font-style:italic">Swim 1.9 km &mdash; 1:00:51 &nbsp;&middot;&nbsp;
-              Bike 90.6 km &mdash; 3:43:56 (Trek Domane AL 2, Gen 4) &nbsp;&middot;&nbsp;
-              Run 21.6 km &mdash; 2:18:57</span></td>
-        </tr>
-        <tr>
-          <td class="cat">Skydiving</td>
-          <td class="mk">USPA</td>
-          <td class="md">Pursuing A License &middot;
-              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">6</span> jumps &middot;
-              <span style="font-family:'Cinzel',serif;letter-spacing:.04em;color:var(--war-red)">5:45</span> freefall</td>
-        </tr>
-        <tr>
-          <td class="cat">Expeditions</td>
-          <td class="mk">AllTrails</td>
-          <td class="md">Hikes, bikes, &amp; climbs &mdash; prospection logged on AllTrails</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="btn-row" style="margin-top:18px">
-      <a class="btn" href="https://www.alltrails.com/members/bryce-waddell-3" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M14 6l-4.22 9.55 1.6 1.6L14 11l3 5h-4.5l-2 2H21L14 6zm-4.9 6.39l-2.1-2.39L2 22h9.5l-1.4-1.4-4.2.01 1.7-3.84-1.5-1.5-1.93 4.36-.6-.6 4.43-6.04z"/></svg>
-        View my hikes on AllTrails
-      </a>
-    </div>
-  </section>
-
-  <!-- SOCIAL CREDIT SCORE -->
-  <section id="civility">
-    <div class="section-head"><span class="banner"></span><h2>Social Credit Score</h2><span class="rule"></span></div>
-    <p class="section-intro">Buyer/Seller Ratings</p>
-    <!-- ============================================================
-         UPDATE THESE SCORES MONTHLY:
-         edit the numbers in the .score lines below, then update
-         the "As of" date at the bottom of this section.
-         ============================================================ -->
-    <div class="rep-grid">
-      <div class="rep">
-        <div class="platform">Uber</div>
-        <div class="score">4.91<span> / 5</span></div>
-        <div class="what">Rider rating</div>
-      </div>
-      <div class="rep">
-        <div class="platform">Lyft</div>
-        <div class="score">4.90<span> / 5</span></div>
-        <div class="what">Rider rating &middot; 85 rides</div>
-      </div>
-      <div class="rep">
-        <div class="platform">Airbnb</div>
-        <div class="score">5.00<span> / 5</span></div>
-        <div class="what">Guest rating &middot; 16 trips</div>
-      </div>
-      <div class="rep">
-        <div class="platform">eBay</div>
-        <div class="score">100<span>%</span></div>
-        <div class="what">Positive feedback &middot; 17 items sold</div>
-      </div>
-    </div>
-    <div class="rep-asof">As of July 2026</div>
-    <div class="btn-row" style="margin-top:18px">
-      <a class="btn" href="https://www.ebay.com/usr/b-ryce88" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 .59 1.42l9 9a2 2 0 0 0 2.83 0l7-7a2 2 0 0 0-.01-2.84zM6.5 8A1.5 1.5 0 1 1 8 6.5 1.5 1.5 0 0 1 6.5 8z"/></svg>
-        View my eBay profile
-      </a>
     </div>
   </section>
 
