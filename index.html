@@ -216,6 +216,16 @@
   .fan-legend .lg{display:inline-flex;align-items:center;gap:8px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:.04em;color:var(--ink)}
   .fan-legend .lg i{width:15px;height:15px;border-radius:3px;display:inline-block;border:1px solid rgba(36,31,24,.45)}
   .fan-legend .lg em{font-style:normal;color:var(--ink-soft);font-size:12px}
+  .mig-teaser{display:block;position:relative;margin:0 0 28px;border-radius:6px;overflow:hidden;background:#0A1322;
+    border:1px solid var(--rule);box-shadow:0 4px 16px rgba(60,30,20,.12)}
+  .mig-teaser img{display:block;width:100%;height:auto;transition:transform .6s ease}
+  .mig-teaser:hover img{transform:scale(1.015)}
+  .mig-teaser-cap{position:absolute;left:0;right:0;bottom:0;padding:48px 24px 18px;color:#f1e7cf;
+    background:linear-gradient(transparent,rgba(5,9,16,.88) 55%)}
+  .mig-teaser-cap b{display:block;font-family:'Cinzel',serif;font-weight:600;font-size:clamp(18px,2.6vw,26px);letter-spacing:.08em}
+  .mig-teaser-cap span{display:block;font-style:italic;font-size:16.5px;color:#d6b66e;max-width:60ch}
+  .mig-teaser:hover{color:inherit}
+  @media(max-width:760px){.mig-teaser-cap{position:static;background:#0A1322;padding:12px 16px 14px}}
   .fan-cap{text-align:center;color:var(--ink-soft);font-style:italic;font-size:15px;margin-top:10px}
 
   /* rig table */
@@ -506,10 +516,27 @@
     </div>
 
     <div class="card">
-      <div class="role-row"><h3>Ancestry Fan Chart</h3><span class="org-when">Data Visualization</span></div>
-      <div class="subrole">Six generations of GEDCOM genealogy data rendered as an interactive SVG sunburst</div>
+      <div class="role-row"><h3>Ancestral Migrations</h3><span class="org-when">Data Visualization</span></div>
+      <div class="subrole">A real lineage timeline: 1,688 direct-line ancestors and 499 Atlantic crossings, 1610 to today</div>
       <ul>
-        <li>Color-coded lineages, curved arc labels, and hover tooltips &mdash; see <a class="scholar-link" href="#lineage">Lineage</a> below.</li>
+        <li>Built on Kinfold, my own genealogy engine: reads the RootsMagic SQLite database directly and places every birth, arrival and death offline, to the county, province or country.</li>
+        <li>Every Ahnentafel slot is drawn &mdash; 1,798 lines across eighteen generations, including ancestors who appear on two lines &mdash; converging, line by line, on a single birthplace.</li>
+        <li>Period-accurate America: 219 dated state and territory borders (1783&ndash;2000) from the Newberry Library&rsquo;s Atlas of Historical County Boundaries, with colonies, Native nations, roads and canals keyed to the year.</li>
+        <li>Hand-written Canvas 2D renderer: settled paths are cached off-screen so only moving lines repaint, keeping 3,000+ animated paths above 60&nbsp;fps &mdash; no frameworks, no third-party requests.</li>
+        <li><a class="scholar-link" href="migrations/">Watch the journey &rarr;</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="role-row"><h3>Descent Proof &amp; Tree Verification</h3><span class="org-when">Genealogy Engineering</span></div>
+      <div class="subrole">A machine-checked proof of descent, modeled on how mathematicians formalize large theorems</div>
+      <ul>
+        <li>Every parent&ndash;child link and marriage is a versioned claim; a checker derives its grade from the evidence written on it, so no link can be typed into &ldquo;proven.&rdquo;</li>
+        <li>High-signal records only: an original with a locator and a transcribed quote &mdash; will, baptism, vital record, 1880+ census &mdash; plus identity anchors. Online trees, hints and Find a Grave are logged as clues and never raise a grade.</li>
+        <li>Adversarial review: drafter, researcher and skeptic agents; a proof counts only once a reviewer who didn&rsquo;t draft it upholds it, sealed to the exact evidence judged.</li>
+        <li>Tree Checker Engine: turns every date, place and link on the direct line into a typed claim and tests it &mdash; parent ages, a parent alive at the birth, a county or state that didn&rsquo;t yet exist.</li>
+        <li>Rate-limited web crawlers sweep FamilySearch pedigrees and full-text colonial immigrant lists to point research at each line&rsquo;s likely immigrant &mdash; leads, never evidence.</li>
+        <li>Verified findings sync back to the RootsMagic master in one backed-up, logged transaction, with a proof level on every link. As of November 2026: 133 of 218 parent links proven.</li>
       </ul>
     </div>
   </section>
@@ -654,256 +681,12 @@
   <!-- LINEAGE -->
   <section id="lineage">
     <div class="section-head"><span class="banner"></span><h2>Lineage</h2><span class="rule"></span></div>
-    <p class="section-intro">A lifelong genealogy project. Below is my direct paternal-and-maternal lines; six generations of ancestors, rendered as a fan chart (63 forebears, charted to the 1830s).</p>
-    <div class="fanwrap">
-      <div class="fan-hint">Swipe to explore &middot; tap a name for details</div>
-      <div class="fan-scroll">
-      <svg viewBox="-340 -340 680 680" xmlns="http://www.w3.org/2000/svg" class="fanchart" role="img" aria-label="Interactive fan chart of the direct-line ancestors of Bryce Waddell, six generations">
-<defs>
-<path id="fp1" d="M3.66,-83.92 A84.00,84.00 0 0 1 3.66,83.92" fill="none"/>
-<path id="fp2" d="M-3.66,83.92 A84.00,84.00 0 0 1 -3.66,-83.92" fill="none"/>
-<path id="fp3" d="M4.75,-135.92 A136.00,136.00 0 0 1 135.92,-4.75" fill="none"/>
-<path id="fp4" d="M4.75,135.92 A136.00,136.00 0 0 0 135.92,4.75" fill="none"/>
-<path id="fp5" d="M-135.92,4.75 A136.00,136.00 0 0 0 -4.75,135.92" fill="none"/>
-<path id="fp6" d="M-135.92,-4.75 A136.00,136.00 0 0 1 -4.75,-135.92" fill="none"/>
-<path id="fp7" d="M5.25,-187.93 A188.00,188.00 0 0 1 129.17,-136.60" fill="none"/>
-<path id="fp8" d="M136.60,-129.17 A188.00,188.00 0 0 1 187.93,-5.25" fill="none"/>
-<path id="fp9" d="M136.60,129.17 A188.00,188.00 0 0 0 187.93,5.25" fill="none"/>
-<path id="fp10" d="M5.25,187.93 A188.00,188.00 0 0 0 129.17,136.60" fill="none"/>
-<path id="fp11" d="M-129.17,136.60 A188.00,188.00 0 0 0 -5.25,187.93" fill="none"/>
-<path id="fp12" d="M-187.93,5.25 A188.00,188.00 0 0 0 -136.60,129.17" fill="none"/>
-<path id="fp13" d="M-187.93,-5.25 A188.00,188.00 0 0 1 -136.60,-129.17" fill="none"/>
-<path id="fp14" d="M-129.17,-136.60 A188.00,188.00 0 0 1 -5.25,-187.93" fill="none"/>
-<path id="fp15" d="M5.44,-239.94 A240.00,240.00 0 0 1 86.79,-223.76" fill="none"/>
-<path id="fp16" d="M96.85,-219.59 A240.00,240.00 0 0 1 165.81,-173.51" fill="none"/>
-<path id="fp17" d="M173.51,-165.81 A240.00,240.00 0 0 1 219.59,-96.85" fill="none"/>
-<path id="fp18" d="M223.76,-86.79 A240.00,240.00 0 0 1 239.94,-5.44" fill="none"/>
-<path id="fp19" d="M223.76,86.79 A240.00,240.00 0 0 0 239.94,5.44" fill="none"/>
-<path id="fp20" d="M173.51,165.81 A240.00,240.00 0 0 0 219.59,96.85" fill="none"/>
-<path id="fp21" d="M96.85,219.59 A240.00,240.00 0 0 0 165.81,173.51" fill="none"/>
-<path id="fp22" d="M5.44,239.94 A240.00,240.00 0 0 0 86.79,223.76" fill="none"/>
-<path id="fp23" d="M-86.79,223.76 A240.00,240.00 0 0 0 -5.44,239.94" fill="none"/>
-<path id="fp24" d="M-165.81,173.51 A240.00,240.00 0 0 0 -96.85,219.59" fill="none"/>
-<path id="fp25" d="M-219.59,96.85 A240.00,240.00 0 0 0 -173.51,165.81" fill="none"/>
-<path id="fp26" d="M-239.94,5.44 A240.00,240.00 0 0 0 -223.76,86.79" fill="none"/>
-<path id="fp27" d="M-239.94,-5.44 A240.00,240.00 0 0 1 -223.76,-86.79" fill="none"/>
-<path id="fp28" d="M-219.59,-96.85 A240.00,240.00 0 0 1 -173.51,-165.81" fill="none"/>
-<path id="fp29" d="M-165.81,-173.51 A240.00,240.00 0 0 1 -96.85,-219.59" fill="none"/>
-<path id="fp30" d="M-86.79,-223.76 A240.00,240.00 0 0 1 -5.44,-239.94" fill="none"/>
-<path id="fp31" d="M5.39,-293.95 A294.00,294.00 0 0 1 52.06,-289.35" fill="none"/>
-<path id="fp32" d="M65.14,-298.74 A305.76,305.76 0 0 1 111.81,-284.58" fill="none"/>
-<path id="fp33" d="M60.13,-275.76 A282.24,282.24 0 0 1 103.21,-262.69" fill="none"/>
-<path id="fp34" d="M117.47,-269.51 A294.00,294.00 0 0 1 158.83,-247.40" fill="none"/>
-<path id="fp35" d="M167.79,-241.42 A294.00,294.00 0 0 1 204.04,-211.66" fill="none"/>
-<path id="fp36" d="M220.13,-212.21 A305.76,305.76 0 0 1 251.07,-174.50" fill="none"/>
-<path id="fp37" d="M203.20,-195.88 A282.24,282.24 0 0 1 231.76,-161.08" fill="none"/>
-<path id="fp38" d="M257.30,-165.18 A305.76,305.76 0 0 1 280.29,-122.17" fill="none"/>
-<path id="fp39" d="M237.51,-152.48 A282.24,282.24 0 0 1 258.73,-112.77" fill="none"/>
-<path id="fp40" d="M273.64,-107.51 A294.00,294.00 0 0 1 287.25,-62.63" fill="none"/>
-<path id="fp41" d="M300.93,-54.15 A305.76,305.76 0 0 1 305.71,-5.60" fill="none"/>
-<path id="fp42" d="M277.78,-49.98 A282.24,282.24 0 0 1 282.19,-5.17" fill="none"/>
-<path id="fp43" d="M300.93,54.15 A305.76,305.76 0 0 0 305.71,5.60" fill="none"/>
-<path id="fp44" d="M277.78,49.98 A282.24,282.24 0 0 0 282.19,5.17" fill="none"/>
-<path id="fp45" d="M284.58,111.81 A305.76,305.76 0 0 0 298.74,65.14" fill="none"/>
-<path id="fp46" d="M262.69,103.21 A282.24,282.24 0 0 0 275.76,60.13" fill="none"/>
-<path id="fp47" d="M257.30,165.18 A305.76,305.76 0 0 0 280.29,122.17" fill="none"/>
-<path id="fp48" d="M237.51,152.48 A282.24,282.24 0 0 0 258.73,112.77" fill="none"/>
-<path id="fp49" d="M211.66,204.04 A294.00,294.00 0 0 0 241.42,167.79" fill="none"/>
-<path id="fp50" d="M174.50,251.07 A305.76,305.76 0 0 0 212.21,220.13" fill="none"/>
-<path id="fp51" d="M161.08,231.76 A282.24,282.24 0 0 0 195.88,203.20" fill="none"/>
-<path id="fp52" d="M122.17,280.29 A305.76,305.76 0 0 0 165.18,257.30" fill="none"/>
-<path id="fp53" d="M112.77,258.73 A282.24,282.24 0 0 0 152.48,237.51" fill="none"/>
-<path id="fp54" d="M65.14,298.74 A305.76,305.76 0 0 0 111.81,284.58" fill="none"/>
-<path id="fp55" d="M60.13,275.76 A282.24,282.24 0 0 0 103.21,262.69" fill="none"/>
-<path id="fp56" d="M5.39,293.95 A294.00,294.00 0 0 0 52.06,289.35" fill="none"/>
-<path id="fp57" d="M-54.15,300.93 A305.76,305.76 0 0 0 -5.60,305.71" fill="none"/>
-<path id="fp58" d="M-49.98,277.78 A282.24,282.24 0 0 0 -5.17,282.19" fill="none"/>
-<path id="fp59" d="M-107.51,273.64 A294.00,294.00 0 0 0 -62.63,287.25" fill="none"/>
-<path id="fp60" d="M-165.18,257.30 A305.76,305.76 0 0 0 -122.17,280.29" fill="none"/>
-<path id="fp61" d="M-152.48,237.51 A282.24,282.24 0 0 0 -112.77,258.73" fill="none"/>
-<path id="fp62" d="M-204.04,211.66 A294.00,294.00 0 0 0 -167.79,241.42" fill="none"/>
-<path id="fp63" d="M-251.07,174.50 A305.76,305.76 0 0 0 -220.13,212.21" fill="none"/>
-<path id="fp64" d="M-231.76,161.08 A282.24,282.24 0 0 0 -203.20,195.88" fill="none"/>
-<path id="fp65" d="M-280.29,122.17 A305.76,305.76 0 0 0 -257.30,165.18" fill="none"/>
-<path id="fp66" d="M-258.73,112.77 A282.24,282.24 0 0 0 -237.51,152.48" fill="none"/>
-<path id="fp67" d="M-287.25,62.63 A294.00,294.00 0 0 0 -273.64,107.51" fill="none"/>
-<path id="fp68" d="M-293.95,5.39 A294.00,294.00 0 0 0 -289.35,52.06" fill="none"/>
-<path id="fp69" d="M-305.71,-5.60 A305.76,305.76 0 0 1 -300.93,-54.15" fill="none"/>
-<path id="fp70" d="M-282.19,-5.17 A282.24,282.24 0 0 1 -277.78,-49.98" fill="none"/>
-<path id="fp71" d="M-287.25,-62.63 A294.00,294.00 0 0 1 -273.64,-107.51" fill="none"/>
-<path id="fp72" d="M-280.29,-122.17 A305.76,305.76 0 0 1 -257.30,-165.18" fill="none"/>
-<path id="fp73" d="M-258.73,-112.77 A282.24,282.24 0 0 1 -237.51,-152.48" fill="none"/>
-<path id="fp74" d="M-251.07,-174.50 A305.76,305.76 0 0 1 -220.13,-212.21" fill="none"/>
-<path id="fp75" d="M-231.76,-161.08 A282.24,282.24 0 0 1 -203.20,-195.88" fill="none"/>
-<path id="fp76" d="M-212.21,-220.13 A305.76,305.76 0 0 1 -174.50,-251.07" fill="none"/>
-<path id="fp77" d="M-195.88,-203.20 A282.24,282.24 0 0 1 -161.08,-231.76" fill="none"/>
-<path id="fp78" d="M-165.18,-257.30 A305.76,305.76 0 0 1 -122.17,-280.29" fill="none"/>
-<path id="fp79" d="M-152.48,-237.51 A282.24,282.24 0 0 1 -112.77,-258.73" fill="none"/>
-<path id="fp80" d="M-111.81,-284.58 A305.76,305.76 0 0 1 -65.14,-298.74" fill="none"/>
-<path id="fp81" d="M-103.21,-262.69 A282.24,282.24 0 0 1 -60.13,-275.76" fill="none"/>
-<path id="fp82" d="M-54.15,-300.93 A305.76,305.76 0 0 1 -5.60,-305.71" fill="none"/>
-<path id="fp83" d="M-49.98,-277.78 A282.24,282.24 0 0 1 -5.17,-282.19" fill="none"/>
-</defs>
-<circle cx="0" cy="0" r="58" fill="#8f1d1d" stroke="#000000" stroke-width="2" data-name="Bryce Waddell" data-years="" data-place="" class="seg"/>
-<path d="M0.00,-58.00 L0.00,-110.00 A110.00,110.00 0 0 1 0.00,110.00 L0.00,58.00 A58.00,58.00 0 0 0 0.00,-58.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Father" data-years="" data-place="" class="seg"/>
-<path d="M0.00,58.00 L0.00,110.00 A110.00,110.00 0 0 1 -0.00,-110.00 L-0.00,-58.00 A58.00,58.00 0 0 0 0.00,58.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Mother" data-years="" data-place="" class="seg"/>
-<path d="M0.00,-110.00 L0.00,-162.00 A162.00,162.00 0 0 1 162.00,0.00 L110.00,0.00 A110.00,110.00 0 0 0 0.00,-110.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Grandfather" data-years="" data-place="" class="seg"/>
-<path d="M110.00,0.00 L162.00,0.00 A162.00,162.00 0 0 1 0.00,162.00 L0.00,110.00 A110.00,110.00 0 0 0 110.00,0.00 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Martha Susan Sue Caldwell" data-years="1945–2019" data-place="Indiana, USA" class="seg"/>
-<path d="M0.00,110.00 L0.00,162.00 A162.00,162.00 0 0 1 -162.00,0.00 L-110.00,0.00 A110.00,110.00 0 0 0 0.00,110.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Grandfather" data-years="" data-place="" class="seg"/>
-<path d="M-110.00,0.00 L-162.00,0.00 A162.00,162.00 0 0 1 -0.00,-162.00 L-0.00,-110.00 A110.00,110.00 0 0 0 -110.00,0.00 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Grandmother" data-years="" data-place="" class="seg"/>
-<path d="M0.00,-162.00 L0.00,-214.00 A214.00,214.00 0 0 1 151.32,-151.32 L114.55,-114.55 A162.00,162.00 0 0 0 0.00,-162.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Clarence Cleda Waddell" data-years="1905–1969" data-place="Indiana, USA" class="seg"/>
-<path d="M114.55,-114.55 L151.32,-151.32 A214.00,214.00 0 0 1 214.00,0.00 L162.00,0.00 A162.00,162.00 0 0 0 114.55,-114.55 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Cleda E. Opel" data-years="1909–1976" data-place="Indiana, USA" class="seg"/>
-<path d="M162.00,0.00 L214.00,0.00 A214.00,214.00 0 0 1 151.32,151.32 L114.55,114.55 A162.00,162.00 0 0 0 162.00,0.00 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Charles Phillip Caldwell" data-years="1916–1985" data-place="Indiana, USA" class="seg"/>
-<path d="M114.55,114.55 L151.32,151.32 A214.00,214.00 0 0 1 0.00,214.00 L0.00,162.00 A162.00,162.00 0 0 0 114.55,114.55 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Emogene Catherine Marquette" data-years="1922–2018" data-place="Indiana, USA" class="seg"/>
-<path d="M0.00,162.00 L0.00,214.00 A214.00,214.00 0 0 1 -151.32,151.32 L-114.55,114.55 A162.00,162.00 0 0 0 0.00,162.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Hiram Jerome Griffin" data-years="1906–2002" data-place="Indiana, USA" class="seg"/>
-<path d="M-114.55,114.55 L-151.32,151.32 A214.00,214.00 0 0 1 -214.00,0.00 L-162.00,0.00 A162.00,162.00 0 0 0 -114.55,114.55 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Sarah Ellen Gosnell" data-years="1909–1963" data-place="Indiana, USA" class="seg"/>
-<path d="M-162.00,0.00 L-214.00,0.00 A214.00,214.00 0 0 1 -151.32,-151.32 L-114.55,-114.55 A162.00,162.00 0 0 0 -162.00,0.00 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Thomas Elbert Scobee" data-years="1918–1977" data-place="Indiana, USA" class="seg"/>
-<path d="M-114.55,-114.55 L-151.32,-151.32 A214.00,214.00 0 0 1 -0.00,-214.00 L-0.00,-162.00 A162.00,162.00 0 0 0 -114.55,-114.55 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Vivian Irene Martin" data-years="1923–1963" data-place="Indiana, USA" class="seg"/>
-<path d="M0.00,-214.00 L0.00,-266.00 A266.00,266.00 0 0 1 101.79,-245.75 L81.89,-197.71 A214.00,214.00 0 0 0 0.00,-214.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Claude Hayes Waddle" data-years="1877–1923" data-place="Indiana, USA" class="seg"/>
-<path d="M81.89,-197.71 L101.79,-245.75 A266.00,266.00 0 0 1 188.09,-188.09 L151.32,-151.32 A214.00,214.00 0 0 0 81.89,-197.71 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Delila Grant" data-years="1872–1937" data-place="Indiana, USA" class="seg"/>
-<path d="M151.32,-151.32 L188.09,-188.09 A266.00,266.00 0 0 1 245.75,-101.79 L197.71,-81.89 A214.00,214.00 0 0 0 151.32,-151.32 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="George Opel" data-years="1874–1917" data-place="Indiana, USA" class="seg"/>
-<path d="M197.71,-81.89 L245.75,-101.79 A266.00,266.00 0 0 1 266.00,0.00 L214.00,0.00 A214.00,214.00 0 0 0 197.71,-81.89 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Barbara Seitz" data-years="1880–1940" data-place="Indiana, USA" class="seg"/>
-<path d="M214.00,0.00 L266.00,0.00 A266.00,266.00 0 0 1 245.75,101.79 L197.71,81.89 A214.00,214.00 0 0 0 214.00,0.00 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Ray James Caldwell" data-years="1892–1944" data-place="Indiana, USA" class="seg"/>
-<path d="M197.71,81.89 L245.75,101.79 A266.00,266.00 0 0 1 188.09,188.09 L151.32,151.32 A214.00,214.00 0 0 0 197.71,81.89 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Chloe Tharp" data-years="1895–1970" data-place="Indiana, USA" class="seg"/>
-<path d="M151.32,151.32 L188.09,188.09 A266.00,266.00 0 0 1 101.79,245.75 L81.89,197.71 A214.00,214.00 0 0 0 151.32,151.32 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Grover Cleveland Marquette" data-years="1894–1966" data-place="Indiana, USA" class="seg"/>
-<path d="M81.89,197.71 L101.79,245.75 A266.00,266.00 0 0 1 0.00,266.00 L0.00,214.00 A214.00,214.00 0 0 0 81.89,197.71 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Minnie Alma Heintz" data-years="1893–1974" data-place="Indiana, USA" class="seg"/>
-<path d="M0.00,214.00 L0.00,266.00 A266.00,266.00 0 0 1 -101.79,245.75 L-81.89,197.71 A214.00,214.00 0 0 0 0.00,214.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Gilbert Jack Griffin" data-years="1873–1943" data-place="Indiana, USA" class="seg"/>
-<path d="M-81.89,197.71 L-101.79,245.75 A266.00,266.00 0 0 1 -188.09,188.09 L-151.32,151.32 A214.00,214.00 0 0 0 -81.89,197.71 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Dollie D Crane Harrington" data-years="1883–1945" data-place="Indiana, USA" class="seg"/>
-<path d="M-151.32,151.32 L-188.09,188.09 A266.00,266.00 0 0 1 -245.75,101.79 L-197.71,81.89 A214.00,214.00 0 0 0 -151.32,151.32 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Alva Gosnell" data-years="1863–1932" data-place="Indiana, USA" class="seg"/>
-<path d="M-197.71,81.89 L-245.75,101.79 A266.00,266.00 0 0 1 -266.00,0.00 L-214.00,0.00 A214.00,214.00 0 0 0 -197.71,81.89 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Lucy M. Helt" data-years="1867–1916" data-place="Indiana, USA" class="seg"/>
-<path d="M-214.00,0.00 L-266.00,0.00 A266.00,266.00 0 0 1 -245.75,-101.79 L-197.71,-81.89 A214.00,214.00 0 0 0 -214.00,0.00 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Daniel Clarence Scobee" data-years="1884–1973" data-place="Indiana, USA" class="seg"/>
-<path d="M-197.71,-81.89 L-245.75,-101.79 A266.00,266.00 0 0 1 -188.09,-188.09 L-151.32,-151.32 A214.00,214.00 0 0 0 -197.71,-81.89 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Katie Lee Howlett" data-years="1889–1962" data-place="Kentucky, USA" class="seg"/>
-<path d="M-151.32,-151.32 L-188.09,-188.09 A266.00,266.00 0 0 1 -101.79,-245.75 L-81.89,-197.71 A214.00,214.00 0 0 0 -151.32,-151.32 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="John Jacob (Jake) Martin" data-years="1899–1973" data-place="Indiana, USA" class="seg"/>
-<path d="M-81.89,-197.71 L-101.79,-245.75 A266.00,266.00 0 0 1 -0.00,-266.00 L-0.00,-214.00 A214.00,214.00 0 0 0 -81.89,-197.71 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Georgia Anna Magill" data-years="1900–1988" data-place="Indiana, USA" class="seg"/>
-<path d="M0.00,-266.00 L0.00,-322.00 A322.00,322.00 0 0 1 62.82,-315.81 L51.89,-260.89 A266.00,266.00 0 0 0 0.00,-266.00 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="David Waddle" data-years="b. 1837" data-place="Indiana, USA" class="seg"/>
-<path d="M51.89,-260.89 L62.82,-315.81 A322.00,322.00 0 0 1 123.22,-297.49 L101.79,-245.75 A266.00,266.00 0 0 0 51.89,-260.89 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Margaret Rose Evans" data-years="1846–1902" data-place="Indiana, USA" class="seg"/>
-<path d="M101.79,-245.75 L123.22,-297.49 A322.00,322.00 0 0 1 178.89,-267.73 L147.78,-221.17 A266.00,266.00 0 0 0 101.79,-245.75 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Levi S. Grant" data-years="1846–1889" data-place="Indiana, USA" class="seg"/>
-<path d="M147.78,-221.17 L178.89,-267.73 A322.00,322.00 0 0 1 227.69,-227.69 L188.09,-188.09 A266.00,266.00 0 0 0 147.78,-221.17 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Sarah C Pruitt" data-years="1846–1903" data-place="Indiana, USA" class="seg"/>
-<path d="M188.09,-188.09 L227.69,-227.69 A322.00,322.00 0 0 1 267.73,-178.89 L221.17,-147.78 A266.00,266.00 0 0 0 188.09,-188.09 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Sebastian Opel" data-years="1846–1905" data-place="Indiana, USA" class="seg"/>
-<path d="M221.17,-147.78 L267.73,-178.89 A322.00,322.00 0 0 1 297.49,-123.22 L245.75,-101.79 A266.00,266.00 0 0 0 221.17,-147.78 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Elisabeth Huebner" data-years="1850–1908" data-place="Indiana, USA" class="seg"/>
-<path d="M245.75,-101.79 L297.49,-123.22 A322.00,322.00 0 0 1 315.81,-62.82 L260.89,-51.89 A266.00,266.00 0 0 0 245.75,-101.79 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="John P Seitz" data-years="1858–1897" data-place="Indiana, USA" class="seg"/>
-<path d="M260.89,-51.89 L315.81,-62.82 A322.00,322.00 0 0 1 322.00,0.00 L266.00,0.00 A266.00,266.00 0 0 0 260.89,-51.89 Z" fill="#8f1d1d" stroke="#000000" stroke-width="1.15" data-name="Elizabeth Neukam" data-years="1855–1934" data-place="Indiana, USA" class="seg"/>
-<path d="M266.00,0.00 L322.00,0.00 A322.00,322.00 0 0 1 315.81,62.82 L260.89,51.89 A266.00,266.00 0 0 0 266.00,0.00 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Charles A. Caldwell" data-years="1869–1908" data-place="Indiana, USA" class="seg"/>
-<path d="M260.89,51.89 L315.81,62.82 A322.00,322.00 0 0 1 297.49,123.22 L245.75,101.79 A266.00,266.00 0 0 0 260.89,51.89 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Daisie Martin" data-years="1871–1950" data-place="Indiana, USA" class="seg"/>
-<path d="M245.75,101.79 L297.49,123.22 A322.00,322.00 0 0 1 267.73,178.89 L221.17,147.78 A266.00,266.00 0 0 0 245.75,101.79 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Charles M Tharp" data-years="1856–1904" data-place="Indiana, USA" class="seg"/>
-<path d="M221.17,147.78 L267.73,178.89 A322.00,322.00 0 0 1 227.69,227.69 L188.09,188.09 A266.00,266.00 0 0 0 221.17,147.78 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Jennie Belle Webb" data-years="1867–1947" data-place="Illinois, USA" class="seg"/>
-<path d="M188.09,188.09 L227.69,227.69 A322.00,322.00 0 0 1 178.89,267.73 L147.78,221.17 A266.00,266.00 0 0 0 188.09,188.09 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="George Marquett" data-years="1853–1898" data-place="Indiana, USA" class="seg"/>
-<path d="M147.78,221.17 L178.89,267.73 A322.00,322.00 0 0 1 123.22,297.49 L101.79,245.75 A266.00,266.00 0 0 0 147.78,221.17 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Ruthie Prather" data-years="1857–1921" data-place="Indiana, USA" class="seg"/>
-<path d="M101.79,245.75 L123.22,297.49 A322.00,322.00 0 0 1 62.82,315.81 L51.89,260.89 A266.00,266.00 0 0 0 101.79,245.75 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Conrad Heintz" data-years="1860–1898" data-place="Indiana, USA" class="seg"/>
-<path d="M51.89,260.89 L62.82,315.81 A322.00,322.00 0 0 1 0.00,322.00 L0.00,266.00 A266.00,266.00 0 0 0 51.89,260.89 Z" fill="#2B2B2B" stroke="#000000" stroke-width="1.15" data-name="Barbara Ann Baer" data-years="1857–1921" data-place="Ohio, USA" class="seg"/>
-<path d="M0.00,266.00 L0.00,322.00 A322.00,322.00 0 0 1 -62.82,315.81 L-51.89,260.89 A266.00,266.00 0 0 0 0.00,266.00 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Hiram Owen Griffin" data-years="1836–1891" data-place="Indiana, USA" class="seg"/>
-<path d="M-51.89,260.89 L-62.82,315.81 A322.00,322.00 0 0 1 -123.22,297.49 L-101.79,245.75 A266.00,266.00 0 0 0 -51.89,260.89 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Lucy Ann Evans" data-years="1838–1896" data-place="Indiana, USA" class="seg"/>
-<path d="M-101.79,245.75 L-123.22,297.49 A322.00,322.00 0 0 1 -178.89,267.73 L-147.78,221.17 A266.00,266.00 0 0 0 -101.79,245.75 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="William Riley Harrington" data-years="1851–1919" data-place="Indiana, USA" class="seg"/>
-<path d="M-147.78,221.17 L-178.89,267.73 A322.00,322.00 0 0 1 -227.69,227.69 L-188.09,188.09 A266.00,266.00 0 0 0 -147.78,221.17 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Emma Eveline (Earlin) Wright" data-years="1854–1927" data-place="Indiana, USA" class="seg"/>
-<path d="M-188.09,188.09 L-227.69,227.69 A322.00,322.00 0 0 1 -267.73,178.89 L-221.17,147.78 A266.00,266.00 0 0 0 -188.09,188.09 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Robert William Gosnell" data-years="1832–1907" data-place="Ohio, USA" class="seg"/>
-<path d="M-221.17,147.78 L-267.73,178.89 A322.00,322.00 0 0 1 -297.49,123.22 L-245.75,101.79 A266.00,266.00 0 0 0 -221.17,147.78 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Elizabeth Bartlett" data-years="1835–1902" data-place="Ohio, USA" class="seg"/>
-<path d="M-245.75,101.79 L-297.49,123.22 A322.00,322.00 0 0 1 -315.81,62.82 L-260.89,51.89 A266.00,266.00 0 0 0 -245.75,101.79 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Eli B Helt" data-years="1831–1878" data-place="Indiana, USA" class="seg"/>
-<path d="M-260.89,51.89 L-315.81,62.82 A322.00,322.00 0 0 1 -322.00,0.00 L-266.00,0.00 A266.00,266.00 0 0 0 -260.89,51.89 Z" fill="#b8923a" stroke="#000000" stroke-width="1.15" data-name="Mary H Jacks" data-years="b. 1836" data-place="Indiana, USA" class="seg"/>
-<path d="M-266.00,0.00 L-322.00,0.00 A322.00,322.00 0 0 1 -315.81,-62.82 L-260.89,-51.89 A266.00,266.00 0 0 0 -266.00,0.00 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Robert Lesley Scobee Jr." data-years="1866–1933" data-place="Indiana, USA" class="seg"/>
-<path d="M-260.89,-51.89 L-315.81,-62.82 A322.00,322.00 0 0 1 -297.49,-123.22 L-245.75,-101.79 A266.00,266.00 0 0 0 -260.89,-51.89 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Luanna Henry" data-years="1864–1922" data-place="Indiana, USA" class="seg"/>
-<path d="M-245.75,-101.79 L-297.49,-123.22 A322.00,322.00 0 0 1 -267.73,-178.89 L-221.17,-147.78 A266.00,266.00 0 0 0 -245.75,-101.79 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Robert L. Howlett" data-years="1865–1948" data-place="Kentucky, USA" class="seg"/>
-<path d="M-221.17,-147.78 L-267.73,-178.89 A322.00,322.00 0 0 1 -227.69,-227.69 L-188.09,-188.09 A266.00,266.00 0 0 0 -221.17,-147.78 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Margaret (or Martha) M. Conley" data-years="1863–1942" data-place="Kentucky, USA" class="seg"/>
-<path d="M-188.09,-188.09 L-227.69,-227.69 A322.00,322.00 0 0 1 -178.89,-267.73 L-147.78,-221.17 A266.00,266.00 0 0 0 -188.09,-188.09 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Samuel Valentine Martin" data-years="1850–1930" data-place="Kentucky, USA" class="seg"/>
-<path d="M-147.78,-221.17 L-178.89,-267.73 A322.00,322.00 0 0 1 -123.22,-297.49 L-101.79,-245.75 A266.00,266.00 0 0 0 -147.78,-221.17 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Margaret Rozella Lancaster" data-years="1860–1944" data-place="Indiana, USA" class="seg"/>
-<path d="M-101.79,-245.75 L-123.22,-297.49 A322.00,322.00 0 0 1 -62.82,-315.81 L-51.89,-260.89 A266.00,266.00 0 0 0 -101.79,-245.75 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Theodore Clay Magill" data-years="1875–1948" data-place="Indiana, USA" class="seg"/>
-<path d="M-51.89,-260.89 L-62.82,-315.81 A322.00,322.00 0 0 1 -0.00,-322.00 L-0.00,-266.00 A266.00,266.00 0 0 0 -51.89,-260.89 Z" fill="#faf4e6" stroke="#000000" stroke-width="1.15" data-name="Harriet (Hattie) Mae Wysong" data-years="1878–1953" data-place="Missouri, USA" class="seg"/>
-<g pointer-events="none">
-<text x="0" y="-4" text-anchor="middle" font-size="17" font-weight="700" fill="#f6efdc" font-family="Cinzel,serif">Bryce</text>
-<text x="0" y="16" text-anchor="middle" font-size="13.5" fill="#f6efdc" font-family="Cinzel,serif" letter-spacing="1">WADDELL</text>
-<text font-size="14.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp1" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Father</textPath></text>
-<text font-size="14.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp2" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Mother</textPath></text>
-<text font-size="13.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp3" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Grandfather</textPath></text>
-<text font-size="13.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp4" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Martha Caldwell</textPath></text>
-<text font-size="13.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp5" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Grandfather</textPath></text>
-<text font-size="13.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp6" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Grandmother</textPath></text>
-<text font-size="11.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp7" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Clarence Waddell</textPath></text>
-<text font-size="11.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp8" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Cleda Opel</textPath></text>
-<text font-size="11.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp9" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Charles Caldwell</textPath></text>
-<text font-size="11.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp10" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Emogene Marquette</textPath></text>
-<text font-size="11.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp11" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Hiram Griffin</textPath></text>
-<text font-size="11.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp12" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Sarah Gosnell</textPath></text>
-<text font-size="11.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp13" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Thomas Scobee</textPath></text>
-<text font-size="11.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp14" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Vivian Martin</textPath></text>
-<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp15" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Claude Waddle</textPath></text>
-<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp16" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Delila Grant</textPath></text>
-<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp17" startOffset="50%" text-anchor="middle" dominant-baseline="middle">George Opel</textPath></text>
-<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp18" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Barbara Seitz</textPath></text>
-<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp19" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Ray Caldwell</textPath></text>
-<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp20" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Chloe Tharp</textPath></text>
-<text font-size="9.3" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp21" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Grover Marquette</textPath></text>
-<text font-size="10.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp22" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Minnie Heintz</textPath></text>
-<text font-size="9.9" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp23" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Gilbert Griffin</textPath></text>
-<text font-size="8.8" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp24" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Dollie Harrington</textPath></text>
-<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp25" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Alva Gosnell</textPath></text>
-<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp26" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Lucy Helt</textPath></text>
-<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp27" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Daniel Scobee</textPath></text>
-<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp28" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Katie Howlett</textPath></text>
-<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp29" startOffset="50%" text-anchor="middle" dominant-baseline="middle">John Martin</textPath></text>
-<text font-size="10.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp30" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Georgia Magill</textPath></text>
-<text font-size="7.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp31" startOffset="50%" text-anchor="middle" dominant-baseline="middle">David Waddle</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp32" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Margaret</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp33" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Evans</textPath></text>
-<text font-size="8.4" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp34" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Levi Grant</textPath></text>
-<text font-size="7.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp35" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Sarah Pruitt</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp36" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Sebastian</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp37" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Opel</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp38" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Elisabeth</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp39" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Huebner</textPath></text>
-<text font-size="8.4" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp40" startOffset="50%" text-anchor="middle" dominant-baseline="middle">John Seitz</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp41" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Elizabeth</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp42" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Neukam</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp43" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Charles</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp44" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Caldwell</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp45" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Daisie</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp46" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Martin</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp47" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Charles</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp48" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Tharp</textPath></text>
-<text font-size="7.6" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp49" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Jennie Webb</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp50" startOffset="50%" text-anchor="middle" dominant-baseline="middle">George</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp51" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Marquett</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp52" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Ruthie</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp53" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Prather</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp54" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Conrad</textPath></text>
-<text font-size="8.5" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp55" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Heintz</textPath></text>
-<text font-size="7.0" fill="#f6efdc" font-family="Cinzel,serif"><textPath href="#fp56" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Barbara Baer</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp57" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Hiram</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp58" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Griffin</textPath></text>
-<text font-size="8.4" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp59" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Lucy Evans</textPath></text>
-<text font-size="8.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp60" startOffset="50%" text-anchor="middle" dominant-baseline="middle">William</textPath></text>
-<text font-size="8.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp61" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Harrington</textPath></text>
-<text font-size="7.6" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp62" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Emma Wright</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp63" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Robert</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp64" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Gosnell</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp65" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Elizabeth</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp66" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Bartlett</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp67" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Eli Helt</textPath></text>
-<text font-size="8.4" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp68" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Mary Jacks</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp69" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Robert</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp70" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Scobee</textPath></text>
-<text font-size="7.0" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp71" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Luanna Henry</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp72" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Robert</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp73" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Howlett</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp74" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Margaret</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp75" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Conley</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp76" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Samuel</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp77" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Martin</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp78" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Margaret</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp79" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Lancaster</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp80" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Theodore</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp81" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Magill</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp82" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Harriet</textPath></text>
-<text font-size="8.5" fill="#1f1710" font-family="Cinzel,serif"><textPath href="#fp83" startOffset="50%" text-anchor="middle" dominant-baseline="middle">Wysong</textPath></text>
-</g>
-</svg>
-      </div>
-      <div class="fan-legend">
-        <span class="lg"><i style="background:#8f1d1d"></i>Waddell</span>
-        <span class="lg"><i style="background:#b8923a"></i>Griffin</span>
-        <span class="lg"><i style="background:#2B2B2B"></i>Caldwell</span>
-        <span class="lg"><i style="background:#faf4e6"></i>Scobee</span>
-      </div>
-      <div class="fan-cap">Direct-line ancestors of Bryce Waddell &middot; 6 generations</div>
-    </div>
+    <p class="section-intro">A lifelong genealogy project. Below are my 1,688 direct-line ancestors, traced across eighteen generations and rendered as a historically accurate migration converging on my birthplace.</p>
+    <a class="mig-teaser" href="migrations/">
+      <img src="images/migrations-poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
+           alt="Night map of the Atlantic, 1640: glowing arcs from England to New England and Virginia, with the names of ancestors arriving">
+      <span class="mig-teaser-cap"><b>Ancestral Migrations</b><span>499 Atlantic crossings and 1,688 ancestors over eighteen generations, converging on one birthplace. Watch the journey&nbsp;&rarr;</span></span>
+    </a>
   </section>
 
 </main>
