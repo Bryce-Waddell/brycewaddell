@@ -118,14 +118,14 @@
   /* what the film shows: every direct-line ancestor, the immigrants among them, and where the lines meet */
   function head(d) {
     const whose = d && d.home ? `${esc(d.home)}’s` : "the";
-    if (!d || !d.people) return `<div class="page-head"><div><h1>Migrations</h1></div></div>`;
-    if (d.everyone) return `<div class="page-head"><div><h1>Migrations</h1><p>${fmt(d.people.length)} first-generation Americans in ${whose} tree, from where they were born to where they first appear in America.</p></div></div>`;
+    if (!d || !d.people) return `<div class="page-head"><div><h1>${esc((window.KF_TEXT && window.KF_TEXT.title) || "Migrations")}</h1></div></div>`;
+    if (d.everyone) return `<div class="page-head"><div><h1>${esc((window.KF_TEXT && window.KF_TEXT.title) || "Migrations")}</h1><p>${fmt(d.people.length)} first-generation Americans in ${whose} tree, from where they were born to where they first appear in America.</p></div></div>`;
     const line = d.descent || [], anc = new Set(line.filter((n) => n.a > 1).map((n) => n.id)).size;
     const gens = line.length ? Math.max(...line.map((n) => n.a)).toString(2).length : 0, home = line[0];
     const town = home ? ((home.place || "").split(",")[0].trim() === home.region || home.precision === "state" ? home.region : `${(home.place || "").split(",")[0].trim()}, ${home.region}`) : "";
     const p = anc ? `${fmt(anc)} known direct-line ancestors, across ${gens} generations: the ${fmt(d.people.length)} who came to America from abroad, and every line of descent that converges to the latest Birth.`
       : `${fmt(d.people.length)} of ${whose} direct-line ancestors came to America from abroad. Here is their journey.`;
-    return `<div class="page-head"><div><h1>Migrations</h1><p>${p}</p></div></div>`;
+    return `<div class="page-head"><div><h1>${esc((window.KF_TEXT && window.KF_TEXT.title) || "Migrations")}</h1><p>${p}</p></div></div>`;
   }
 
   /* a few headline facts worth reading before pressing play */

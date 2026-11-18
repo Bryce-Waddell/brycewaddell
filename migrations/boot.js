@@ -17,7 +17,7 @@ const hideTip = () => (tip.hidden = true);
 // the canvas draws its names in the site's own face
 window.KF_SERIF = '"EB Garamond", Georgia, serif';
 // the page's own footnote: what changes how the map reads, nothing about record years
-window.KF_TEXT = { note: "Colonial borders are today's state lines; from 1783 they are as they stood. An ancestor with no recorded birthplace is shown at their first record, or with their child." };
+window.KF_TEXT = { title: "Ancestral Migrations", note: "Colonial borders are today's state lines; from 1783 they are as they stood. An ancestor with no recorded birthplace is shown at their first record, or with their child." };
 document.addEventListener("DOMContentLoaded", async () => {
   if (document.fonts && document.fonts.load) await Promise.all([document.fonts.load('italic 15px "EB Garamond"'), document.fonts.load('15px "EB Garamond"')]).catch(() => {});
   await window.KFMigrations.render($("#view"));

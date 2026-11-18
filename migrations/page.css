@@ -27,7 +27,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .sc-main { max-width: 1240px; margin: 0 auto; padding: 32px 24px 48px; }
 .sc-foot { max-width: 1240px; margin: 0 auto; padding: 0 24px 48px; color: var(--ink-2); font-size: 15px; font-style: italic; }
 .sc-foot p { margin: 0 0 8px; max-width: 72ch; }
-.sc-foot .sc-credit { font-size: 13px; opacity: .75; }
+.sc-foot .sc-credit { font-size: 13px; color: var(--ink-2); }
 
 /* what migrations.js uses from Kinfold's page furniture */
 .page-head { margin-bottom: var(--s4); }
@@ -54,12 +54,24 @@ table.data .num { text-align: right; white-space: nowrap; font-variant-numeric: 
 .anum { color: var(--ink-3); }
 details summary { cursor: pointer; }
 #tip { position: fixed; z-index: 30; pointer-events: none; background: var(--ink); color: var(--paper); padding: 8px; border-radius: 4px; font-size: .82rem; max-width: 300px; line-height: 1.35; }
+/* craft: keyboard focus, selection, balanced headings, reduced motion */
+:focus-visible { outline: 2px solid var(--pat); outline-offset: 3px; border-radius: 2px; }
+.mig-stage :focus-visible { outline-color: #D6B66E; }
+::selection { background: rgba(184, 146, 58, .32); color: var(--ink); }
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+.sc-top a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
 /* this page shows the direct line only */
-.mig-bar label:has(#mg-all) { display: none; }
+.mig-bar label:has(#mg-all), .mig-bar .seg[aria-label="Side"] { display: none; }   /* no 'Everyone' and no father's/mother's side switch here */
 .mig-fact b { font-family: 'Cinzel', serif; color: var(--pat); }
 @media (max-width: 700px) {
   .sc-main { padding: 24px 16px 32px; } .sc-top, .sc-foot { padding-left: 16px; padding-right: 16px; }
   .mig-stage .mig-legend { gap: 4px; } .mig-stage .mig-chip { font-size: 12px; padding: 2px 8px; gap: 4px; }
+  /* the headline facts as a compact two-column grid, so the map is not pushed below the fold */
+  .sc-main .mig-facts { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .sc-main .mig-fact { padding: 8px 12px; } .sc-main .mig-fact b { font-size: 1.05rem; } .sc-main .mig-fact span { font-size: .78rem; line-height: 1.35; display: block; }
+  .sc-main .page-head p { font-size: 18px; }
 }
 
 /* ---- the map stage, from Kinfold's styles.css ---- */
