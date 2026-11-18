@@ -58,9 +58,10 @@
       p.landing = p.trail.find((t) => t.place === p.landing.place && t.year === p.landing.year && t.what === p.landing.what) || p.landing;
     });
     const byId = new Map(people.map((p) => [p.id, p]));
-    const facts = insights(d, people);
+    // the headline facts, unless the page asks for none (the public showcase)
+    const facts = window.KF_TEXT && window.KF_TEXT.facts === false ? [] : insights(d, people);
     viewEl.innerHTML = head(d) + `<div class="stack mig">
-      <div class="mig-facts">${facts.map((f) => `<div class="mig-fact"><b>${f[0]}</b><span>${f[1]}</span></div>`).join("")}</div>
+      ${facts.length ? `<div class="mig-facts">${facts.map((f) => `<div class="mig-fact"><b>${f[0]}</b><span>${f[1]}</span></div>`).join("")}</div>` : ""}
       <div class="toolbar mig-bar">
         <div class="seg" role="group" aria-label="View">${[["map", "Map"], ["flows", "From → to"], ["list", "List"]].map(([k, l]) => `<button data-mv="${k}" class="${st.view === k ? "on" : ""}" aria-pressed="${st.view === k}">${l}</button>`).join("")}</div>
         <div class="seg" role="group" aria-label="Side">${[["all", "Both sides"], ["paternal", "Father's side"], ["maternal", "Mother's side"]].map(([k, l]) => `<button data-ms="${k}" class="${st.side === k ? "on" : ""}" aria-pressed="${st.side === k}">${l}</button>`).join("")}</div>

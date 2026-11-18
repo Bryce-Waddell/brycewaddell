@@ -68,9 +68,6 @@ p, li { text-wrap: pretty; }
 @media (max-width: 700px) {
   .sc-main { padding: 24px 16px 32px; } .sc-top, .sc-foot { padding-left: 16px; padding-right: 16px; }
   .mig-stage .mig-legend { gap: 4px; } .mig-stage .mig-chip { font-size: 12px; padding: 2px 8px; gap: 4px; }
-  /* the headline facts as a compact two-column grid, so the map is not pushed below the fold */
-  .sc-main .mig-facts { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .sc-main .mig-fact { padding: 8px 12px; } .sc-main .mig-fact b { font-size: 1.05rem; } .sc-main .mig-fact span { font-size: .78rem; line-height: 1.35; display: block; }
   .sc-main .page-head p { font-size: 18px; }
 }
 
