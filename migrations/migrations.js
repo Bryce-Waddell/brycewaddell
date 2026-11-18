@@ -353,10 +353,12 @@
     const nodes = new Map();
     (d.descent || []).forEach((n) => {
       const imm = byId.get(n.id);
-      const pt = n.a === 1 ? proj(n.lon, n.lat) : imm ? imm.o : proj(...jitter(n, n.id * 13 + 5, n.precision));
+      const pt = n.a === 1 || n.private ? proj(n.lon, n.lat) : imm ? imm.o : proj(...jitter(n, n.id * 13 + 5, n.precision));
       nodes.set(n.a, Object.assign(n, { pt, imm, g: bits(n.a), side: sideOf(n.a) }));
     });
-    nodes.forEach((n) => { n.est = n.born || (n.to ? nodes.get(n.to).est - 28 : new Date().getFullYear() - 30); });
+    // a private home person has no birth year: the film then ends just after the last public date
+    const lastKnown = Math.max(...[...nodes.values()].flatMap((n) => [n.born, n.died]).filter(Boolean), ...people.map((p) => p.year));
+    nodes.forEach((n) => { n.est = n.born || (n.to ? nodes.get(n.to).est - 28 : n.private ? lastKnown + 2 : new Date().getFullYear() - 30); });
     const home = nodes.get(1) || null;
     const edges = [];
     nodes.forEach((n) => {
@@ -372,7 +374,7 @@
     // the last leg of each life: from where their child on the line was born to where they died
     const US = "United States", lives = [];
     nodes.forEach((n) => {
-      if (!n.death || !n.to) return;
+      if (!n.death || !n.to || nodes.get(n.to).private) return;      // no last leg drawn from a private birthplace
       const t = nodes.get(n.to), b = proj(...jitter(n.death, n.id * 17 + 9, n.death.precision));
       const a = n.imm && n.death.country === US && t.country !== US ? n.imm.l : t.pt, dx = b[0] - a[0], dy = b[1] - a[1];
       if (Math.hypot(dx, dy) < 0.3) return;
@@ -382,8 +384,8 @@
     });
     // names to show as people arrive: at a landing, and wherever a move within America crosses a state line
     const caps = people.map((p) => ({ t: p.t1, pt: p.l, name: p.name, sub: `${p.origin.region || p.country}, ${p.year}`, rgb: p.rgb, on: () => p.vis }));
-    edges.forEach((e) => { if (e.n.country === US && e.t.country === US && e.n.region !== e.t.region) caps.push({ t: e.t1, pt: e.b, name: e.n.name, sub: `${e.n.region} → ${e.t.region}, by ${Math.floor(e.t.est)}`, rgb: "233,223,199", on: () => e.vis }); });
-    lives.forEach((l) => { if (l.n.death.country === US && l.t.country === US && l.n.death.region !== l.t.region) caps.push({ t: l.t1, pt: l.b, name: l.n.name, sub: `${l.t.region} → ${l.n.death.region}, died ${l.n.died || "there"}`, rgb: "170,190,220", on: () => l.n.vis }); });
+    edges.forEach((e) => { if (!e.n.private && !e.t.private && e.n.country === US && e.t.country === US && e.n.region !== e.t.region) caps.push({ t: e.t1, pt: e.b, name: e.n.name, sub: `${e.n.region} → ${e.t.region}, by ${Math.floor(e.t.est)}`, rgb: "233,223,199", on: () => e.vis }); });
+    lives.forEach((l) => { if (!l.t.private && l.n.death.country === US && l.t.country === US && l.n.death.region !== l.t.region) caps.push({ t: l.t1, pt: l.b, name: l.n.name, sub: `${l.t.region} → ${l.n.death.region}, died ${l.n.died || "there"}`, rgb: "170,190,220", on: () => l.n.vis }); });
     caps.sort((a, b) => a.t - b.t);
     const maxG = Math.max(2, ...edges.map((e) => e.g), ...people.map((p) => p.g || 0));
     const firsts = [...people.map((p) => p.t0), ...edges.map((e) => e.t0)];
@@ -403,8 +405,8 @@
     const meanN = per.reduce((s, n) => s + n, 0) / nDec || 1, wts = per.map((n) => 0.3 + n / meanN), wSum = wts.reduce((s, n) => s + n, 0);
     const rateAt = (y) => (y >= yEnd ? 1 : 10 / ((85 * wts[di(y)]) / wSum));        // timeline years per second
 
-    const homePlace = home ? ((home.place || "").split(",")[0].trim() === home.region || home.precision === "state" ? home.region
-      : `${(home.place || "").split(",")[0].trim()}, ${home.region}`) : "";
+    const homePlace = !home || home.private ? "" : ((home.place || "").split(",")[0].trim() === home.region || home.precision === "state" ? home.region
+      : `${(home.place || "").split(",")[0].trim()}, ${home.region}`);
     host.innerHTML = `<div class="mig-stage" id="mg-stage">
       <canvas id="mg-cv" role="img" aria-label="Map of immigrant journeys and lines of descent up to the year shown"></canvas>
       <div class="mig-vig"></div>
@@ -415,7 +417,7 @@
         <button data-mzi="1" aria-label="Zoom in">+</button><button data-mzi="-1" aria-label="Zoom out">−</button>
       </div>
       <aside class="mig-card" id="mg-side" hidden></aside>
-      ${home ? `<div class="mig-finale" id="mg-fin"><b>${esc(home.name)}</b><span>${esc(homePlace)}${home.born ? `, ${home.born}` : ""}</span></div>` : ""}
+      ${home ? `<div class="mig-finale" id="mg-fin"><b>${esc(home.name)}</b>${homePlace || home.born ? `<span>${esc(homePlace)}${home.born ? `, ${home.born}` : ""}</span>` : ""}</div>` : ""}
       <div class="mig-tip" id="mg-tip" hidden></div>
       <div class="mig-time">
         <div class="mig-year"><b id="mg-yr"></b><span id="mg-cnt"></span><i id="mg-chron"></i></div>
@@ -811,7 +813,7 @@
       });
       if (best) return best;
       bd = 7 * 7;
-      nodes.forEach((n) => { if (!n.vis || n.est > yr) return; const dd = (sx(n.pt[0]) - mx) ** 2 + (sy(n.pt[1]) - my) ** 2; if (dd < bd) { bd = dd; best = { n }; } });
+      nodes.forEach((n) => { if (!n.vis || n.private || n.est > yr) return; const dd = (sx(n.pt[0]) - mx) ** 2 + (sy(n.pt[1]) - my) ** 2; if (dd < bd) { bd = dd; best = { n }; } });
       return best;
     };
     // one finger (or the mouse) pans; two fingers pinch to zoom and pan together; a tap selects
