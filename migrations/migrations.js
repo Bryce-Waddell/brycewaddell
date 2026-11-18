@@ -42,6 +42,7 @@
       return;
     }
     people.forEach((p) => {
+      p.guess = !p.inferred ? 0 : p.inferred.band === "low" ? 2 : 1;
       p.c = color(p.country);
       p.o = proj(...jitter(p.origin, p.id, p.origin.precision));
       p.l = proj(...jitter(p.landing, p.id + 100003, p.landing.precision === "county" ? "county" : "region"));
@@ -124,7 +125,8 @@
     const line = d.descent || [], anc = new Set(line.filter((n) => n.a > 1).map((n) => n.id)).size;
     const gens = line.length ? Math.max(...line.map((n) => n.a)).toString(2).length : 0, home = line[0];
     const town = home ? ((home.place || "").split(",")[0].trim() === home.region || home.precision === "state" ? home.region : `${(home.place || "").split(",")[0].trim()}, ${home.region}`) : "";
-    const p = anc ? `${fmt(anc)} known direct-line ancestors, across ${gens} generations: the ${fmt(d.people.length)} who came to America from abroad, and every line of descent that converges to the latest Birth.`
+    const inf = d.people.filter((x) => x.inferred).length, rec = d.people.length - inf;
+    const p = anc ? `${fmt(anc)} known direct-line ancestors, across ${gens} generations: the ${fmt(rec)} who came to America from abroad, ${inf ? `${fmt(inf)} more whose origin is inferred, ` : ""}and every line of descent that converges to the latest Birth.`
       : `${fmt(d.people.length)} of ${whose} direct-line ancestors came to America from abroad. Here is their journey.`;
     return `<div class="page-head"><div><h1>${esc((window.KF_TEXT && window.KF_TEXT.title) || "Migrations")}</h1><p>${p}</p></div></div>`;
   }
@@ -323,6 +325,7 @@
     const f = (u, v, i) => (1 - u) * (1 - v) * P[i] + ((1 - u) * v + u * (1 - v)) * Q[i] + u * v * R[i];
     return [f(a, a, 0), f(a, a, 1), f(a, b, 0), f(a, b, 1), f(b, b, 0), f(b, b, 1)];
   };
+  const GUESS = [1, 0.6, 0.35];                   // recorded origin, inferred, inferred with low support
   const bits = (a) => 32 - Math.clz32(a);
   const sideOf = (a) => { if (!a || a < 2) return null; return a < 3 << (bits(a) - 2) ? "paternal" : "maternal"; };
 
@@ -331,6 +334,10 @@
     const age = p.born && p.year - p.born, okAge = age > 0 && age < 100;
     const from = p.origin.region || p.country, to = placeLabel(p.landing);
     let a;
+    if (p.inferred) {
+      const why = p.inferred.basis === "list" ? `a compiled list of immigrants (${p.inferred.source})` : `${p.inferred.band} model support`;
+      return `No birthplace abroad on record; in ${to} by ${p.year}. Origin ${p.country}, inferred from ${why}.`;
+    }
     if (p.year_how === "arrived") a = okAge ? (age < 16 ? `Crossed as a child of ${age}` : `Crossed the Atlantic at ${age}`) : `Crossed the Atlantic in ${p.year}`;
     else if (p.year_how === "by") a = `Left ${from} and was in ${to} by ${p.year}${okAge ? `, aged about ${age}` : ""}`;
     else a = `Thought to have crossed around ${p.year}`;
@@ -384,7 +391,7 @@
       lives.push({ n, t, a, q: [(a[0] + b[0]) / 2 - dy * bow, (a[1] + b[1]) / 2 + dx * bow], b, t1, t0: Math.max(t.est + 0.5, t1 - 8) });
     });
     // names to show as people arrive: at a landing, and wherever a move within America crosses a state line
-    const caps = people.map((p) => ({ t: p.t1, pt: p.l, name: p.name, sub: `${p.origin.region || p.country}, ${p.year}`, rgb: p.rgb, on: () => p.vis }));
+    const caps = people.map((p) => ({ t: p.t1, pt: p.l, name: p.name, sub: `${p.origin.region || p.country}${p.inferred ? " (inferred)" : ""}, ${p.year}`, rgb: p.rgb, on: () => p.vis }));
     edges.forEach((e) => { if (!e.n.private && !e.t.private && e.n.country === US && e.t.country === US && e.n.region !== e.t.region) caps.push({ t: e.t1, pt: e.b, name: e.n.name, sub: `${e.n.region} → ${e.t.region}, by ${Math.floor(e.t.est)}`, rgb: "233,223,199", on: () => e.vis }); });
     lives.forEach((l) => { if (!l.t.private && l.n.death.country === US && l.t.country === US && l.n.death.region !== l.t.region) caps.push({ t: l.t1, pt: l.b, name: l.n.name, sub: `${l.t.region} → ${l.n.death.region}, died ${l.n.died || "there"}`, rgb: "170,190,220", on: () => l.n.vis }); });
     caps.sort((a, b) => a.t - b.t);
@@ -584,14 +591,15 @@
       const buckets = new Map();
       people.forEach((p) => {
         if (!p.vis || yr < p.t1 || p === selP) return;
-        const age = yr - p.t1, b = age < 8 ? 0 : age < 30 ? 1 : 2, key = p.rgb + b;
+        const age = yr - p.t1, b = age < 8 ? 0 : age < 30 ? 1 : 2, g = p.guess, key = p.rgb + b + "|" + g;
         let bk = buckets.get(key);
-        if (!bk) buckets.set(key, (bk = { c: p.rgb, b, path: new Path2D() }));
+        if (!bk) buckets.set(key, (bk = { c: p.rgb, b, g, path: new Path2D() }));
         bk.path.moveTo(p.o[0], p.o[1]); bk.path.quadraticCurveTo(p.q[0], p.q[1], p.l[0], p.l[1]);
       });
       buckets.forEach((bk) => {
-        c.strokeStyle = `rgba(${bk.c},${Math.min(1, [0.55, 0.32, 0.13][bk.b] * dim * (bk.b === 2 ? boost : 1)).toFixed(3)})`;
-        c.lineWidth = [1.4, 1.1, 0.8][bk.b] * px; c.stroke(bk.path);
+        c.strokeStyle = `rgba(${bk.c},${Math.min(1, [0.55, 0.32, 0.13][bk.b] * dim * (bk.b === 2 ? boost : 1) * GUESS[bk.g]).toFixed(3)})`;
+        c.lineWidth = [1.4, 1.1, 0.8][bk.b] * px;
+        c.setLineDash(bk.g ? [3 * px, 4 * px] : []); c.stroke(bk.path); c.setLineDash([]);
       });
       const recent = new Path2D(), past = new Path2D();
       nodes.forEach((n) => {
@@ -663,9 +671,11 @@
         if (f) wave(p, true, p.rgb);
       });
       sailing.forEach((p) => {
-        const k = ease((yr - p.t0) / (p.t1 - p.t0)), a = p === selP ? 1 : dim;
+        const k = ease((yr - p.t0) / (p.t1 - p.t0)), a = (p === selP ? 1 : dim) * GUESS[p.guess];
         let s = sub(p.o, p.q, p.l, 0, k);
+        if (p.guess) ctx.setLineDash([3 * px, 4 * px]);
         ctx.beginPath(); ctx.moveTo(s[0], s[1]); ctx.quadraticCurveTo(s[2], s[3], s[4], s[5]); stroke(p.rgb, 0.4 * a, 1.1);
+        ctx.setLineDash([]);
         s = sub(p.o, p.q, p.l, Math.max(0, k - 0.16), k);
         ctx.beginPath(); ctx.moveTo(s[0], s[1]); ctx.quadraticCurveTo(s[2], s[3], s[4], s[5]); stroke(p.rgb, 0.95 * a, 1.9);
         head(s[4], s[5], 16, 0.95 * a, p.rgb);
@@ -847,7 +857,7 @@
       if (ev.pointerType === "touch") return;          // no hover on a touch screen
       hov = hit(ev);
       cv.style.cursor = hov ? "pointer" : "";
-      if (hov && hov.p) { const p = hov.p; tip(`<b>${esc(p.name)}</b><span>${p.year_how === "arrived" ? "Arrived" : p.year_how === "about" ? "About" : "By"} ${p.year} · ${esc(origin(p))}</span><i>${esc(journeyNote(p))}</i>`, ev); }
+      if (hov && hov.p) { const p = hov.p; tip(`<b>${esc(p.name)}</b><span>${p.year_how === "arrived" ? "Arrived" : p.year_how === "about" ? "About" : "By"} ${p.year} · ${esc(origin(p))}${p.inferred ? " (inferred)" : ""}</span><i>${esc(journeyNote(p))}</i>`, ev); }
       else if (hov) { const n = hov.n; tip(`<b>${esc(n.name)}</b><span>${n.born || "?"}–${n.died || ""}</span><span>${n.basis === "born" ? esc(n.place || "") : `Birthplace not recorded<br>${n.basis === "child" ? "Child born" : esc(n.basis)}: ${esc(n.place || "")}`}</span>`, ev); }
       else tip(null);
     });
@@ -916,7 +926,7 @@
         <p class="mig-sub">${p.born || "?"}–${p.died || ""}</p>
         <p class="mig-line">${esc(journeyNote(p))}</p>
         <ol class="mig-steps">
-          <li style="--c:${glow(p.country)}"><b>Born</b> ${p.born || ""}<br><span>${esc(p.birth_place || p.country)}</span></li>
+          <li style="--c:${glow(p.country)}"><b>${p.inferred ? "Origin, inferred" : "Born"}</b> ${p.inferred ? "" : p.born || ""}<br><span>${esc(p.inferred ? p.country : p.birth_place || p.country)}</span></li>
           ${p.left ? `<li style="--c:${glow(p.country)}"><b>Left</b> ${p.left.year || ""}<br><span>${esc(p.left.place)}</span></li>` : ""}
           ${p.trail.map((t) => `<li class="${t === p.landing ? "land" : ""}"><b>${esc(t.what)}</b> ${t.year || ""}<br><span>${esc(t.place)}</span></li>`).join("")}
         </ol>`;
@@ -1005,7 +1015,7 @@
       $("#mg-rows").innerHTML = ps.map((p) => `<tr>
         <td class="num">${p.year}${p.year_how === "arrived" ? "" : `<span class="muted small"> ${p.year_how === "about" ? "c." : "by"}</span>`}</td>
         <td><button class="linkish" data-mp="${p.id}">${esc(p.name)}</button>${p.ahnen ? ` <span class="anum small">#${p.ahnen}</span>` : ""}</td>
-        <td><i class="mig-sw" style="background:${p.c}"></i>${esc(p.origin.region ? `${p.origin.region}, ${p.country}` : p.country)}</td>
+        <td><i class="mig-sw" style="background:${p.c}"></i>${esc(p.origin.region ? `${p.origin.region}, ${p.country}` : p.country)}${p.inferred ? `<span class="muted small"> inferred</span>` : ""}</td>
         <td>${esc(placeLabel(p.landing))}</td>
         <td class="small muted">${p.moves.length > 1 ? esc([...new Set(p.trail.filter((t) => t !== p.landing && t.year && t.year >= p.year).map((t) => t.region))].filter((r) => r !== p.state).join(", ") || "moved within " + p.state) : ""}</td></tr>`).join("");
       $("#mg-n").textContent = `${ps.length} people`;
