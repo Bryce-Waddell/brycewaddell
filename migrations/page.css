@@ -77,7 +77,14 @@ details summary { cursor: pointer; }
 .mig-stage { position: relative; height: clamp(480px, 78vh, 880px); border-radius: 10px; overflow: hidden; background: #0A1322; color: #E9DFC7;
   --gold: #D6B66E; --parch: #E9DFC7; --dusk: rgba(8, 13, 23, .82); font-size: .85rem; }
 .mig-stage:fullscreen { height: 100vh; border-radius: 0; }
-.mig-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+.mig-stage.mig-filled { position: fixed; inset: 0; z-index: 50; width: 100vw; height: 100vh; height: 100dvh; border-radius: 0; }
+:root.mig-locked, :root.mig-locked body { overflow: hidden; }
+.mig-stage.mig-filled .mig-legend { left: max(16px, env(safe-area-inset-left)); }
+.mig-stage.mig-filled .mig-tools { right: max(16px, env(safe-area-inset-right)); }
+.mig-stage.mig-filled .mig-time { padding-left: max(24px, env(safe-area-inset-left)); padding-right: max(24px, env(safe-area-inset-right)); padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+@media (max-height: 560px) { .mig-stage.mig-filled .mig-time, .mig-stage:fullscreen .mig-time { padding-top: 24px;} .mig-stage.mig-filled .mig-year b, .mig-stage:fullscreen .mig-year b { font-size: 2rem;} .mig-stage.mig-filled .mig-year i, .mig-stage:fullscreen .mig-year i { font-size: .9rem;} .mig-stage.mig-filled .mig-card, .mig-stage:fullscreen .mig-card { top: 56px; bottom: 96px;} .mig-stage.mig-filled .mig-legend { gap: 4px;} .mig-stage.mig-filled .mig-chip { font-size: 12px; padding: 2px 8px; gap: 4px;} }
+.mig-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.mig-stage { touch-action: manipulation; }
 .mig-stage canvas.dragging { cursor: grabbing !important; }
 .mig-vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(3, 6, 12, .72) 100%); }
 .mig-stage button { background: none; border: 1px solid transparent; border-radius: 16px; color: var(--parch); font: inherit; padding: 4px 8px; cursor: pointer; opacity: .75; }
@@ -127,7 +134,7 @@ details summary { cursor: pointer; }
 .mig-head { stroke: #F1E7CF; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
 .mig-ticks { position: relative; height: 16px; margin-top: 4px; font-size: .72rem; opacity: .6; }
 .mig-ticks span { position: absolute; transform: translateX(-50%); }
-@media (max-width: 700px) { .mig-year { flex-wrap: wrap; gap: 8px 16px;} .mig-year i { flex-basis: 100%; font-size: .95rem;} .mig-speed, .mig-tools [data-mzi], #mg-full { display: none;} .mig-stage .mig-legend { right: 16px; top: 56px;} .mig-stage { height: clamp(420px, 70vh, 640px);} }
+@media (max-width: 700px) { .mig-year { flex-wrap: wrap; gap: 8px 16px;} .mig-year i { flex-basis: 100%; font-size: .95rem;} .mig-speed { display: none;} .mig-tools { gap: 0;} .mig-tools button { padding: 4px 6px;} .mig-stage .mig-legend { right: 16px; top: 56px;} .mig-stage { height: clamp(420px, 70vh, 640px);} }
 .mig-flow { width: 100%; height: auto; font-size: 13px; }
 .mig-flow text { fill: var(--ink); }
 .mig-flow .n { fill: var(--ink-3); }

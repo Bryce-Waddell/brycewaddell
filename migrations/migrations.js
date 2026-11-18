@@ -814,22 +814,54 @@
       nodes.forEach((n) => { if (!n.vis || n.est > yr) return; const dd = (sx(n.pt[0]) - mx) ** 2 + (sy(n.pt[1]) - my) ** 2; if (dd < bd) { bd = dd; best = { n }; } });
       return best;
     };
-    let drag = null;
-    cv.addEventListener("pointerdown", (ev) => { drag = { x: ev.clientX, y: ev.clientY, cx: cam.cx, cy: cam.cy, moved: false }; cv.setPointerCapture(ev.pointerId); });
+    // one finger (or the mouse) pans; two fingers pinch to zoom and pan together; a tap selects
+    const fingers = new Map();                       // pointerId -> [clientX, clientY]
+    let drag = null, pinch = null, pinched = false;
+    const local = ([x, y]) => { const b = cv.getBoundingClientRect(); return [x - b.left, y - b.top]; };
+    const pair = () => { const [a, b] = [...fingers.values()].slice(0, 2).map(local); return { d: Math.hypot(a[0] - b[0], a[1] - b[1]) || 1, m: [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2] }; };
+    const grab = (x, y) => ({ x, y, cx: cam.cx, cy: cam.cy, moved: false });
+    cv.addEventListener("pointerdown", (ev) => {
+      cv.setPointerCapture(ev.pointerId);
+      fingers.set(ev.pointerId, [ev.clientX, ev.clientY]);
+      if (fingers.size >= 2) { pinch = pair(); pinched = true; drag = null; tip(null); return; }
+      drag = grab(ev.clientX, ev.clientY);
+    });
     cv.addEventListener("pointermove", (ev) => {
+      if (fingers.has(ev.pointerId)) fingers.set(ev.pointerId, [ev.clientX, ev.clientY]);
+      if (pinch && fingers.size >= 2) {
+        const now = pair();
+        zoomAt(now.d / pinch.d, now.m[0], now.m[1]);
+        cam.cx -= (now.m[0] - pinch.m[0]) / cam.z; cam.cy -= (now.m[1] - pinch.m[1]) / cam.z;
+        pinch = now; cv.classList.add("dragging");
+        return;
+      }
       if (drag) {
         if (!drag.moved && Math.hypot(ev.clientX - drag.x, ev.clientY - drag.y) < 4) return;
         drag.moved = true; cam.manual = true; $("#mg-follow").hidden = false; cv.classList.add("dragging"); tip(null);
         cam.cx = drag.cx - (ev.clientX - drag.x) / cam.z; cam.cy = drag.cy - (ev.clientY - drag.y) / cam.z;
         return;
       }
+      if (ev.pointerType === "touch") return;          // no hover on a touch screen
       hov = hit(ev);
       cv.style.cursor = hov ? "pointer" : "";
       if (hov && hov.p) { const p = hov.p; tip(`<b>${esc(p.name)}</b><span>${p.year_how === "arrived" ? "Arrived" : p.year_how === "about" ? "About" : "By"} ${p.year} · ${esc(origin(p))}</span><i>${esc(journeyNote(p))}</i>`, ev); }
       else if (hov) { const n = hov.n; tip(`<b>${esc(n.name)}</b><span>${n.born || "?"}–${n.died || ""}</span><span>${n.basis === "born" ? esc(n.place || "") : `Birthplace not recorded<br>${n.basis === "child" ? "Child born" : esc(n.basis)}: ${esc(n.place || "")}`}</span>`, ev); }
       else tip(null);
     });
+    const lift = (ev) => {
+      fingers.delete(ev.pointerId);
+      if (pinched) {                                   // after a pinch: the last finger left carries on panning; no tap
+        pinch = null;
+        const left = [...fingers.values()][0];
+        drag = left ? Object.assign(grab(left[0], left[1]), { moved: true }) : null;
+        if (!fingers.size) { pinched = false; cv.classList.remove("dragging"); }
+        return true;
+      }
+      return false;
+    };
+    cv.addEventListener("pointercancel", (ev) => { lift(ev); drag = null; cv.classList.remove("dragging"); });
     cv.addEventListener("pointerup", (ev) => {
+      if (lift(ev)) return;
       const was = drag; drag = null; cv.classList.remove("dragging");
       if (was && was.moved) return;
       const h = hit(ev);
@@ -841,7 +873,33 @@
     cv.addEventListener("wheel", (ev) => { ev.preventDefault(); const b = cv.getBoundingClientRect(); zoomAt(ev.deltaY > 0 ? 1 / 1.15 : 1.15, ev.clientX - b.left, ev.clientY - b.top); }, { passive: false });
     $$("[data-mzi]", stage).forEach((b) => b.addEventListener("click", () => zoomAt(b.dataset.mzi === "1" ? 1.4 : 1 / 1.4, W / 2, H / 2)));
     $("#mg-follow").addEventListener("click", () => { cam.manual = false; $("#mg-follow").hidden = true; });
-    $("#mg-full").addEventListener("click", () => (document.fullscreenElement ? document.exitFullscreen() : stage.requestFullscreen && stage.requestFullscreen()));
+    // Safari's own pinch would zoom the whole page instead of the map
+    const noPageZoom = (e) => e.preventDefault();
+    stage.addEventListener("gesturestart", noPageZoom);
+
+    /* ---- full screen: the browser's own where it has one; otherwise (iPhone Safari has none for a page) the stage
+       is pinned over the whole window. Turning a phone sideways fills the screen; turning it back returns. */
+    const fullBtn = $("#mg-full"), native = !!(stage.requestFullscreen && document.fullscreenEnabled);
+    let filled = false, byTurn = false;
+    const label = () => { fullBtn.textContent = document.fullscreenElement || filled ? "Exit full screen" : "Full screen"; };
+    const fill = (on, turned) => {
+      if (on === filled) return;
+      filled = on; byTurn = on && !!turned;
+      stage.classList.toggle("mig-filled", on);
+      document.documentElement.classList.toggle("mig-locked", on);
+      label();
+    };
+    fullBtn.addEventListener("click", () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else if (filled) fill(false);
+      else if (native) stage.requestFullscreen().catch(() => fill(true));
+      else fill(true);
+    });
+    document.addEventListener("fullscreenchange", label);
+    const sideways = matchMedia("(orientation: landscape) and (pointer: coarse) and (max-height: 560px)");
+    const turn = () => { if (sideways.matches) fill(true, true); else if (byTurn) fill(false); };
+    sideways.addEventListener("change", turn);
+    turn();
 
     /* ---- the selected person's card */
     function select(id) {
@@ -885,7 +943,10 @@
     raf = requestAnimationFrame(frame);
     return {
       refresh,
-      stop: () => { alive = false; st.playing = false; cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener("keydown", onKey); },
+      stop: () => {
+        alive = false; st.playing = false; cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener("keydown", onKey);
+        sideways.removeEventListener("change", turn); document.removeEventListener("fullscreenchange", label); fill(false);
+      },
     };
   }
 
