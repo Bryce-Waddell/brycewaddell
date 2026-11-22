@@ -262,18 +262,6 @@
   .rig .md{color:var(--ink-soft)}
   .rig tr:hover td{background:rgba(184,146,58,.06)}
 
-
-  /* social credit score */
-  .rep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
-  .rep{background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:4px;
-       padding:20px 22px;text-align:center;box-shadow:0 4px 16px rgba(60,30,20,.06)}
-  .rep .platform{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
-  .rep .score{font-family:'Cinzel',serif;font-size:34px;font-weight:700;color:var(--war-red);margin-top:8px;line-height:1}
-  .rep .score span{font-size:15px;font-weight:400;color:var(--ink-soft)}
-  .rep .what{font-style:italic;color:var(--ink-soft);font-size:14.5px;margin-top:8px}
-  .rep-asof{font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-top:14px}
-
-
   /* footer / connect */
   footer{text-align:center;padding:54px 28px 64px;border-top:1px solid var(--rule);margin-top:24px}
   footer .wm{font-family:'EB Garamond',Georgia,serif;font-weight:600;letter-spacing:.02em;color:var(--ink);font-size:30px}
@@ -337,12 +325,6 @@
     .fan-legend,.fan-cap{padding-left:14px;padding-right:14px}
     .fan-tip{max-width:240px;font-size:14px}
 
-    /* ratings: 2 x 2 */
-    .rep-grid{grid-template-columns:1fr 1fr;gap:12px}
-    .rep{padding:16px 10px}
-    .rep .score{font-size:29px}
-    .rep .what{font-size:13.5px}
-
     /* footer */
     footer{padding:40px 18px 48px}
     .social{gap:10px}
@@ -383,7 +365,6 @@
     <a href="#engineering">Engineering</a>
     <a href="#scholarship">Scholarship</a>
     <a href="#athletics">Athletics</a>
-    <a href="#civility">Civility</a>
     <a href="#lineage">Lineage</a>
     <a href="#connect">Connect</a>
   </div>
@@ -502,7 +483,7 @@
   <!-- ENGINEERING -->
   <section id="engineering">
     <div class="section-head"><span class="banner"></span><h2>Engineering</h2><span class="rule"></span></div>
-    <p class="section-intro">Systems I built outside the ERP &mdash; genealogy, hardware, timber structures, and web infrastructure.</p>
+    <p class="section-intro">Systems I built outside the ERP &mdash; genealogy, hardware, and timber structures.</p>
 
     <div class="card">
       <div class="role-row"><h3>Genealogy</h3><span class="org-when">Proprietary System</span></div>
@@ -512,6 +493,7 @@
         <li>Every link scored against original records; impossible dates, places and relationships caught automatically.</li>
         <li>Ancestral Migrations: 499 Atlantic crossings and 1,798 lines of descent converging on one birthplace, over America as it stood each year.</li>
         <li>219 dated state and territory boundaries from the Newberry Library&rsquo;s Atlas of Historical County Boundaries, rendered so every ancestral event sits within the borders of its year.</li>
+        <li>Functional core, imperative shell: pure, deterministic logic at the center, with all I/O pushed to the edges.</li>
         <li>Custom Canvas renderer animating thousands of paths; no frameworks, no third-party requests.</li>
         <li><a class="scholar-link" href="migrations/">Watch the journey &rarr;</a></li>
       </ul>
@@ -562,16 +544,6 @@
           <figcaption>Covered boat slip during final build-out.</figcaption>
         </figure>
       </div>
-    </div>
-
-    <div class="card">
-      <div class="role-row"><h3>brycewaddell.com</h3><span class="org-when">Web &amp; Security</span></div>
-      <div class="subrole">Personal website</div>
-      <ul>
-        <li>Strict Content-Security-Policy: scripts authorized by hash, no third-party origins, all fonts self-hosted.</li>
-        <li>Domain hardened against spoofing with SPF, DMARC (reject), and null DKIM records.</li>
-        <li>Responsive, dependency-free HTML &amp; CSS &mdash; no frameworks, no trackers.</li>
-      </ul>
     </div>
 
   </section>
@@ -669,46 +641,6 @@
       <a class="btn" href="https://www.alltrails.com/members/bryce-waddell-3" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M14 6l-4.22 9.55 1.6 1.6L14 11l3 5h-4.5l-2 2H21L14 6zm-4.9 6.39l-2.1-2.39L2 22h9.5l-1.4-1.4-4.2.01 1.7-3.84-1.5-1.5-1.93 4.36-.6-.6 4.43-6.04z"/></svg>
         View my hikes on AllTrails
-      </a>
-    </div>
-  </section>
-
-  <!-- CIVILITY (counterparty ratings) -->
-  <section id="civility">
-    <div class="section-head"><span class="banner"></span><h2>Civility</h2><span class="rule"></span></div>
-    <p class="section-intro">Ratings from the other side of the transaction &mdash; drivers, hosts, and buyers.</p>
-    <!-- ============================================================
-         UPDATE THESE SCORES MONTHLY:
-         edit the numbers in the .score lines below, then update
-         the "As of" date at the bottom of this section.
-         ============================================================ -->
-    <div class="rep-grid">
-      <div class="rep">
-        <div class="platform">Uber</div>
-        <div class="score">4.91<span> / 5</span></div>
-        <div class="what">Rider rating</div>
-      </div>
-      <div class="rep">
-        <div class="platform">Lyft</div>
-        <div class="score">4.90<span> / 5</span></div>
-        <div class="what">Rider rating &middot; 85 rides</div>
-      </div>
-      <div class="rep">
-        <div class="platform">Airbnb</div>
-        <div class="score">5.00<span> / 5</span></div>
-        <div class="what">Guest rating &middot; 16 trips</div>
-      </div>
-      <div class="rep">
-        <div class="platform">eBay</div>
-        <div class="score">100<span>%</span></div>
-        <div class="what">Positive feedback &middot; 17 items sold</div>
-      </div>
-    </div>
-    <div class="rep-asof">As of July 2026</div>
-    <div class="btn-row" style="margin-top:18px">
-      <a class="btn" href="https://www.ebay.com/usr/b-ryce88" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M21.41 11.58l-9-9A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 .59 1.42l9 9a2 2 0 0 0 2.83 0l7-7a2 2 0 0 0-.01-2.84zM6.5 8A1.5 1.5 0 1 1 8 6.5 1.5 1.5 0 0 1 6.5 8z"/></svg>
-        View my eBay profile
       </a>
     </div>
   </section>
